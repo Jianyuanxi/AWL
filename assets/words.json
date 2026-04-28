@@ -1,0 +1,4042 @@
+[
+  {
+    "title": "Sublist 1",
+    "words": [
+      {
+        "id": 1,
+        "english": "analyse",
+        "phonetic": "/ˈænəlaɪz/",
+        "chinese": "v. 分析",
+        "example": "Researchers analyse the results carefully."
+      },
+      {
+        "id": 2,
+        "english": "approach",
+        "phonetic": "/əˈproʊtʃ/",
+        "chinese": "n. 方法, 途径; v. 接近",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 3,
+        "english": "area",
+        "phonetic": "/ˈɛriə/",
+        "chinese": "n. 区域, 领域",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 4,
+        "english": "assess",
+        "phonetic": "/əˈsɛs/",
+        "chinese": "v. 评估, 评定",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 5,
+        "english": "assume",
+        "phonetic": "/əˈsuːm/",
+        "chinese": "v. 假设, 承担",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 6,
+        "english": "authority",
+        "phonetic": "/əˈθɔːrəti/",
+        "chinese": "n. 权威, 官方",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 7,
+        "english": "available",
+        "phonetic": "/əˈveɪləbl/",
+        "chinese": "adj. 可获得的, 可用的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 8,
+        "english": "benefit",
+        "phonetic": "/ˈbɛnɪfɪt/",
+        "chinese": "n. 利益, 好处; v. 有益于",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 9,
+        "english": "concept",
+        "phonetic": "/ˈkɒnsɛpt/",
+        "chinese": "n. 概念, 观念",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 10,
+        "english": "consist",
+        "phonetic": "/kənˈsɪst/",
+        "chinese": "v. 组成, 构成",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 11,
+        "english": "constitute",
+        "phonetic": "/ˈkɒnstɪtjuːt/",
+        "chinese": "v. 构成, 组成",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 12,
+        "english": "context",
+        "phonetic": "/ˈkɒntɛkst/",
+        "chinese": "n. 背景, 上下文",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 13,
+        "english": "contract",
+        "phonetic": "/ˈkɒntrækt/",
+        "chinese": "n. 合同, 契约; v. 收缩",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 14,
+        "english": "create",
+        "phonetic": "/kriˈeɪt/",
+        "chinese": "v. 创造, 创建",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 15,
+        "english": "data",
+        "phonetic": "/ˈdeɪtə/",
+        "chinese": "n. 数据, 资料",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 16,
+        "english": "define",
+        "phonetic": "/dɪˈfaɪn/",
+        "chinese": "v. 定义, 规定",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 17,
+        "english": "derive",
+        "phonetic": "/dɪˈraɪv/",
+        "chinese": "v. 获得, 源于",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 18,
+        "english": "distribute",
+        "phonetic": "/dɪˈstrɪbjuːt/",
+        "chinese": "v. 分布, 分配",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 19,
+        "english": "economy",
+        "phonetic": "/ɪˈkɒnəmi/",
+        "chinese": "n. 经济, 节约",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 20,
+        "english": "environment",
+        "phonetic": "/ɪnˈvaɪrənmənt/",
+        "chinese": "n. 环境",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 21,
+        "english": "establish",
+        "phonetic": "/ɪˈstæblɪʃ/",
+        "chinese": "v. 建立, 确立",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 22,
+        "english": "estimate",
+        "phonetic": "/ˈɛstɪmeɪt/",
+        "chinese": "v. / n. 估计, 估算",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 23,
+        "english": "evident",
+        "phonetic": "/ˈɛvɪdənt/",
+        "chinese": "adj. 明显的, 显然的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 24,
+        "english": "export",
+        "phonetic": "/ˈɛkspɔːrt/",
+        "chinese": "v. / n. 出口, 输出",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 25,
+        "english": "factor",
+        "phonetic": "/ˈfæktər/",
+        "chinese": "n. 因素, 要素",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 26,
+        "english": "finance",
+        "phonetic": "/ˈfaɪnæns/",
+        "chinese": "n. 财政, 金融; v. 资助",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 27,
+        "english": "formula",
+        "phonetic": "/ˈfɔːrmjələ/",
+        "chinese": "n. 公式, 配方",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 28,
+        "english": "function",
+        "phonetic": "/ˈfʌŋkʃn/",
+        "chinese": "n. 功能, 作用; v. 起作用",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 29,
+        "english": "income",
+        "phonetic": "/ˈɪnkʌm/",
+        "chinese": "n. 收入, 收益",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 30,
+        "english": "indicate",
+        "phonetic": "/ˈɪndɪkeɪt/",
+        "chinese": "v. 表明, 指示",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 31,
+        "english": "individual",
+        "phonetic": "/ˌɪndɪˈvɪdʒuəl/",
+        "chinese": "adj. 个人的; n. 个人",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 32,
+        "english": "interpret",
+        "phonetic": "/ɪnˈtɜːrprət/",
+        "chinese": "v. 解释, 翻译",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 33,
+        "english": "involve",
+        "phonetic": "/ɪnˈvɒlv/",
+        "chinese": "v. 包含, 牵涉",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 34,
+        "english": "issue",
+        "phonetic": "/ˈɪʃuː/",
+        "chinese": "n. 问题, 发行; v. 发行",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 35,
+        "english": "labour",
+        "phonetic": "/ˈleɪbə(r)/",
+        "chinese": "n. 劳动; 产门",
+        "example": "The project required a great deal of labour."
+      },
+      {
+        "id": 36,
+        "english": "legal",
+        "phonetic": "/ˈliːɡl/",
+        "chinese": "adj. 法律的, 合法的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 37,
+        "english": "legislate",
+        "phonetic": "/ˈlɛdʒɪsleɪt/",
+        "chinese": "v. 立法",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 38,
+        "english": "major",
+        "phonetic": "/ˈmeɪdʒər/",
+        "chinese": "adj. 主要的; n. 主修",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 39,
+        "english": "method",
+        "phonetic": "/ˈmɛθəd/",
+        "chinese": "n. 方法, 办法",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 40,
+        "english": "occur",
+        "phonetic": "/əˈkɜːr/",
+        "chinese": "v. 发生, 出现",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 41,
+        "english": "percent",
+        "phonetic": "/pərˈsɛnt/",
+        "chinese": "n. 百分比",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 42,
+        "english": "period",
+        "phonetic": "/ˈpɪriəd/",
+        "chinese": "n. 期间, 时期",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 43,
+        "english": "policy",
+        "phonetic": "/ˈpɒləsi/",
+        "chinese": "n. 政策, 方针",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 44,
+        "english": "principle",
+        "phonetic": "/ˈprɪnsəpl/",
+        "chinese": "n. 原则, 原理",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 45,
+        "english": "proceed",
+        "phonetic": "/proʊˈsiːd/",
+        "chinese": "v. 继续进行, 开始",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 46,
+        "english": "process",
+        "phonetic": "/ˈprɒsɛs/",
+        "chinese": "n. 过程, 步骤; v. 处理",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 47,
+        "english": "require",
+        "phonetic": "/rɪˈkwaɪər/",
+        "chinese": "v. 需要, 要求",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 48,
+        "english": "research",
+        "phonetic": "/ˈriːsɜːrtʃ/",
+        "chinese": "n. / v. 研究, 调查",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 49,
+        "english": "respond",
+        "phonetic": "/rɪˈspɒnd/",
+        "chinese": "v. 响应, 回答",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 50,
+        "english": "role",
+        "phonetic": "/roʊl/",
+        "chinese": "n. 角色, 作用",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 51,
+        "english": "section",
+        "phonetic": "/ˈsɛkʃn/",
+        "chinese": "n. 部分, 部门",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 52,
+        "english": "sector",
+        "phonetic": "/ˈsɛktər/",
+        "chinese": "n. 部门, 行业",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 53,
+        "english": "significant",
+        "phonetic": "/sɪɡˈnɪfɪkənt/",
+        "chinese": "adj. 重大的, 显著的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 54,
+        "english": "similar",
+        "phonetic": "/ˈsɪmələr/",
+        "chinese": "adj. 相似的, 类似的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 55,
+        "english": "source",
+        "phonetic": "/sɔːrs/",
+        "chinese": "n. 来源, 水源",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 56,
+        "english": "specific",
+        "phonetic": "/spəˈsɪfɪk/",
+        "chinese": "adj. 特定的, 具体的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 57,
+        "english": "structure",
+        "phonetic": "/ˈstrʌktʃər/",
+        "chinese": "n. 结构, 构造; v. 组织",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 58,
+        "english": "theory",
+        "phonetic": "/ˈθiːəri/",
+        "chinese": "n. 理论, 学说",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 59,
+        "english": "identify",
+        "phonetic": "/aɪˈdentɪfaɪ/",
+        "chinese": "v. 确认, 识别",
+        "example": "The study aims to identify the main cause."
+      },
+      {
+        "id": 60,
+        "english": "vary",
+        "phonetic": "/ˈvɛri/",
+        "chinese": "v. 改变, 变化",
+        "example": "No example for root word test."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 2",
+    "words": [
+      {
+        "id": 61,
+        "english": "achieve",
+        "phonetic": "/əˈtʃiːv/",
+        "chinese": "v. 取得, 获得",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 62,
+        "english": "acquire",
+        "phonetic": "/əˈkwaɪər/",
+        "chinese": "v. 获得, 取得",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 63,
+        "english": "administrate",
+        "phonetic": "/ədˈmɪnɪstreɪt/",
+        "chinese": "v. 管理, 治理",
+        "example": "The committee helps administrate the program."
+      },
+      {
+        "id": 64,
+        "english": "affect",
+        "phonetic": "/əˈfɛkt/",
+        "chinese": "v. 影响, 感动",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 65,
+        "english": "appropriate",
+        "phonetic": "/əˈproʊpriət/",
+        "chinese": "adj. 适当的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 66,
+        "english": "aspect",
+        "phonetic": "/ˈæspɛkt/",
+        "chinese": "n. 方面, 面貌",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 67,
+        "english": "assist",
+        "phonetic": "/əˈsɪst/",
+        "chinese": "v. 协助, 帮助",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 68,
+        "english": "category",
+        "phonetic": "/ˈkætəɡɔːri/",
+        "chinese": "n. 种类, 分类",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 69,
+        "english": "chapter",
+        "phonetic": "/ˈtʃæptər/",
+        "chinese": "n. 章, 篇",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 70,
+        "english": "commission",
+        "phonetic": "/kəˈmɪʃn/",
+        "chinese": "n. 委员会, 佣金",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 71,
+        "english": "community",
+        "phonetic": "/kəˈmjuːnəti/",
+        "chinese": "n. 社区, 团体",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 72,
+        "english": "complex",
+        "phonetic": "/ˈkɒmplɛks/",
+        "chinese": "adj. 复杂的; n. 综合体",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 73,
+        "english": "compute",
+        "phonetic": "/kəmˈpjuːt/",
+        "chinese": "v. 计算, 估算",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 74,
+        "english": "conclude",
+        "phonetic": "/kənˈkluːd/",
+        "chinese": "v. 得出结论, 结束",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 75,
+        "english": "conduct",
+        "phonetic": "/kənˈdʌkt/",
+        "chinese": "v. 组织, 实施; n. 行为",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 76,
+        "english": "consequent",
+        "phonetic": "/ˈkɒnsɪkwənt/",
+        "chinese": "adj. 随之发生的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 77,
+        "english": "construct",
+        "phonetic": "/kənˈstrʌkt/",
+        "chinese": "v. 构建, 建造",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 78,
+        "english": "consume",
+        "phonetic": "/kənˈsuːm/",
+        "chinese": "v. 消耗, 消费",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 79,
+        "english": "credit",
+        "phonetic": "/ˈkrɛdɪt/",
+        "chinese": "n. 信用, 学分; v. 赞颂",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 80,
+        "english": "culture",
+        "phonetic": "/ˈkʌltʃər/",
+        "chinese": "n. 文化, 培植",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 81,
+        "english": "design",
+        "phonetic": "/dɪˈzaɪn/",
+        "chinese": "v. / n. 设计, 构思",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 82,
+        "english": "distinct",
+        "phonetic": "/dɪˈstɪŋkt/",
+        "chinese": "adj. 明显的, 独特的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 83,
+        "english": "element",
+        "phonetic": "/ˈɛlɪmənt/",
+        "chinese": "n. 元素, 成分",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 84,
+        "english": "equate",
+        "phonetic": "/ɪˈkweɪt/",
+        "chinese": "v. 使等同, 认为...相等",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 85,
+        "english": "evaluate",
+        "phonetic": "/ˈɛstɪmeɪt/",
+        "chinese": "v. 评价, 评估",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 86,
+        "english": "feature",
+        "phonetic": "/ˈfiːtʃər/",
+        "chinese": "n. 特征, 容貌",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 87,
+        "english": "final",
+        "phonetic": "/ˈfaɪnl/",
+        "chinese": "adj. 最终的, 决定性的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 88,
+        "english": "focus",
+        "phonetic": "/ˈfoʊkəs/",
+        "chinese": "n. / v. 焦点, 集中",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 89,
+        "english": "impact",
+        "phonetic": "/ˈɪmpækt/",
+        "chinese": "n. / v. 影响, 冲击",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 90,
+        "english": "injure",
+        "phonetic": "/ˈɪndʒər/",
+        "chinese": "v. 伤害, 损害",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 91,
+        "english": "institute",
+        "phonetic": "/ˈɪnstɪtuːt/",
+        "chinese": "v. 建立; n. 机构",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 92,
+        "english": "invest",
+        "phonetic": "/ɪnˈvɛst/",
+        "chinese": "v. 投资",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 93,
+        "english": "item",
+        "phonetic": "/ˈaɪtəm/",
+        "chinese": "n. 条款, 项目",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 94,
+        "english": "journal",
+        "phonetic": "/ˈdʒɜːrnl/",
+        "chinese": "n. 期刊, 杂志",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 95,
+        "english": "maintain",
+        "phonetic": "/meɪnˈteɪn/",
+        "chinese": "v. 维持, 保养",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 96,
+        "english": "normal",
+        "phonetic": "/ˈnɔːrml/",
+        "chinese": "adj. 正常的, 标准的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 97,
+        "english": "obtain",
+        "phonetic": "/əbˈteɪn/",
+        "chinese": "v. 获得, 得到",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 98,
+        "english": "participate",
+        "phonetic": "/pɑːrˈtɪsɪpeɪt/",
+        "chinese": "v. 参与, 参加",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 99,
+        "english": "perceive",
+        "phonetic": "/pərˈsiːv/",
+        "chinese": "v. 察觉, 感知",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 100,
+        "english": "positive",
+        "phonetic": "/sɪɡˈnɪfɪkənt/",
+        "chinese": "adj. 积极的, 肯定的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 101,
+        "english": "potential",
+        "phonetic": "/ˈpɒzɪtɪv/",
+        "chinese": "adj. 潜在的; n. 潜能",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 102,
+        "english": "previous",
+        "phonetic": "/ˈpriːviəs/",
+        "chinese": "adj. 早先的, 以前的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 103,
+        "english": "primary",
+        "phonetic": "/ˈpraɪməri/",
+        "chinese": "adj. 主要的, 初级的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 104,
+        "english": "purchase",
+        "phonetic": "/ˈpɜːrtʃəs/",
+        "chinese": "v. 购买; n. 购买品",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 105,
+        "english": "range",
+        "phonetic": "/reɪndʒ/",
+        "chinese": "n. 范围; v. 变化",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 106,
+        "english": "region",
+        "phonetic": "/ˈriːdʒən/",
+        "chinese": "n. 地区, 区域",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 107,
+        "english": "regulate",
+        "phonetic": "/ˈrɛɡjuleɪt/",
+        "chinese": "v. 调节, 规定",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 108,
+        "english": "relevant",
+        "phonetic": "/ˈrɛləvənt/",
+        "chinese": "adj. 相关的, 切题的",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 109,
+        "english": "reside",
+        "phonetic": "/rɪˈzaɪd/",
+        "chinese": "v. 居住, 驻留",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 110,
+        "english": "resource",
+        "phonetic": "/sɔːrs/",
+        "chinese": "n. 资源, 财力",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 111,
+        "english": "restrict",
+        "phonetic": "/ˈrɛstrɪkt/",
+        "chinese": "v. 限制, 约束",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 112,
+        "english": "secure",
+        "phonetic": "/sɪˈkjʊr/",
+        "chinese": "adj. 安全的; v. 获得",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 113,
+        "english": "seek",
+        "phonetic": "/siːk/",
+        "chinese": "v. 寻找, 谋求",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 114,
+        "english": "select",
+        "phonetic": "/sɪˈlɛkt/",
+        "chinese": "v. 挑选, 选择",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 115,
+        "english": "site",
+        "phonetic": "/saɪt/",
+        "chinese": "n. 地点, 遗址",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 116,
+        "english": "strategy",
+        "phonetic": "/ˈstrætədʒi/",
+        "chinese": "n. 策略, 战略",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 117,
+        "english": "survey",
+        "phonetic": "/ˈsɜːrveɪ/",
+        "chinese": "n. / v. 调查, 勘测",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 118,
+        "english": "text",
+        "phonetic": "/tɛkst/",
+        "chinese": "n. 文本, 课文",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 119,
+        "english": "tradition",
+        "phonetic": "/trəˈdɪʃn/",
+        "chinese": "n. 传统, 惯例",
+        "example": "No example for root word test."
+      },
+      {
+        "id": 120,
+        "english": "transfer",
+        "phonetic": "/trænsˈfɜːr/",
+        "chinese": "v. / n. 转移, 转换",
+        "example": "No example for root word test."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 3",
+    "words": [
+      {
+        "id": 121,
+        "english": "alternative",
+        "phonetic": "/ɔːlˈtɜːrnətɪv/",
+        "chinese": "adj. 供选择的; n. 替代品",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 122,
+        "english": "circumstance",
+        "phonetic": "/ˈsɜːrkəmstæns/",
+        "chinese": "n. 环境, 情况",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 123,
+        "english": "comment",
+        "phonetic": "/ˈkɒmɛnt/",
+        "chinese": "n. / v. 评论, 意见",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 124,
+        "english": "compensate",
+        "phonetic": "/ˈkɒmpənsɛɪt/",
+        "chinese": "v. 补偿, 赔偿",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 125,
+        "english": "component",
+        "phonetic": "/kəmˈpoʊnənt/",
+        "chinese": "n. 组成部分, 零件",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 126,
+        "english": "consent",
+        "phonetic": "/kənˈsɛnt/",
+        "chinese": "v. / n. 同意, 赞成",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 127,
+        "english": "considerable",
+        "phonetic": "/kənˈsɪdərəbl/",
+        "chinese": "adj. 相当大的, 重要的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 128,
+        "english": "constant",
+        "phonetic": "/ˈkɒnstənt/",
+        "chinese": "adj. 固定的, 不断的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 129,
+        "english": "constrain",
+        "phonetic": "/kənˈstreɪn/",
+        "chinese": "v. 约束, 限制",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 130,
+        "english": "contribute",
+        "phonetic": "/kənˈtrɪbjuːt/",
+        "chinese": "v. 贡献, 捐献",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 131,
+        "english": "convene",
+        "phonetic": "/kənˈviːn/",
+        "chinese": "v. 召集, 集合",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 132,
+        "english": "coordinate",
+        "phonetic": "/koʊˈɔːrdɪnət/",
+        "chinese": "v. 协调, 配合",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 133,
+        "english": "core",
+        "phonetic": "/kɔːr/",
+        "chinese": "n. 核心, 要点",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 134,
+        "english": "corporate",
+        "phonetic": "/ˈkɔːrpərət/",
+        "chinese": "adj. 公司的, 共同的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 135,
+        "english": "correspond",
+        "phonetic": "/ˌkɔːrəˈspɒnd/",
+        "chinese": "v. 符合, 通信",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 136,
+        "english": "criteria",
+        "phonetic": "/kraɪˈtɪəriə/",
+        "chinese": "n. 标准, 条件",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 137,
+        "english": "deduce",
+        "phonetic": "/dɪˈdjuːs/",
+        "chinese": "v. 推论, 推断",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 138,
+        "english": "demonstrate",
+        "phonetic": "/ˈdɛmənstreɪt/",
+        "chinese": "v. 证明, 示范",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 139,
+        "english": "document",
+        "phonetic": "/ˈdɒkjumənt/",
+        "chinese": "n. 文件; v. 记录",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 140,
+        "english": "dominate",
+        "phonetic": "/ˈdɒmɪneɪt/",
+        "chinese": "v. 控制, 支配",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 141,
+        "english": "emphasis",
+        "phonetic": "/ˈɛmfəsɪs/",
+        "chinese": "n. 强调, 重点",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 142,
+        "english": "ensure",
+        "phonetic": "/ɪnˈʃʊr/",
+        "chinese": "v. 确保, 保证",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 143,
+        "english": "exclude",
+        "phonetic": "/ɪksˈkluːd/",
+        "chinese": "v. 排除, 排斥",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 144,
+        "english": "framework",
+        "phonetic": "/ˈfreɪmwɜːrk/",
+        "chinese": "n. 框架, 结构",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 145,
+        "english": "fund",
+        "phonetic": "/fʌnd/",
+        "chinese": "n. 资金; v. 资助",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 146,
+        "english": "illustrate",
+        "phonetic": "/ˈɪləstreɪt/",
+        "chinese": "v. 说明, 阐明",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 147,
+        "english": "immigrate",
+        "phonetic": "/ˈɪmɪɡreɪt/",
+        "chinese": "v. 移居入境",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 148,
+        "english": "imply",
+        "phonetic": "/ɪmˈplaɪ/",
+        "chinese": "v. 暗示, 意味",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 149,
+        "english": "initial",
+        "phonetic": "/ɪˈnɪʃl/",
+        "chinese": "adj. 最初的, 初始的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 150,
+        "english": "instance",
+        "phonetic": "/ˈɪnstəns/",
+        "chinese": "n. 实例, 例子",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 151,
+        "english": "interact",
+        "phonetic": "/ˌɪntərˈækt/",
+        "chinese": "v. 相互作用, 交流",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 152,
+        "english": "justify",
+        "phonetic": "/ˈdʒʌstɪfaɪ/",
+        "chinese": "v. 证明...是正当的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 153,
+        "english": "layer",
+        "phonetic": "/ˈleɪər/",
+        "chinese": "n. 层, 层次",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 154,
+        "english": "link",
+        "phonetic": "/lɪŋk/",
+        "chinese": "n. / v. 连接, 联系",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 155,
+        "english": "locate",
+        "phonetic": "/ˈloʊkeɪt/",
+        "chinese": "v. 定位, 位于",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 156,
+        "english": "maximise",
+        "phonetic": "/ˈmæksɪmaɪz/",
+        "chinese": "v. 最大化",
+        "example": "We should maximise the use of available data."
+      },
+      {
+        "id": 157,
+        "english": "minor",
+        "phonetic": "/ˈmaɪnər/",
+        "chinese": "adj. 较小的, 次要的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 158,
+        "english": "negate",
+        "phonetic": "/nɪˈɡeɪt/",
+        "chinese": "v. 否定, 取消",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 159,
+        "english": "outcome",
+        "phonetic": "/ˈaʊtkʌm/",
+        "chinese": "n. 结果, 成果",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 160,
+        "english": "partner",
+        "phonetic": "/ˈpɑːrtnər/",
+        "chinese": "n. 伙伴, 合作者",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 161,
+        "english": "philosophy",
+        "phonetic": "/fɪˈlɒsəfi/",
+        "chinese": "n. 哲学, 哲理",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 162,
+        "english": "physical",
+        "phonetic": "/ˈfɪzɪkl/",
+        "chinese": "adj. 物理的, 身体的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 163,
+        "english": "proportion",
+        "phonetic": "/prəˈpɔːrʃn/",
+        "chinese": "n. 比例, 均衡",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 164,
+        "english": "publish",
+        "phonetic": "/ˈpʌblɪʃ/",
+        "chinese": "v. 出版, 发表",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 165,
+        "english": "react",
+        "phonetic": "/riˈækt/",
+        "chinese": "v. 反应, 起反作用",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 166,
+        "english": "register",
+        "phonetic": "/ˈrɛdʒɪstər/",
+        "chinese": "n. / v. 登记, 注册",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 167,
+        "english": "rely",
+        "phonetic": "/rɪˈlaɪ/",
+        "chinese": "v. 依靠, 信赖",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 168,
+        "english": "remove",
+        "phonetic": "/rɪˈmuːv/",
+        "chinese": "v. 移除, 消除",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 169,
+        "english": "scheme",
+        "phonetic": "/ˈskiːm/",
+        "chinese": "n. 计划, 方案",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 170,
+        "english": "sequence",
+        "phonetic": "/ˈsiːkwəns/",
+        "chinese": "n. 序列, 顺序",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 171,
+        "english": "sex",
+        "phonetic": "/sɛks/",
+        "chinese": "n. 性别, 性",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 172,
+        "english": "shift",
+        "phonetic": "/ʃɪft/",
+        "chinese": "v. / n. 转移, 转变",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 173,
+        "english": "specify",
+        "phonetic": "/spəˈsɪfaɪ/",
+        "chinese": "v. 详细说明, 指定",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 174,
+        "english": "sufficient",
+        "phonetic": "/səˈfɪʃnt/",
+        "chinese": "adj. 足够的, 充分的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 175,
+        "english": "task",
+        "phonetic": "/tæsk/",
+        "chinese": "n. 任务, 工作",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 176,
+        "english": "technical",
+        "phonetic": "/ˈtɛknɪkl/",
+        "chinese": "adj. 技术的, 工艺的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 177,
+        "english": "technique",
+        "phonetic": "/tɛkˈniːk/",
+        "chinese": "n. 技术, 技能",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 178,
+        "english": "technology",
+        "phonetic": "/tɛkˈnɒlədʒi/",
+        "chinese": "n. 科技, 工艺",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 179,
+        "english": "valid",
+        "phonetic": "/ˈvælɪd/",
+        "chinese": "adj. 有效的, 正当的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 180,
+        "english": "volume",
+        "phonetic": "/ˈvɒljuːm/",
+        "chinese": "n. 体积, 音量, 卷",
+        "example": "There's no example sentence for root word."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 4",
+    "words": [
+      {
+        "id": 181,
+        "english": "access",
+        "phonetic": "/ˈæksɛs/",
+        "chinese": "n. 通道, 入口; v. 访问",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 182,
+        "english": "adequate",
+        "phonetic": "/səˈfɪʃnt/",
+        "chinese": "adj. 充足的, 适当的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 183,
+        "english": "annual",
+        "phonetic": "/ˈænjuəl/",
+        "chinese": "adj. 年度的, 每年的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 184,
+        "english": "apparent",
+        "phonetic": "/ˈæpərənt/",
+        "chinese": "adj. 显然的, 表面上的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 185,
+        "english": "approximate",
+        "phonetic": "/əˈprɒksɪmət/",
+        "chinese": "adj. 近似的, 大约的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 186,
+        "english": "attitude",
+        "phonetic": "/ˈætɪtjuːd/",
+        "chinese": "n. 态度, 看法",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 187,
+        "english": "attribute",
+        "phonetic": "/əˈtrɪbjuːt/",
+        "chinese": "v. 归因于; n. 属性",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 188,
+        "english": "civil",
+        "phonetic": "/ˈsiːvl/",
+        "chinese": "adj. 市民的, 民事的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 189,
+        "english": "code",
+        "phonetic": "/koʊd/",
+        "chinese": "n. 代码, 密码, 法规",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 190,
+        "english": "commit",
+        "phonetic": "/kəˈmɪt/",
+        "chinese": "v. 犯(错), 承诺",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 191,
+        "english": "communicate",
+        "phonetic": "/kəˈmjuːnɪkeɪt/",
+        "chinese": "v. 交流, 传达",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 192,
+        "english": "concentrate",
+        "phonetic": "/ˈkɒnsəntreɪt/",
+        "chinese": "v. 集中, 专心",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 193,
+        "english": "confer",
+        "phonetic": "/kənˈfɜːr/",
+        "chinese": "v. 授予, 协商",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 194,
+        "english": "contrast",
+        "phonetic": "/ˈkɒntræst/",
+        "chinese": "n. / v. 对比, 对对照",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 195,
+        "english": "cycle",
+        "phonetic": "/ˈsiːkwəns/",
+        "chinese": "n. 循环, 周期",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 196,
+        "english": "debate",
+        "phonetic": "/dɪˈbeɪt/",
+        "chinese": "n. / v. 辩论, 讨论",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 197,
+        "english": "despite",
+        "phonetic": "/dɪˈspaɪt/",
+        "chinese": "prep. 尽管, 即使",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 198,
+        "english": "dimension",
+        "phonetic": "/daɪˈmɛnʃn/",
+        "chinese": "n. 规模, 维度",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 199,
+        "english": "domestic",
+        "phonetic": "/dəˈmɛstɪk/",
+        "chinese": "adj. 国内的, 家庭的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 200,
+        "english": "emerge",
+        "phonetic": "/ɪˈmɜːrdʒ/",
+        "chinese": "v. 出现, 浮现",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 201,
+        "english": "error",
+        "phonetic": "/ˈɛrər/",
+        "chinese": "n. 错误, 差错",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 202,
+        "english": "ethnic",
+        "phonetic": "/ˈɛθnɪk/",
+        "chinese": "adj. 种族的, 部落的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 203,
+        "english": "goal",
+        "phonetic": "/ɡoʊl/",
+        "chinese": "n. 目标, 目的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 204,
+        "english": "grant",
+        "phonetic": "/ɡrænt/",
+        "chinese": "v. 授予, 承认",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 205,
+        "english": "hence",
+        "phonetic": "/hɛns/",
+        "chinese": "adv. 因此, 今后",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 206,
+        "english": "hypothesis",
+        "phonetic": "/ˈθiːəri/",
+        "chinese": "n. 假设, 假说",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 207,
+        "english": "implement",
+        "phonetic": "/ˈɪmplɪmənt/",
+        "chinese": "v. 贯彻, 实施; n. 工具",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 208,
+        "english": "implicate",
+        "phonetic": "/ɪmˈplaɪk/",
+        "chinese": "v. 牵涉, 意味着",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 209,
+        "english": "impose",
+        "phonetic": "/ɪmˈpoʊz/",
+        "chinese": "v. 强加, 征税",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 210,
+        "english": "integrate",
+        "phonetic": "/ˈɪntɪɡreɪt/",
+        "chinese": "v. 使完整, 整合",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 211,
+        "english": "internal",
+        "phonetic": "/ɪnˈtɜːrnl/",
+        "chinese": "adj. 内部的, 国内的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 212,
+        "english": "investigate",
+        "phonetic": "/ɪnˈvɛstɪɡeɪt/",
+        "chinese": "v. 调查, 研究",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 213,
+        "english": "job",
+        "phonetic": "/dʒɒb/",
+        "chinese": "n. 工作, 职业",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 214,
+        "english": "label",
+        "phonetic": "/ˈleɪbl/",
+        "chinese": "n. 标签; v. 标记",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 215,
+        "english": "mechanism",
+        "phonetic": "/ˈmɛkənɪzəm/",
+        "chinese": "n. 机制, 机械装置",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 216,
+        "english": "obvious",
+        "phonetic": "/ˈɒbviəs/",
+        "chinese": "adj. 明显的, 清楚的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 217,
+        "english": "occupy",
+        "phonetic": "/ˈɒkjupaɪ/",
+        "chinese": "v. 占据, 占领",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 218,
+        "english": "option",
+        "phonetic": "/ˈɒpʃn/",
+        "chinese": "n. 选项, 选择权",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 219,
+        "english": "output",
+        "phonetic": "/ˈaʊtpʊt/",
+        "chinese": "n. 产量, 输出",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 220,
+        "english": "overall",
+        "phonetic": "/ˈoʊvərɔːl/",
+        "chinese": "adj. 全面的, 总体的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 221,
+        "english": "parallel",
+        "phonetic": "/ˈpærəlɛl/",
+        "chinese": "adj. 平行的; n. 平行线",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 222,
+        "english": "parameter",
+        "phonetic": "/pəˈræmɪtər/",
+        "chinese": "n. 参数, 参量",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 223,
+        "english": "phase",
+        "phonetic": "/feɪz/",
+        "chinese": "n. 阶段, 时期",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 224,
+        "english": "predict",
+        "phonetic": "/prɪˈdɪkt/",
+        "chinese": "v. 预测, 预言",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 225,
+        "english": "principal",
+        "phonetic": "/ˈprɪnsəpl/",
+        "chinese": "adj. 主要的; n. 校长",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 226,
+        "english": "prior",
+        "phonetic": "/ˈpraɪər/",
+        "chinese": "adj. 优先的, 在先的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 227,
+        "english": "professional",
+        "phonetic": "/prəˈfɛʃənl/",
+        "chinese": "adj. 专业的, 职业的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 228,
+        "english": "project",
+        "phonetic": "/ˈprɒdʒɛkt/",
+        "chinese": "n. 项目, 工程",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 229,
+        "english": "promote",
+        "phonetic": "/prəˈmoʊt/",
+        "chinese": "v. 促进, 提升",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 230,
+        "english": "regime",
+        "phonetic": "/reɪˈʒiːm/",
+        "chinese": "n. 政权, 制度",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 231,
+        "english": "resolve",
+        "phonetic": "/rɪˈzɒlv/",
+        "chinese": "v. 解决, 决定",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 232,
+        "english": "retain",
+        "phonetic": "/rɪˈteɪn/",
+        "chinese": "v. 保持, 保留",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 233,
+        "english": "series",
+        "phonetic": "/ˈsiːkwəns/",
+        "chinese": "n. 系列, 连续",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 234,
+        "english": "statistic",
+        "phonetic": "/stəˈtɪstɪk/",
+        "chinese": "n. 统计数值",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 235,
+        "english": "status",
+        "phonetic": "/ˈsteɪtəs/",
+        "chinese": "n. 地位, 状态",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 236,
+        "english": "stress",
+        "phonetic": "/strɛs/",
+        "chinese": "n. / v. 压力, 强调",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 237,
+        "english": "subsequent",
+        "phonetic": "/ˈsʌbsɪkwənt/",
+        "chinese": "adj. 随后的, 后来的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 238,
+        "english": "sum",
+        "phonetic": "/sʌm/",
+        "chinese": "n. 总数, 金额",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 239,
+        "english": "summary",
+        "phonetic": "/ˈsʌməri/",
+        "chinese": "n. 摘要, 概要",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 240,
+        "english": "undertake",
+        "phonetic": "/ˌʌndərˈteɪk/",
+        "chinese": "v. 承担, 从事",
+        "example": "There's no example sentence for root word."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 5",
+    "words": [
+      {
+        "id": 241,
+        "english": "academy",
+        "phonetic": "/əˈkædəmi/",
+        "chinese": "n. 学院, 学会",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 242,
+        "english": "adjust",
+        "phonetic": "/əˈdʒʌst/",
+        "chinese": "v. 调整, 适应",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 243,
+        "english": "alter",
+        "phonetic": "/əˈlɜːrt/",
+        "chinese": "v. 改变, 更改",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 244,
+        "english": "amend",
+        "phonetic": "/ˈɔːltər/",
+        "chinese": "v. 修改, 修订",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 245,
+        "english": "aware",
+        "phonetic": "/əˈwɛr/",
+        "chinese": "adj. 意识到的, 知道的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 246,
+        "english": "capacity",
+        "phonetic": "/kəˈpæsəti/",
+        "chinese": "n. 容量, 能力",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 247,
+        "english": "challenge",
+        "phonetic": "/ˈtʃælɪndʒ/",
+        "chinese": "n. / v. 挑战",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 248,
+        "english": "clause",
+        "phonetic": "/klɔːz/",
+        "chinese": "n. 条款, 从句",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 249,
+        "english": "compound",
+        "phonetic": "/ˈkɒmpaʊnd/",
+        "chinese": "n. 化合物, 混合物",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 250,
+        "english": "conflict",
+        "phonetic": "/ˈkɒnflɪkt/",
+        "chinese": "n. / v. 冲突, 矛盾",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 251,
+        "english": "consult",
+        "phonetic": "/kənˈsʌlt/",
+        "chinese": "v. 咨询, 商量",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 252,
+        "english": "contact",
+        "phonetic": "/ˈkɒntækt/",
+        "chinese": "n. / v. 接触, 联系",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 253,
+        "english": "decline",
+        "phonetic": "/dɪˈklaɪn/",
+        "chinese": "v. / n. 下降, 衰退",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 254,
+        "english": "discrete",
+        "phonetic": "/dɪˈskriːt/",
+        "chinese": "adj. 离散的, 不连续的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 255,
+        "english": "draft",
+        "phonetic": "/dræft/",
+        "chinese": "n. 草稿; v. 起草",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 256,
+        "english": "enable",
+        "phonetic": "/ɪˈneɪbl/",
+        "chinese": "v. 使能够, 授权",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 257,
+        "english": "energy",
+        "phonetic": "/ˈɛnərdʒi/",
+        "chinese": "n. 能量, 精力",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 258,
+        "english": "enforce",
+        "phonetic": "/ɪnˈfɔːrs/",
+        "chinese": "v. 强制执行, 强迫",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 259,
+        "english": "entity",
+        "phonetic": "/ˈɛntɪti/",
+        "chinese": "n. 实体, 独立存在体",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 260,
+        "english": "equivalent",
+        "phonetic": "/ɪˈkwɪvələnt/",
+        "chinese": "adj. 等价的, 相等的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 261,
+        "english": "evolve",
+        "phonetic": "/ɪˈvɒlv/",
+        "chinese": "v. 发展, 进化",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 262,
+        "english": "expand",
+        "phonetic": "/ɪkˈspænd/",
+        "chinese": "v. 扩大, 扩展",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 263,
+        "english": "expose",
+        "phonetic": "/ɪkˈspoʊz/",
+        "chinese": "v. 暴露, 揭露",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 264,
+        "english": "external",
+        "phonetic": "/ɪkˈstɜːrnl/",
+        "chinese": "adj. 外部的, 表面的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 265,
+        "english": "facilitate",
+        "phonetic": "/fəˈsɪlɪteɪt/",
+        "chinese": "v. 促进, 帮助",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 266,
+        "english": "fundamental",
+        "phonetic": "/ˌfʌndəˈmentl/",
+        "chinese": "adj. 基本的, 根本的",
+        "example": "Trust is fundamental to good teamwork."
+      },
+      {
+        "id": 267,
+        "english": "generate",
+        "phonetic": "/ˈdʒɛnəreɪt/",
+        "chinese": "v. 产生, 创造",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 268,
+        "english": "generation",
+        "phonetic": "/ˌdʒɛnəˈreɪʃn/",
+        "chinese": "n. 一代人, 产生",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 269,
+        "english": "image",
+        "phonetic": "/ˈɪmɪdʒ/",
+        "chinese": "n. 图像, 形象",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 270,
+        "english": "liberal",
+        "phonetic": "/ˈlɪbərəl/",
+        "chinese": "adj. 自由的, 慷慨的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 271,
+        "english": "licence",
+        "phonetic": "/ˈlaɪsns/",
+        "chinese": "n. 许可证, 执照",
+        "example": "You need a licence to use this material."
+      },
+      {
+        "id": 272,
+        "english": "logic",
+        "phonetic": "/ˈlɒdʒɪk/",
+        "chinese": "n. 逻辑, 逻辑学",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 273,
+        "english": "margin",
+        "phonetic": "/ˈmɑːrdʒɪn/",
+        "chinese": "n. 边缘, 利润",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 274,
+        "english": "medical",
+        "phonetic": "/ˈmɛdɪkl/",
+        "chinese": "adj. 医学的, 医疗的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 275,
+        "english": "mental",
+        "phonetic": "/ˈmɛntl/",
+        "chinese": "adj. 精神的, 心理的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 276,
+        "english": "modify",
+        "phonetic": "/ˈmɒdɪfaɪ/",
+        "chinese": "v. 修改, 更改",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 277,
+        "english": "network",
+        "phonetic": "/ˈnɛtwɜːrk/",
+        "chinese": "n. 网络, 网状物",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 278,
+        "english": "notion",
+        "phonetic": "/ˈnoʊʃn/",
+        "chinese": "n. 概念, 观念",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 279,
+        "english": "objective",
+        "phonetic": "/əbˈdʒɛktɪv/",
+        "chinese": "adj. 客观的; n. 目标",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 280,
+        "english": "orient",
+        "phonetic": "/ˈɔːriənt/",
+        "chinese": "v. 使适应, 确定方向",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 281,
+        "english": "perspective",
+        "phonetic": "/pərˈspɛktɪv/",
+        "chinese": "n. 观点, 远景",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 282,
+        "english": "precise",
+        "phonetic": "/prɪˈsaɪs/",
+        "chinese": "adj. 精确的, 准确的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 283,
+        "english": "prime",
+        "phonetic": "/praɪm/",
+        "chinese": "adj. 首要的, 最好的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 284,
+        "english": "psychology",
+        "phonetic": "/saɪˈkɒlədʒi/",
+        "chinese": "n. 心理学, 心理",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 285,
+        "english": "pursue",
+        "phonetic": "/pərˈsuː/",
+        "chinese": "v. 追求, 追赶",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 286,
+        "english": "ratio",
+        "phonetic": "/ˈreɪʃioʊ/",
+        "chinese": "n. 比率, 比例",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 287,
+        "english": "reject",
+        "phonetic": "/rɪˈdʒɛkt/",
+        "chinese": "v. 拒绝, 驳回",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 288,
+        "english": "revenue",
+        "phonetic": "/ˈrɛvənuː/",
+        "chinese": "n. 收入, 收益",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 289,
+        "english": "stable",
+        "phonetic": "/ˈsteɪbl/",
+        "chinese": "adj. 稳定的, 坚固的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 290,
+        "english": "style",
+        "phonetic": "/staɪl/",
+        "chinese": "n. 风格, 款式",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 291,
+        "english": "substitute",
+        "phonetic": "/ˈsʌbstɪtjuːt/",
+        "chinese": "n. 代替品; v. 替代",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 292,
+        "english": "sustain",
+        "phonetic": "/səˈsteɪn/",
+        "chinese": "v. 维持, 支撑",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 293,
+        "english": "symbol",
+        "phonetic": "/ˈsɪmbl/",
+        "chinese": "n. 符号, 象征",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 294,
+        "english": "target",
+        "phonetic": "/ˈtɑːrɡɪt/",
+        "chinese": "n. 目标, 靶子",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 295,
+        "english": "transit",
+        "phonetic": "/ˈtrænzɪt/",
+        "chinese": "n. 运输, 经过",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 296,
+        "english": "trend",
+        "phonetic": "/trɛnd/",
+        "chinese": "n. 趋势, 倾向",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 297,
+        "english": "version",
+        "phonetic": "/ˈvɜːrʒn/",
+        "chinese": "n. 版本, 变体",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 298,
+        "english": "welfare",
+        "phonetic": "/ˈwɛlfɛr/",
+        "chinese": "n. 福利, 幸福",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 299,
+        "english": "whereas",
+        "phonetic": "/wɛrˈæz/",
+        "chinese": "conj. 然而, 鉴于",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 300,
+        "english": "monitor",
+        "phonetic": "/ˈmɒnɪtə(r)/",
+        "chinese": "v. 监控, 监测; n. 监视器",
+        "example": "Scientists monitor the changes over time."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 6",
+    "words": [
+      {
+        "id": 301,
+        "english": "accurate",
+        "phonetic": "/ˈækjərət/",
+        "chinese": "adj. 准确的, 精确的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 302,
+        "english": "acknowledge",
+        "phonetic": "/əkˈnɒlɪdʒ/",
+        "chinese": "v. 承认, 答谢",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 303,
+        "english": "aggregate",
+        "phonetic": "/ˈæɡrɪɡət/",
+        "chinese": "n. / v. 集合, 合计",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 304,
+        "english": "allocate",
+        "phonetic": "/ˈæləkeɪt/",
+        "chinese": "v. 分配, 拨出",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 305,
+        "english": "assign",
+        "phonetic": "/ˈæsɪn/",
+        "chinese": "v. 分配, 指定",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 306,
+        "english": "attach",
+        "phonetic": "/əˈtætʃ/",
+        "chinese": "v. 附上, 系上",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 307,
+        "english": "author",
+        "phonetic": "/ˈɔːθər/",
+        "chinese": "n. 作者, 创造者",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 308,
+        "english": "bond",
+        "phonetic": "/bɒnd/",
+        "chinese": "n. 纽带, 债券",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 309,
+        "english": "brief",
+        "phonetic": "/briːf/",
+        "chinese": "adj. 简短的, 简洁的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 310,
+        "english": "capable",
+        "phonetic": "/ˈkeɪpəbl/",
+        "chinese": "adj. 有能力的, 能干的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 311,
+        "english": "cite",
+        "phonetic": "/saɪt/",
+        "chinese": "v. 引用, 传唤",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 312,
+        "english": "cooperate",
+        "phonetic": "/koʊˈɒpəreɪt/",
+        "chinese": "v. 合作, 协作",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 313,
+        "english": "discriminate",
+        "phonetic": "/dɪˈskrɪmɪneɪt/",
+        "chinese": "v. 歧视, 区别",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 314,
+        "english": "display",
+        "phonetic": "/dɪˈspleɪ/",
+        "chinese": "v. / n. 显示, 展览",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 315,
+        "english": "diverse",
+        "phonetic": "/daɪˈvɜːrs/",
+        "chinese": "adj. 不同的, 多样的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 316,
+        "english": "domain",
+        "phonetic": "/doʊˈmeɪn/",
+        "chinese": "n. 领域, 领土",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 317,
+        "english": "edit",
+        "phonetic": "/ˈɛdɪt/",
+        "chinese": "v. 编辑, 校订",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 318,
+        "english": "enhance",
+        "phonetic": "/ɪnˈhæns/",
+        "chinese": "v. 提高, 增加",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 319,
+        "english": "estate",
+        "phonetic": "/ɪˈsteɪt/",
+        "chinese": "n. 房地产, 财产",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 320,
+        "english": "exceed",
+        "phonetic": "/ɪkˈsiːd/",
+        "chinese": "v. 超过, 胜过",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 321,
+        "english": "expertise",
+        "phonetic": "/ˌekspɜːˈtiːz/",
+        "chinese": "n. 专门知识, 专长",
+        "example": "Her expertise is in environmental law."
+      },
+      {
+        "id": 322,
+        "english": "explicit",
+        "phonetic": "/ɪkˈsplɪsɪt/",
+        "chinese": "adj. 明确的, 详述的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 323,
+        "english": "federal",
+        "phonetic": "/ˈfɛdərəl/",
+        "chinese": "adj. 联邦的, 联盟的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 324,
+        "english": "fee",
+        "phonetic": "/fiː/",
+        "chinese": "n. 费用, 酬金",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 325,
+        "english": "flexible",
+        "phonetic": "/ˈflɛksɪbl/",
+        "chinese": "adj. 灵活的, 柔韧的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 326,
+        "english": "furthermore",
+        "phonetic": "/ˌfɜːrðərˈmɔːr/",
+        "chinese": "adv. 此外, 而且",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 327,
+        "english": "gender",
+        "phonetic": "/ˈdʒɛndər/",
+        "chinese": "n. 性别",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 328,
+        "english": "ignorant",
+        "phonetic": "/ˈɪɡnərənt/",
+        "chinese": "adj. 无知的, 愚昧的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 329,
+        "english": "incentive",
+        "phonetic": "/ɪnˈsɛntɪv/",
+        "chinese": "n. 动机, 刺激",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 330,
+        "english": "incidence",
+        "phonetic": "/ˈɪnsɪdəns/",
+        "chinese": "n. 发生率, 影响",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 331,
+        "english": "incorporate",
+        "phonetic": "/ˈɪnkɔːrpəreɪt/",
+        "chinese": "v. 包含, 吸收",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 332,
+        "english": "index",
+        "phonetic": "/ˈɪndɛks/",
+        "chinese": "n. 索引, 指数",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 333,
+        "english": "inhibit",
+        "phonetic": "/ɪnˈhɪbɪt/",
+        "chinese": "v. 抑制, 阻止",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 334,
+        "english": "initiate",
+        "phonetic": "/ɪˈnɪʃieɪt/",
+        "chinese": "v. 开始, 发起",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 335,
+        "english": "input",
+        "phonetic": "/ˈɪnpʊt/",
+        "chinese": "n. 输入, 投入",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 336,
+        "english": "instruct",
+        "phonetic": "/ɪnˈstrʌkt/",
+        "chinese": "v. 指导, 指示",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 337,
+        "english": "intelligent",
+        "phonetic": "/ˈɪntəlɪdʒənt/",
+        "chinese": "adj. 智能的, 明智的",
+        "example": "The system gives intelligent suggestions."
+      },
+      {
+        "id": 338,
+        "english": "interval",
+        "phonetic": "/ˈɪntərvl/",
+        "chinese": "n. 间隔, 距离",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 339,
+        "english": "lecture",
+        "phonetic": "/ˈlɛktʃər/",
+        "chinese": "n. / v. 演讲, 讲座",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 340,
+        "english": "migrate",
+        "phonetic": "/ˈmaɪɡreɪt/",
+        "chinese": "v. 迁移, 移居",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 341,
+        "english": "minimum",
+        "phonetic": "/ˈmɪnɪməm/",
+        "chinese": "n. 最小值; adj. 最小的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 342,
+        "english": "ministry",
+        "phonetic": "/ˈmɪnɪstri/",
+        "chinese": "n. 部, 内阁",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 343,
+        "english": "motive",
+        "phonetic": "/ˈmoʊtɪv/",
+        "chinese": "n. 动机, 目的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 344,
+        "english": "neutral",
+        "phonetic": "/ˈnuːtrəl/",
+        "chinese": "adj. 中立的, 中性的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 345,
+        "english": "nevertheless",
+        "phonetic": "/ˌnɛvərðəˈlɛs/",
+        "chinese": "adv. 然而, 不过",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 346,
+        "english": "overseas",
+        "phonetic": "/ˌoʊvərˈsiːz/",
+        "chinese": "adv. / adj. 海外的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 347,
+        "english": "precede",
+        "phonetic": "/prɪˈsiːd/",
+        "chinese": "v. 领先, 在...之前",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 348,
+        "english": "presume",
+        "phonetic": "/prɪˈzuːm/",
+        "chinese": "v. 假定, 设想",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 349,
+        "english": "rational",
+        "phonetic": "/ˈræʃənl/",
+        "chinese": "adj. 理性的, 合理的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 350,
+        "english": "recover",
+        "phonetic": "/rɪˈkʌvər/",
+        "chinese": "v. 恢复, 找回",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 351,
+        "english": "reveal",
+        "phonetic": "/rɪˈviːl/",
+        "chinese": "v. 揭露, 显露",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 352,
+        "english": "scope",
+        "phonetic": "/skoʊp/",
+        "chinese": "n. 范围, 视野",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 353,
+        "english": "subsidy",
+        "phonetic": "/ˈsʌbsɪdi/",
+        "chinese": "n. 补贴, 津贴",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 354,
+        "english": "tape",
+        "phonetic": "/teɪp/",
+        "chinese": "n. 磁带, 胶带",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 355,
+        "english": "trace",
+        "phonetic": "/treɪs/",
+        "chinese": "v. 追踪; n. 痕迹",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 356,
+        "english": "transform",
+        "phonetic": "/trænsˈfɔːrm/",
+        "chinese": "v. 改变, 转换",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 357,
+        "english": "transport",
+        "phonetic": "/ˈtrænspɔːrt/",
+        "chinese": "v. / n. 运输, 交通",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 358,
+        "english": "underlie",
+        "phonetic": "/ˌʌndərˈlaɪ/",
+        "chinese": "v. 位于...之下, 构成...的基础",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 359,
+        "english": "utilize",
+        "phonetic": "/ˈjuːtəlaɪz/",
+        "chinese": "v. 利用, 使用",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 360,
+        "english": "abstract",
+        "phonetic": "/ˈæbstrækt/",
+        "chinese": "adj. 抽象的; n. 摘要",
+        "example": "Please read the abstract before the full paper."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 7",
+    "words": [
+      {
+        "id": 361,
+        "english": "advocate",
+        "phonetic": "/ˈædvəkət/",
+        "chinese": "v. 提倡, 主张; n. 提倡者",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 362,
+        "english": "channel",
+        "phonetic": "/ˈtʃænl/",
+        "chinese": "n. 频道, 航道",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 363,
+        "english": "chemical",
+        "phonetic": "/ˈkɛmɪkl/",
+        "chinese": "adj. 化学的; n. 化学物质",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 364,
+        "english": "classic",
+        "phonetic": "/ˈklæsɪk/",
+        "chinese": "adj. 经典的; n. 经典作品",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 365,
+        "english": "comprehensive",
+        "phonetic": "/ˌkɒmprɪˈhɛnsɪv/",
+        "chinese": "adj. 全面的, 综合的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 366,
+        "english": "comprise",
+        "phonetic": "/kəmˈpraɪz/",
+        "chinese": "v. 包含, 由...组成",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 367,
+        "english": "confirm",
+        "phonetic": "/kənˈfɜːrm/",
+        "chinese": "v. 确认, 证实",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 368,
+        "english": "contrary",
+        "phonetic": "/ˈkɒntrəri/",
+        "chinese": "adj. 相反的, 对立的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 369,
+        "english": "convert",
+        "phonetic": "/kənˈvɜːrt/",
+        "chinese": "v. 转换, 转化",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 370,
+        "english": "couple",
+        "phonetic": "/ˈkʌpl/",
+        "chinese": "n. 一对, 夫妇",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 371,
+        "english": "decade",
+        "phonetic": "/ˈdɛkeɪd/",
+        "chinese": "n. 十年",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 372,
+        "english": "definite",
+        "phonetic": "/ˈdɛfɪnət/",
+        "chinese": "adj. 明确的, 肯定的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 373,
+        "english": "deny",
+        "phonetic": "/dɪˈnaɪ/",
+        "chinese": "v. 否认, 拒绝",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 374,
+        "english": "differentiate",
+        "phonetic": "/dɪˈfɛrɛnʃieɪt/",
+        "chinese": "v. 区分, 辨别",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 375,
+        "english": "dispose",
+        "phonetic": "/dɪˈspoʊz/",
+        "chinese": "v. 处理, 处置",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 376,
+        "english": "dynamic",
+        "phonetic": "/daɪˈnæmɪk/",
+        "chinese": "adj. 动态的, 有活力的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 377,
+        "english": "eliminate",
+        "phonetic": "/ɪˈlɪmɪneɪt/",
+        "chinese": "v. 消除, 排除",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 378,
+        "english": "empirical",
+        "phonetic": "/ɪmˈpɪrɪkl/",
+        "chinese": "adj. 经验主义的, 凭经验的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 379,
+        "english": "equip",
+        "phonetic": "/ɪˈkwɪp/",
+        "chinese": "v. 装备, 配备",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 380,
+        "english": "extract",
+        "phonetic": "/ɪkˈstrækt/",
+        "chinese": "v. 提取, 拔出",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 381,
+        "english": "file",
+        "phonetic": "/faɪl/",
+        "chinese": "n. 文件, 档案",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 382,
+        "english": "finite",
+        "phonetic": "/ˈfaɪnaɪt/",
+        "chinese": "adj. 有限的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 383,
+        "english": "foundation",
+        "phonetic": "/faʊnˈdeɪʃn/",
+        "chinese": "n. 基础, 基金会",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 384,
+        "english": "globe",
+        "phonetic": "/ɡloʊb/",
+        "chinese": "n. 地球, 地球仪",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 385,
+        "english": "grade",
+        "phonetic": "/ɡreɪd/",
+        "chinese": "n. 等级, 年级",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 386,
+        "english": "guarantee",
+        "phonetic": "/ˌɡærənˈtiː/",
+        "chinese": "v. / n. 保证, 担保",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 387,
+        "english": "hierarchy",
+        "phonetic": "/ˈhaɪərɑːrki/",
+        "chinese": "n. 等级制度",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 388,
+        "english": "identical",
+        "phonetic": "/aɪˈdɛntɪkl/",
+        "chinese": "adj. 相同的, 同一的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 389,
+        "english": "ideology",
+        "phonetic": "/ˌaɪdiˈɒlədʒi/",
+        "chinese": "n. 意识形态, 思想体系",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 390,
+        "english": "infer",
+        "phonetic": "/ɪnˈfɜːr/",
+        "chinese": "v. 推断, 推论",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 391,
+        "english": "innovate",
+        "phonetic": "/ˈɪnəveɪt/",
+        "chinese": "v. 创新, 改革",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 392,
+        "english": "insert",
+        "phonetic": "/ɪnˈsɜːrt/",
+        "chinese": "v. 插入, 嵌入",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 393,
+        "english": "intervene",
+        "phonetic": "/ˌɪntərˈviːn/",
+        "chinese": "v. 干涉, 介入",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 394,
+        "english": "isolate",
+        "phonetic": "/ˈaɪsəleɪt/",
+        "chinese": "v. 隔离, 孤立",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 395,
+        "english": "media",
+        "phonetic": "/ˈmiːdiə/",
+        "chinese": "n. 媒体",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 396,
+        "english": "mode",
+        "phonetic": "/moʊd/",
+        "chinese": "n. 模式, 方式",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 397,
+        "english": "paradigm",
+        "phonetic": "/ˈpærədaɪm/",
+        "chinese": "n. 范例, 典范",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 398,
+        "english": "phenomenon",
+        "phonetic": "/fəˈnɒmɪnən/",
+        "chinese": "n. 现象",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 399,
+        "english": "priority",
+        "phonetic": "/praɪˈɔːrəti/",
+        "chinese": "n. 优先权, 优先事项",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 400,
+        "english": "prohibit",
+        "phonetic": "/proʊˈhɪbɪt/",
+        "chinese": "v. 禁止, 阻止",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 401,
+        "english": "publication",
+        "phonetic": "/ˌpʌblɪˈkeɪʃn/",
+        "chinese": "n. 出版物, 出版",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 402,
+        "english": "quote",
+        "phonetic": "/kwoʊt/",
+        "chinese": "v. 引用, 报价",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 403,
+        "english": "release",
+        "phonetic": "/rɪˈliːs/",
+        "chinese": "v. / n. 释放, 发布",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 404,
+        "english": "reverse",
+        "phonetic": "/rɪˈvɜːrs/",
+        "chinese": "v. 颠倒, 倒转",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 405,
+        "english": "simulate",
+        "phonetic": "/ˈsɪmjuleɪt/",
+        "chinese": "v. 模拟, 模仿",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 406,
+        "english": "sole",
+        "phonetic": "/soʊl/",
+        "chinese": "adj. 唯一的, 仅有的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 407,
+        "english": "somewhat",
+        "phonetic": "/ˈsʌmwʌt/",
+        "chinese": "adv. 稍微, 有点",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 408,
+        "english": "submit",
+        "phonetic": "/səbˈmɪt/",
+        "chinese": "v. 提交, 服从",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 409,
+        "english": "successor",
+        "phonetic": "/səkˈsɛsər/",
+        "chinese": "n. 继承者, 接任者",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 410,
+        "english": "survive",
+        "phonetic": "/sərˈvaɪv/",
+        "chinese": "v. 幸存, 活下来",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 411,
+        "english": "thesis",
+        "phonetic": "/ˈθiːsɪs/",
+        "chinese": "n. 论文, 论点",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 412,
+        "english": "topic",
+        "phonetic": "/ˈtɒpɪk/",
+        "chinese": "n. 主题, 话题",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 413,
+        "english": "transmit",
+        "phonetic": "/trænsˈmɪt/",
+        "chinese": "v. 传输, 传送",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 414,
+        "english": "ultimate",
+        "phonetic": "/ˈʌltɪmət/",
+        "chinese": "adj. 最终的, 极限的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 415,
+        "english": "unique",
+        "phonetic": "/juˈniːk/",
+        "chinese": "adj. 独特的, 唯一的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 416,
+        "english": "visible",
+        "phonetic": "/ˈvɪzəbl/",
+        "chinese": "adj. 可见的, 明显的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 417,
+        "english": "voluntary",
+        "phonetic": "/ˈvɒləntəri/",
+        "chinese": "adj. 自愿的, 志愿的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 418,
+        "english": "adapt",
+        "phonetic": "/əˈdæpt/",
+        "chinese": "v. 采取; 采纳; 适应",
+        "example": "Students must adapt to new methods quickly."
+      },
+      {
+        "id": 419,
+        "english": "adult",
+        "phonetic": "/ˈædʌlt/",
+        "chinese": "n. 成年人; adj. 成年的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 420,
+        "english": "aid",
+        "phonetic": "/eɪd/",
+        "chinese": "n. / v. 帮助, 援助",
+        "example": "Visual aids can improve understanding."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 8",
+    "words": [
+      {
+        "id": 421,
+        "english": "ambiguous",
+        "phonetic": "/æmˈbɪɡjuəs/",
+        "chinese": "adj. 模棱两可的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 422,
+        "english": "append",
+        "phonetic": "/əˈpɛnd/",
+        "chinese": "v. 附加, 增补",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 423,
+        "english": "appreciate",
+        "phonetic": "/əˈpriːʃieɪt/",
+        "chinese": "v. 欣赏, 感激",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 424,
+        "english": "arbitrary",
+        "phonetic": "/ˈɑːrbɪtrəri/",
+        "chinese": "adj. 任意的, 武断的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 425,
+        "english": "automate",
+        "phonetic": "/ˈɔːtəmeɪt/",
+        "chinese": "v. 使自动化",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 426,
+        "english": "bias",
+        "phonetic": "/ˈbaɪəs/",
+        "chinese": "n. 偏见, 偏好",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 427,
+        "english": "chart",
+        "phonetic": "/tʃɑːrt/",
+        "chinese": "n. 图表; v. 绘制地图",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 428,
+        "english": "clarify",
+        "phonetic": "/ˈklærəfaɪ/",
+        "chinese": "v. 澄清, 阐明",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 429,
+        "english": "commodity",
+        "phonetic": "/ˈkɒmədɪti/",
+        "chinese": "n. 商品, 货物",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 430,
+        "english": "complement",
+        "phonetic": "/ˈkɒmplɪmənt/",
+        "chinese": "v. / n. 补充, 互补",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 431,
+        "english": "conform",
+        "phonetic": "/kənˈfɔːrm/",
+        "chinese": "v. 符合, 遵从",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 432,
+        "english": "contemporary",
+        "phonetic": "/kənˈtɛmpərəri/",
+        "chinese": "adj. 当代的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 433,
+        "english": "contradict",
+        "phonetic": "/ˌkɒntrəˈdɪkt/",
+        "chinese": "v. 反驳, 与...矛盾",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 434,
+        "english": "crucial",
+        "phonetic": "/ˈkruːʃl/",
+        "chinese": "adj. 至关重要的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 435,
+        "english": "currency",
+        "phonetic": "/ˈkʌrənsi/",
+        "chinese": "n. 货币, 流通",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 436,
+        "english": "denote",
+        "phonetic": "/dɪˈnoʊt/",
+        "chinese": "v. 表示, 指示",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 437,
+        "english": "detect",
+        "phonetic": "/dɪˈtɛkt/",
+        "chinese": "v. 发现, 察觉",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 438,
+        "english": "deviate",
+        "phonetic": "/ˈdiːvieɪt/",
+        "chinese": "v. 偏离, 脱离",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 439,
+        "english": "displace",
+        "phonetic": "/dɪsˈpleɪs/",
+        "chinese": "v. 取代, 置换",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 440,
+        "english": "drama",
+        "phonetic": "/ˈdrɑːmə/",
+        "chinese": "n. 戏剧, 戏剧性事件",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 441,
+        "english": "eventual",
+        "phonetic": "/ɪˈvɛntʃuəl/",
+        "chinese": "adj. 最终的, 结果的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 442,
+        "english": "exhibit",
+        "phonetic": "/ɪɡˈzɪbɪt/",
+        "chinese": "v. / n. 展览, 陈列",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 443,
+        "english": "exploit",
+        "phonetic": "/ˈɛksplɔɪt/",
+        "chinese": "v. 开发, 利用",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 444,
+        "english": "fluctuate",
+        "phonetic": "/ˈflʌktʃueɪt/",
+        "chinese": "v. 波动, 起伏",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 445,
+        "english": "guideline",
+        "phonetic": "/ˈɡaɪdlaɪn/",
+        "chinese": "n. 指导方针, 准则",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 446,
+        "english": "highlight",
+        "phonetic": "/ˈhaɪlaɪt/",
+        "chinese": "v. 强调, 突出",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 447,
+        "english": "implicit",
+        "phonetic": "/ɪmˈplɪsɪt/",
+        "chinese": "adj. 含蓄的, 暗示的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 448,
+        "english": "induce",
+        "phonetic": "/ɪnˈduːs/",
+        "chinese": "v. 引起, 导致",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 449,
+        "english": "inevitable",
+        "phonetic": "/ɪnˈɛvɪtəbl/",
+        "chinese": "adj. 不可避免的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 450,
+        "english": "infrastructure",
+        "phonetic": "/ˈɪnfrəstrʌktʃər/",
+        "chinese": "n. 基础设施",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 451,
+        "english": "inspect",
+        "phonetic": "/ɪnˈspɛkt/",
+        "chinese": "v. 检查, 视察",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 452,
+        "english": "intense",
+        "phonetic": "/ɪnˈtɛns/",
+        "chinese": "adj. 强烈的, 紧张的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 453,
+        "english": "manipulate",
+        "phonetic": "/məˈnɪpjuleɪt/",
+        "chinese": "v. 操纵, 控制",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 454,
+        "english": "offset",
+        "phonetic": "/ˈɔːfset/",
+        "chinese": "n. / v. 抵消, 补偿",
+        "example": "Tax cuts may offset the higher costs."
+      },
+      {
+        "id": 455,
+        "english": "nuclear",
+        "phonetic": "/ˈnuːkliər/",
+        "chinese": "adj. 核的, 核心的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 456,
+        "english": "minimise",
+        "phonetic": "/ˈmɪnɪmaɪz/",
+        "chinese": "v. 最小化",
+        "example": "We need to minimise unnecessary costs."
+      },
+      {
+        "id": 457,
+        "english": "paragraph",
+        "phonetic": "/ˈpærəɡræf/",
+        "chinese": "n. 段落",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 458,
+        "english": "plus",
+        "phonetic": "/plʌs/",
+        "chinese": "prep. / n. 加上, 正号",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 459,
+        "english": "practitioner",
+        "phonetic": "/prækˈtɪʃənər/",
+        "chinese": "n. 从业者, 执业医生",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 460,
+        "english": "predominant",
+        "phonetic": "/prɪˈdɒmɪnənt/",
+        "chinese": "adj. 占主导地位的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 461,
+        "english": "prospect",
+        "phonetic": "/ˈprɒspɛkt/",
+        "chinese": "n. 前景, 展望",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 462,
+        "english": "radical",
+        "phonetic": "/ˈrædɪkl/",
+        "chinese": "adj. 激进的, 根本的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 463,
+        "english": "random",
+        "phonetic": "/ˈrændəm/",
+        "chinese": "adj. 随机的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 464,
+        "english": "reinforce",
+        "phonetic": "/ˌriːɪnˈfɔːrs/",
+        "chinese": "v. 加强, 加固",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 465,
+        "english": "restore",
+        "phonetic": "/rɪˈstɔːr/",
+        "chinese": "v. 恢复, 修复",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 466,
+        "english": "revise",
+        "phonetic": "/rɪˈvaɪz/",
+        "chinese": "v. 修改, 复习",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 467,
+        "english": "schedule",
+        "phonetic": "/ˈʃɛdjuːl/",
+        "chinese": "n. 时间表, 计划",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 468,
+        "english": "tense",
+        "phonetic": "/tɛns/",
+        "chinese": "adj. 紧张的; n. 时态",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 469,
+        "english": "terminate",
+        "phonetic": "/ˈtɜːrmɪneɪt/",
+        "chinese": "v. 终止, 结束",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 470,
+        "english": "theme",
+        "phonetic": "/θiːm/",
+        "chinese": "n. 主题, 题目",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 471,
+        "english": "thereby",
+        "phonetic": "/ˌðɛrˈbaɪ/",
+        "chinese": "adv. 从而, 因此",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 472,
+        "english": "uniform",
+        "phonetic": "/ˈjuːnɪfɔːrm/",
+        "chinese": "adj. 统一的; n. 制服",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 473,
+        "english": "vehicle",
+        "phonetic": "/ˈviːɪkl/",
+        "chinese": "n. 车辆, 交通工具",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 474,
+        "english": "via",
+        "phonetic": "/ˈvaɪə/",
+        "chinese": "prep. 经由, 通过",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 475,
+        "english": "virtual",
+        "phonetic": "/ˈvɜːrtʃuəl/",
+        "chinese": "adj. 虚拟的, 事实上的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 476,
+        "english": "visual",
+        "phonetic": "/ˈvɪʒuəl/",
+        "chinese": "adj. 视觉的, 看得见的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 477,
+        "english": "widespread",
+        "phonetic": "/ˈwaɪdsprɛd/",
+        "chinese": "adj. 广泛的, 普遍的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 478,
+        "english": "abandon",
+        "phonetic": "/əˈbændən/",
+        "chinese": "v. 放弃, 抛弃",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 479,
+        "english": "accompany",
+        "phonetic": "/əˈkʌmpəni/",
+        "chinese": "v. 陪伴, 伴随",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 480,
+        "english": "accumulate",
+        "phonetic": "/əˈkjuːmjəleɪt/",
+        "chinese": "v. 积累, 积聚",
+        "example": "There's no example sentence for root word."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 9",
+    "words": [
+      {
+        "id": 481,
+        "english": "assure",
+        "phonetic": "/əˈʃʊr/",
+        "chinese": "v. 保证, 确信",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 482,
+        "english": "attain",
+        "phonetic": "/əˈteɪn/",
+        "chinese": "v. 达到, 获得",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 483,
+        "english": "behalf",
+        "phonetic": "/bɪˈhæf/",
+        "chinese": "n. 代表, 利益",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 484,
+        "english": "bulk",
+        "phonetic": "/bʌlk/",
+        "chinese": "n. 体积, 大多数",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 485,
+        "english": "cease",
+        "phonetic": "/siːs/",
+        "chinese": "v. 停止, 终止",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 486,
+        "english": "coherent",
+        "phonetic": "/koʊˈhɪrənt/",
+        "chinese": "adj. 连贯的, 一致的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 487,
+        "english": "coincide",
+        "phonetic": "/ˌkoʊɪnˈsaɪd/",
+        "chinese": "v. 一致, 符合",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 488,
+        "english": "commence",
+        "phonetic": "/siːs/",
+        "chinese": "v. 开始, 着手",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 489,
+        "english": "compatible",
+        "phonetic": "/kəmˈpætɪbl/",
+        "chinese": "adj. 兼容的, 适合的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 490,
+        "english": "concurrent",
+        "phonetic": "/kənˈkʌrənt/",
+        "chinese": "adj. 同时发生的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 491,
+        "english": "confine",
+        "phonetic": "/kənˈfaɪn/",
+        "chinese": "v. 限制, 禁闭",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 492,
+        "english": "controversy",
+        "phonetic": "/ˈkɒntrəvɜːrsi/",
+        "chinese": "n. 争论, 争议",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 493,
+        "english": "converse",
+        "phonetic": "/kənˈvɜːrs/",
+        "chinese": "v. 交谈; adj. 相反的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 494,
+        "english": "device",
+        "phonetic": "/dɪˈvaɪs/",
+        "chinese": "n. 装置, 设备",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 495,
+        "english": "devote",
+        "phonetic": "/dɪˈvoʊt/",
+        "chinese": "v. 致力于, 奉献",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 496,
+        "english": "diminish",
+        "phonetic": "/dɪˈmɪnɪʃ/",
+        "chinese": "v. 减少, 削弱",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 497,
+        "english": "distort",
+        "phonetic": "/dɪˈstɔːrt/",
+        "chinese": "v. 歪曲, 扭曲",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 498,
+        "english": "duration",
+        "phonetic": "/djʊˈreɪʃn/",
+        "chinese": "n. 持续时间, 期间",
+        "example": "The experiment measured the duration of the effect."
+      },
+      {
+        "id": 499,
+        "english": "erode",
+        "phonetic": "/ɪˈroʊd/",
+        "chinese": "v. 侵蚀, 削弱",
+        "example": "Constant delays can erode public trust."
+      },
+      {
+        "id": 500,
+        "english": "ethic",
+        "phonetic": "/ˈɛθɪk/",
+        "chinese": "n. 道德规范, 伦理",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 501,
+        "english": "format",
+        "phonetic": "/ˈfɔːrmæt/",
+        "chinese": "n. 格式, 版式",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 502,
+        "english": "found",
+        "phonetic": "/faʊnd/",
+        "chinese": "v. 建立, 创立",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 503,
+        "english": "inherent",
+        "phonetic": "/ɪnˈhɪrənt/",
+        "chinese": "adj. 固有的, 内在的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 504,
+        "english": "insight",
+        "phonetic": "/ˈɪnsaɪt/",
+        "chinese": "n. 洞察力, 见解",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 505,
+        "english": "integral",
+        "phonetic": "/ˈɪntɪɡrəl/",
+        "chinese": "adj. 不可或缺的, 完整的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 506,
+        "english": "intermediate",
+        "phonetic": "/ˌɪntərˈmiːdiət/",
+        "chinese": "adj. 中间的, 中级的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 507,
+        "english": "manual",
+        "phonetic": "/ˈmænjuəl/",
+        "chinese": "adj. 手工的; n. 手册",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 508,
+        "english": "mature",
+        "phonetic": "/məˈtʃʊr/",
+        "chinese": "adj. 成熟的; v. 成熟",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 509,
+        "english": "mediate",
+        "phonetic": "/ˈmiːdieɪt/",
+        "chinese": "v. 调解, 调停",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 510,
+        "english": "medium",
+        "phonetic": "/ˈmiːdiəm/",
+        "chinese": "n. 媒介; adj. 中等的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 511,
+        "english": "military",
+        "phonetic": "/ˈmɪlɪtəri/",
+        "chinese": "adj. 军事的, 军队的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 512,
+        "english": "minimal",
+        "phonetic": "/ˈmɪnɪməl/",
+        "chinese": "adj. 最小的, 最低的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 513,
+        "english": "mutual",
+        "phonetic": "/ˈmjuːtʃuəl/",
+        "chinese": "adj. 相互的, 共同的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 514,
+        "english": "norm",
+        "phonetic": "/nɔːrm/",
+        "chinese": "n. 规范, 标准",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 515,
+        "english": "overlap",
+        "phonetic": "/ˌoʊvərˈlæp/",
+        "chinese": "v. 重叠, 部分一致",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 516,
+        "english": "passive",
+        "phonetic": "/ˈpæsɪv/",
+        "chinese": "adj. 被动的, 消极的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 517,
+        "english": "portion",
+        "phonetic": "/ˈpɔːrʃn/",
+        "chinese": "n. 部分, 份额",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 518,
+        "english": "preliminary",
+        "phonetic": "/prɪˈlɪmɪnəri/",
+        "chinese": "adj. 初步的, 预备的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 519,
+        "english": "protocol",
+        "phonetic": "/ˈproʊtəkɒl/",
+        "chinese": "n. 协议, 草案",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 520,
+        "english": "qualitative",
+        "phonetic": "/ˈkwɒlɪteɪtɪv/",
+        "chinese": "adj. 定性的, 性质上的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 521,
+        "english": "refine",
+        "phonetic": "/rɪˈfaɪn/",
+        "chinese": "v. 提炼, 改善",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 522,
+        "english": "relax",
+        "phonetic": "/rɪˈlæks/",
+        "chinese": "v. 放松, 休息",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 523,
+        "english": "restrain",
+        "phonetic": "/rɪˈstreɪn/",
+        "chinese": "v. 抑制, 控制",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 524,
+        "english": "revolution",
+        "phonetic": "/ˌrɛvəˈluːʃn/",
+        "chinese": "n. 革命, 旋转",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 525,
+        "english": "rigid",
+        "phonetic": "/ˈrɪdʒɪd/",
+        "chinese": "adj. 严格的, 死板的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 526,
+        "english": "route",
+        "phonetic": "/ruːt/",
+        "chinese": "n. 路线, 途径",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 527,
+        "english": "scenario",
+        "phonetic": "/səˈnærioʊ/",
+        "chinese": "n. 剧本, 方案",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 528,
+        "english": "sphere",
+        "phonetic": "/sfɪr/",
+        "chinese": "n. 球体, 范围",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 529,
+        "english": "subordinate",
+        "phonetic": "/səˈbɔːrdɪnət/",
+        "chinese": "adj. 次要的, 下级的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 530,
+        "english": "supplement",
+        "phonetic": "/ˈsʌplɪmənt/",
+        "chinese": "n. / v. 补充, 增补",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 531,
+        "english": "suspend",
+        "phonetic": "/səˈspɛnd/",
+        "chinese": "v. 暂停, 悬挂",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 532,
+        "english": "team",
+        "phonetic": "/tiːm/",
+        "chinese": "n. 团队, 队",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 533,
+        "english": "temporary",
+        "phonetic": "/ˈtɛmpəreri/",
+        "chinese": "adj. 暂时的, 临时的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 534,
+        "english": "trigger",
+        "phonetic": "/ˈtrɪɡər/",
+        "chinese": "v. 触发, 引起; n. 扳机",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 535,
+        "english": "unify",
+        "phonetic": "/ˈjuːnɪfaɪ/",
+        "chinese": "v. 统一, 使一致",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 536,
+        "english": "violate",
+        "phonetic": "/ˈvaɪəleɪt/",
+        "chinese": "v. 违反, 侵犯",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 537,
+        "english": "vision",
+        "phonetic": "/ˈvɪʒn/",
+        "chinese": "n. 视力, 幻觉, 远见",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 538,
+        "english": "accommodate",
+        "phonetic": "/əˈkɒmədeɪt/",
+        "chinese": "v. 适应, 容纳",
+        "example": "The model can accommodate new variables."
+      },
+      {
+        "id": 539,
+        "english": "analogy",
+        "phonetic": "/əˈnælədʒi/",
+        "chinese": "n. 类比, 相似之处",
+        "example": "The teacher used an analogy to explain the idea."
+      },
+      {
+        "id": 540,
+        "english": "anticipate",
+        "phonetic": "/ænˈtɪsɪpeɪt/",
+        "chinese": "v. 预期, 期望",
+        "example": "We anticipate a rise in demand next year."
+      }
+    ]
+  },
+  {
+    "title": "Sublist 10",
+    "words": [
+      {
+        "id": 541,
+        "english": "collapse",
+        "phonetic": "/kəˈlæps/",
+        "chinese": "v. / n. 倒塌, 崩溃",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 542,
+        "english": "colleague",
+        "phonetic": "/ˈkɒliːɡ/",
+        "chinese": "n. 同事, 同僚",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 543,
+        "english": "compile",
+        "phonetic": "/kəmˈpaɪl/",
+        "chinese": "v. 汇编, 编纂",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 544,
+        "english": "conceive",
+        "phonetic": "/kənˈsiːv/",
+        "chinese": "v. 构思, 设想",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 545,
+        "english": "convince",
+        "phonetic": "/kənˈvɪns/",
+        "chinese": "v. 说服, 使确信",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 546,
+        "english": "depress",
+        "phonetic": "/dɪˈprɛs/",
+        "chinese": "v. 压抑, 使沮丧",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 547,
+        "english": "encounter",
+        "phonetic": "/ɪnˈkaʊntər/",
+        "chinese": "v. / n. 遭遇, 遇到",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 548,
+        "english": "enormous",
+        "phonetic": "/ɪˈnɔːrməs/",
+        "chinese": "adj. 巨大的, 极大的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 549,
+        "english": "forthcoming",
+        "phonetic": "/ˌfɔːrθˈkʌmɪŋ/",
+        "chinese": "adj. 即将到来的, 现成的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 550,
+        "english": "incline",
+        "phonetic": "/ɪnˈklaɪn/",
+        "chinese": "v. 倾斜, 倾向于",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 551,
+        "english": "integrity",
+        "phonetic": "/ɪnˈtɛɡrəti/",
+        "chinese": "n. 完整, 正直",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 552,
+        "english": "intrinsic",
+        "phonetic": "/ɪnˈtrɪnsɪk/",
+        "chinese": "adj. 固有的, 内在的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 553,
+        "english": "invoke",
+        "phonetic": "/ɪnˈvoʊk/",
+        "chinese": "v. 调用, 祈求",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 554,
+        "english": "levy",
+        "phonetic": "/ˈlɛvi/",
+        "chinese": "v. / n. 征收, 征税",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 555,
+        "english": "likewise",
+        "phonetic": "/ˈlaɪkwaɪz/",
+        "chinese": "adv. 同样地, 也",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 556,
+        "english": "nonetheless",
+        "phonetic": "/ˌnɛvərðəˈlɛs/",
+        "chinese": "adv. 然而, 不过",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 557,
+        "english": "notwithstanding",
+        "phonetic": "/ˌnɒtwɪθˈstændɪŋ/",
+        "chinese": "adv. 尽管如此, 仍然",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 558,
+        "english": "odd",
+        "phonetic": "/ɒd/",
+        "chinese": "adj. 奇数的, 古怪的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 559,
+        "english": "ongoing",
+        "phonetic": "/ˈɒnɡoʊɪŋ/",
+        "chinese": "adj. 进行中的, 持续的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 560,
+        "english": "panel",
+        "phonetic": "/ˈpænl/",
+        "chinese": "n. 嵌板, 座谈小组",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 561,
+        "english": "persist",
+        "phonetic": "/pərˈsɪst/",
+        "chinese": "v. 坚持, 持续",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 562,
+        "english": "pose",
+        "phonetic": "/poʊz/",
+        "chinese": "v. 造成, 提出; n. 姿势",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 563,
+        "english": "reluctance",
+        "phonetic": "/rɪˈlʌktəns/",
+        "chinese": "n. 勉强, 不情愿",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 564,
+        "english": "so called",
+        "phonetic": "/ˌsəʊ ˈkɔːld/",
+        "chinese": "adj. 所谓的, 号称的",
+        "example": "The so called solution did not help at all."
+      },
+      {
+        "id": 565,
+        "english": "straightforward",
+        "phonetic": "/ˌstreɪtˈfɔːrwərd/",
+        "chinese": "adj. 简单的, 直截了当的",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 566,
+        "english": "undergo",
+        "phonetic": "/ˌʌndərˈɡoʊ/",
+        "chinese": "v. 经历, 遭受",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 567,
+        "english": "whereby",
+        "phonetic": "/ˌwɛrˈbaɪ/",
+        "chinese": "adv. 借此, 从而",
+        "example": "There's no example sentence for root word."
+      },
+      {
+        "id": 568,
+        "english": "adjacent",
+        "phonetic": "/əˈdʒeɪsnt/",
+        "chinese": "adj. 邻近的, 毗连的",
+        "example": "The lab is adjacent to the library."
+      },
+      {
+        "id": 569,
+        "english": "albeit",
+        "phonetic": "/ɔːlˈbiːɪt/",
+        "chinese": "conj. 虽然, 尽管",
+        "example": "The method is simple, albeit time-consuming."
+      },
+      {
+        "id": 570,
+        "english": "assemble",
+        "phonetic": "/əˈsembl/",
+        "chinese": "v. 集合, 组装",
+        "example": "The team will assemble the equipment today."
+      }
+    ]
+  }
+]
