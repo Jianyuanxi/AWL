@@ -56,6 +56,11 @@ debug_tables.json
 Academic Word List.docx
 Academic Word List.pdf
 
+# Android signing keys
+*.jks
+*.keystore
+key.properties
+
 # Oversized icon source images (only assets/icon/2.png is used by flutter_launcher_icons)
 assets/icon/1.png
 assets/icon/172287711661427_upscayl_4x_digital-art-4x.png

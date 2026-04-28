@@ -1,58 +1,86 @@
 # AWL Focus
 
-> 一个用 Flutter 写的极简学术词汇（Academic Word List）背单词应用，主打 **Apple 风格 + 玻璃拟态（Glassmorphism）+ 专注学习体验**。
+> Flutter 写的学术词汇（Academic Word List）背单词应用，主打 **Apple 风格玻璃拟态 + 专注学习体验 + SRS 间隔复习**。
 
-[English](#english) · 简体中文
+<p align="center">
+  <img src="assets/screenshots/01-study.jpg" width="30%" alt="学习界面" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/02-stats.jpg" width="30%" alt="统计界面" />
+</p>
 
 ---
 
-## ✨ 特性
+## ✨ 功能
 
-- **专注的两屏流程** — Sublist 选择页 + 单词学习页，没有多余干扰
-- **真磨砂玻璃 UI** — 使用 `BackdropFilter(ImageFilter.blur(20, 20))`，柔和阴影 + 半透明白底
-- **丝滑转场** — 自定义 `SmoothPageRoute`：渐显 + 微缩放 + 微位移，进入与返回一气呵成
-- **拼写训练** — 看中文释义和遮盖了关键词的英文例句，键盘输入拼写
-- **单词朗读** — 点扬声器图标朗读发音（`flutter_tts`）
-- **本地进度** — 每个 Sublist 独立断点续学，`shared_preferences` 持久化
-- **错题本** — 错过的单词自动收集，可筛选 Sublist，"已掌握" 一键移除
-- **柔和动效** — 卡片 `AnimatedScale` 按下反馈、进度条 `TweenAnimationBuilder` 动画、单词切换 `AnimatedSwitcher` 渐显+滑入
+### 学习模块
+| 功能 | 说明 |
+|---|---|
+| **Sublist 分组学习** | AWL 10 个 Sublist，独立断点续学，进度自动保存 |
+| **Today's Plan** | 智能检测当前进度，圆环 + 进度条直观展示 |
+| **SRS 间隔复习** | 错词在 1 / 3 / 7 天后自动出现在复习列表，艾宾浩斯曲线巩固记忆 |
+| **今日复习** | 所有错题集中复习，答对自动移除 |
+| **我的收藏** | 星标单词独立背诵，右上角一键收藏 |
+| **拼写训练** | 看中文释义 + 遮盖例句，键盘输入拼写 |
+| **单词朗读** | TTS 发音，点扬声器图标即可 |
+
+### 统计模块
+| 功能 | 说明 |
+|---|---|
+| **连续学习天数** | 每日打卡自动记录，火焰图标激励 |
+| **掌握 / 待复习** | 已掌握词数 + 待巩固错题数 |
+| **准确率** | 总拼写次数与正确率统计 |
+| **本周柱状图** | fl_chart 周一到周日每日学习次数 |
+
+### 体验细节
+| 细节 | 说明 |
+|---|---|
+| **玻璃拟态 UI** | `BackdropFilter` 真磨砂模糊，柔和阴影 + 半透明白底 |
+| **Apple 风格转场** | `CupertinoPageRoute` 标准右向左滑动覆盖 |
+| **闪卡切换动画** | 单词卡片弧度轨迹飞入飞出，带旋转缩放 |
+| **Q弹按钮反馈** | 仿多邻国 3D 按压 + 弹性回弹（50ms / 280ms） |
+| **完成庆祝** | Confetti 全屏粒子 + 脉冲光晕 + 阶梯触觉反馈 |
+| **背景浮动光晕** | 三个独立漂移的 Blur Circle，不死板 |
+
+---
 
 ## 🎨 设计语言
 
-| Token         | 值                              |
-|---------------|--------------------------------|
-| Primary       | `#6C63FF`                      |
-| Background    | `#F8F9FB → #EEF1F6` 垂直渐变   |
-| Text primary  | `#1C1C1E`                      |
-| Text secondary| `#8E8E93`                      |
-| Success       | `#34C759`                      |
-| Danger        | `#FF3B30`                      |
-| 圆角           | 20–28px                        |
-| 阴影           | `blur 20, offset (0,8), α 0.06`|
-| 玻璃模糊       | `sigmaX/Y: 20`                 |
-| 玻璃白底       | 普通卡 60% / 焦点卡 75%         |
+| Token | 值 |
+|---|---|
+| Primary | `#6C63FF` |
+| Background | `#F8F9FB → #EEF1F6` 垂直渐变 |
+| Text primary | `#1C1C1E` |
+| Text secondary | `#8E8E93` |
+| Success / Danger / Star | `#34C759` / `#FF3B30` / `#FFB800` |
+| 字体 | Google Fonts `Plus Jakarta Sans` |
+| 圆角 | 16–32px |
+| 玻璃模糊 | `sigmaX/Y: 20` |
+| 玻璃白底 | 60%–75% 透明度 |
+
+---
 
 ## 🛠 技术栈
 
 | 层 | 选型 |
 |---|---|
-| 框架 | Flutter (Material 3 + Cupertino 混合) |
-| 状态 | `ChangeNotifier`（`StudyManager` 单例） |
-| 存储 | `shared_preferences` |
+| 框架 | Flutter (Material 3 + Cupertino) |
+| 状态管理 | `ChangeNotifier` 单例 (`StudyManager`) |
+| 持久化 | `shared_preferences` |
 | 语音 | `flutter_tts` |
-| 数据 | `assets/words.json`（AWL 10 个 sublist） |
+| 图表 | `fl_chart` |
+| 粒子动效 | `confetti` |
+| 字体 | `google_fonts` |
+| 数据 | `assets/words.json` |
+
+---
 
 ## 🚀 快速开始
 
 ```bash
-# 1. 克隆
-git clone https://github.com/<your-name>/awl-focus.git
-cd awl-focus
+git clone https://github.com/Jianyuanxi/AWL.git
+cd AWL  # 或 flutter_application_1
 
-# 2. 拉依赖
 flutter pub get
-
-# 3. 运行（接好设备或开模拟器）
 flutter run
 ```
 
@@ -64,71 +92,75 @@ flutter run
 flutter pub run flutter_launcher_icons
 ```
 
-图标源文件：`assets/icon/2.png`（在 `pubspec.yaml` 的 `flutter_launcher_icons` 配置里）。
+### 发布 Release APK
+
+推送 tag 即可触发 GitHub Actions 自动构建并发布：
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+> 首次使用需先配置签名密钥和 GitHub Secrets，详见下方「自动发布配置」。
+
+---
+
+## 🤖 自动发布配置
+
+项目已配置 `.github/workflows/release.yml`，推送 `v*` tag 后自动构建签名 APK 并创建 GitHub Release。
+
+**首次配置步骤：**
+
+1. 运行密钥生成脚本：
+```powershell
+.\scripts\generate_keystore.ps1
+```
+
+2. 将脚本输出的 4 个值添加到 [GitHub Secrets](https://github.com/Jianyuanxi/AWL/settings/secrets/actions)：
+
+| Secret 名称 | 说明 |
+|---|---|
+| `KEYSTORE_BASE64` | 签名密钥文件 base64 编码 |
+| `KEYSTORE_PASSWORD` | Keystore 密码 |
+| `KEY_ALIAS` | 密钥别名 |
+| `KEY_PASSWORD` | Key 密码 |
+
+---
 
 ## 📁 项目结构
 
 ```
 lib/
-  main.dart                # 全部代码：主题、GlassCard、页面、StudyManager
+  main.dart                     # 全部代码（单文件架构）
 assets/
-  words.json               # AWL Sublist 数据
-  icon/2.png               # App 图标源
-android/  ios/  windows/   # 各平台壳工程
+  words.json                    # AWL Sublist 数据
+  screenshots/                  # 截图
+  icon/2.png                    # App 图标源
+.github/workflows/
+  release.yml                   # GitHub Actions 自动发布
+scripts/
+  generate_keystore.ps1         # 签名密钥生成脚本
 ```
 
-> 单文件结构是刻意的：表面只有两屏，组件足够小，过度拆分反而增加理解成本。
-
-## 🧪 数据格式
-
-`assets/words.json` 是一个 sublist 数组：
-
-```json
-[
-  {
-    "title": "Sublist 1",
-    "words": [
-      {
-        "id": 1,
-        "english": "process",
-        "phonetic": "/ˈprəʊses/",
-        "chinese": "v. 处理, 处置",
-        "example": "We need to process the application before the deadline."
-      }
-    ]
-  }
-]
-```
+---
 
 ## 🗺 路线图
 
-下面这些是已经规划但还没动工的方向（欢迎 PR）：
-
-- [ ] 学习统计页（连续打卡、准确率、每日学习曲线）
-- [ ] 错题智能复习（基于艾宾浩斯曲线的 SRS）
-- [ ] 多种练习模式（选择题 / 听写 / 看英选中）
-- [ ] 收藏 / 星标功能（界面上的星星图标已经预留）
+- [x] 学习统计页（连续打卡、准确率、本周柱状图）
+- [x] 错题智能复习（SRS 1/3/7 天间隔）
+- [x] 收藏 / 星标功能
+- [x] 完成 Sublist 庆祝动效（Confetti 粒子 + 弹窗动画）
+- [x] 触觉反馈
+- [x] Apple 风格玻璃拟态 UI
+- [x] 闪卡切换动画 + Q弹按钮
+- [x] Google Fonts 字体
+- [x] 背景浮动光晕
+- [ ] 多种练习模式（选择题 / 听写）
+- [ ] 拼写错误高亮（diff 字母级标注）
 - [ ] Dark Mode
-- [ ] 完成 Sublist 的庆祝动效（Lottie / 自绘粒子）
-- [ ] 触觉反馈与音效
+
+---
 
 ## 📜 License
 
 [MIT](LICENSE)
-
----
-
-<a id="english"></a>
-
-## English
-
-A minimalist Flutter vocabulary trainer for the Academic Word List (AWL), with an Apple-style glassmorphism UI and a focus-first study flow.
-
-Two screens (sublist picker + word study), real backdrop-blur glass cards, custom smooth page transitions (fade + soft scale), TTS pronunciation, local persistence, and a built-in mistake review page.
-
-```bash
-flutter pub get
-flutter run
-```
-
-Design tokens, structure, and roadmap are in the Chinese section above.
