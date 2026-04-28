@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:confetti/confetti.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -24,46 +27,156 @@ Future<void> main() async {
 
 class AppTheme {
   static const Color primary = Color(0xFF6C63FF);
-  static const Color primarySoft = Color(0xFF8F88FF);
+  static const Color primaryDark = Color(0xFF5048D6);
   static const Color textPrimary = Color(0xFF1C1C1E);
   static const Color textSecondary = Color(0xFF8E8E93);
   static const Color success = Color(0xFF34C759);
+  static const Color successDark = Color(0xFF2BA84A);
   static const Color danger = Color(0xFFFF3B30);
+  static const Color star = Color(0xFFFFB800);
 
   static const List<Color> bgGradient = <Color>[
     Color(0xFFF8F9FB),
     Color(0xFFEEF1F6),
   ];
-
-  static const List<Color> primaryGradient = <Color>[
-    Color(0xFF8F88FF),
-    Color(0xFF6C63FF),
-  ];
 }
 
 // ============================================================
-// Reusable widgets
+// Background with decorative blur circles
 // ============================================================
 
 class GradientBackground extends StatelessWidget {
   final Widget child;
-
   const GradientBackground({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: AppTheme.bgGradient,
+    return Stack(
+      children: <Widget>[
+        const Positioned.fill(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: AppTheme.bgGradient,
+              ),
+            ),
+          ),
         ),
-      ),
-      child: child,
+        Positioned(
+          top: -80,
+          left: -60,
+          child: _Blob(
+            size: 260,
+            color: AppTheme.primary.withValues(alpha: 0.18),
+            driftDx: 20,
+            driftDy: 16,
+            durationSec: 7,
+          ),
+        ),
+        Positioned(
+          top: 120,
+          right: -100,
+          child: _Blob(
+            size: 220,
+            color: const Color(0xFFFFB6C1).withValues(alpha: 0.18),
+            driftDx: 14,
+            driftDy: 22,
+            durationSec: 9,
+          ),
+        ),
+        Positioned(
+          bottom: -120,
+          left: -40,
+          child: _Blob(
+            size: 280,
+            color: const Color(0xFF89B4FF).withValues(alpha: 0.16),
+            driftDx: 24,
+            driftDy: 12,
+            durationSec: 10,
+          ),
+        ),
+        child,
+      ],
     );
   }
 }
+
+class _Blob extends StatefulWidget {
+  final double size;
+  final Color color;
+  final double driftDx;
+  final double driftDy;
+  final double durationSec;
+
+  const _Blob({
+    required this.size,
+    required this.color,
+    this.driftDx = 18,
+    this.driftDy = 14,
+    this.durationSec = 8,
+  });
+
+  @override
+  State<_Blob> createState() => _BlobState();
+}
+
+class _BlobState extends State<_Blob> with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: widget.durationSec.round()),
+    );
+    _ctrl.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _ctrl,
+      builder: (context, _) {
+        final t = _ctrl.value;
+        final ox = widget.driftDx * (t - 0.5) * 2;
+        final oy = widget.driftDy * (t - 0.5) * 2;
+        return IgnorePointer(
+          child: Transform.translate(
+            offset: Offset(ox, oy),
+            child: Container(
+              width: widget.size,
+              height: widget.size,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: widget.color,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: widget.color,
+                    blurRadius: 80,
+                    spreadRadius: 30,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// ============================================================
+// Glass card
+// ============================================================
 
 class GlassCard extends StatelessWidget {
   final Widget child;
@@ -119,38 +232,80 @@ class GlassCard extends StatelessWidget {
   }
 }
 
+// ============================================================
+// Tap feedback widgets
+// ============================================================
+
 class ScaleTap extends StatefulWidget {
   final Widget child;
   final VoidCallback? onTap;
-
-  const ScaleTap({super.key, required this.child, this.onTap});
+  final double pressScale;
+  const ScaleTap({
+    super.key,
+    required this.child,
+    this.onTap,
+    this.pressScale = 0.96,
+  });
 
   @override
   State<ScaleTap> createState() => _ScaleTapState();
 }
 
-class _ScaleTapState extends State<ScaleTap> {
-  bool _pressed = false;
+class _ScaleTapState extends State<ScaleTap>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+  late final Animation<double> _scale;
 
-  void _setPressed(bool value) {
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 70),
+      reverseDuration: const Duration(milliseconds: 300),
+    );
+    _scale = Tween<double>(begin: 1.0, end: widget.pressScale).animate(
+      CurvedAnimation(
+        parent: _ctrl,
+        curve: Curves.easeOut,
+        reverseCurve: Curves.elasticOut,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  void _down(_) {
     if (widget.onTap == null) return;
-    if (_pressed != value) setState(() => _pressed = value);
+    _ctrl.forward();
+    HapticFeedback.selectionClick();
+  }
+
+  void _up(_) {
+    if (widget.onTap == null) return;
+    _ctrl.reverse();
   }
 
   @override
   Widget build(BuildContext context) {
     return Listener(
       behavior: HitTestBehavior.deferToChild,
-      onPointerDown: (_) => _setPressed(true),
-      onPointerUp: (_) => _setPressed(false),
-      onPointerCancel: (_) => _setPressed(false),
+      onPointerDown: _down,
+      onPointerUp: _up,
+      onPointerCancel: _up,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: widget.onTap,
-        child: AnimatedScale(
-          scale: _pressed ? 0.97 : 1.0,
-          duration: const Duration(milliseconds: 120),
-          curve: Curves.easeOut,
+        child: AnimatedBuilder(
+          animation: _scale,
+          builder: (context, child) => Transform.scale(
+            scale: _scale.value,
+            child: child,
+          ),
           child: widget.child,
         ),
       ),
@@ -158,117 +313,174 @@ class _ScaleTapState extends State<ScaleTap> {
   }
 }
 
-// Custom page route — fade + soft scale (no harsh slide).
-// Forward feels like the destination "rises into focus", reverse settles back.
-class SmoothPageRoute<T> extends PageRouteBuilder<T> {
-  SmoothPageRoute({required this.builder, RouteSettings? settings})
-      : super(
-          settings: settings,
-          pageBuilder: (context, _, __) => builder(context),
-          transitionDuration: const Duration(milliseconds: 520),
-          reverseTransitionDuration: const Duration(milliseconds: 380),
-          opaque: true,
-          barrierColor: null,
-        );
+/// Duolingo-style 3D button with snappy press + springy rebound.
+class DuolingoButton extends StatefulWidget {
+  final String label;
+  final IconData? icon;
+  final VoidCallback? onTap;
+  final Color color;
+  final Color shadowColor;
+  final Color textColor;
+  final double radius;
+  final double height;
+  final double shadowOffset;
+  final bool enabled;
 
-  final WidgetBuilder builder;
+  const DuolingoButton({
+    super.key,
+    required this.label,
+    this.icon,
+    this.onTap,
+    this.color = AppTheme.primary,
+    this.shadowColor = AppTheme.primaryDark,
+    this.textColor = Colors.white,
+    this.radius = 16,
+    this.height = 54,
+    this.shadowOffset = 4,
+    this.enabled = true,
+  });
 
   @override
-  Widget buildTransitions(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
-    final enter = CurvedAnimation(
-      parent: animation,
-      curve: Curves.easeOutCubic,
-      reverseCurve: Curves.easeInCubic,
-    );
-    final cover = CurvedAnimation(
-      parent: secondaryAnimation,
-      curve: Curves.easeOutCubic,
-      reverseCurve: Curves.easeInCubic,
-    );
+  State<DuolingoButton> createState() => _DuolingoButtonState();
+}
 
-    return FadeTransition(
-      opacity: Tween<double>(begin: 1.0, end: 0.4).animate(cover),
-      child: ScaleTransition(
-        scale: Tween<double>(begin: 1.0, end: 0.97).animate(cover),
-        child: FadeTransition(
-          opacity: enter,
-          child: ScaleTransition(
-            scale: Tween<double>(begin: 0.96, end: 1.0).animate(enter),
-            child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 0.02),
-                end: Offset.zero,
-              ).animate(enter),
-              child: child,
-            ),
-          ),
+class _DuolingoButtonState extends State<DuolingoButton>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+  late final Animation<double> _press;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 50),
+      reverseDuration: const Duration(milliseconds: 280),
+    );
+    _press = CurvedAnimation(
+      parent: _ctrl,
+      curve: Curves.easeOut,
+      reverseCurve: Curves.elasticOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  void _down(_) {
+    if (!widget.enabled || widget.onTap == null) return;
+    _ctrl.forward();
+    HapticFeedback.mediumImpact();
+  }
+
+  void _up(_) {
+    if (!widget.enabled || widget.onTap == null) return;
+    _ctrl.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final disabled = !widget.enabled || widget.onTap == null;
+    return Listener(
+      onPointerDown: _down,
+      onPointerUp: _up,
+      onPointerCancel: _up,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: widget.onTap,
+        child: AnimatedBuilder(
+          animation: _press,
+          builder: (context, _) {
+            final v = _press.value.clamp(0.0, 1.0);
+            final scale = 1.0 - 0.03 * v; // subtle squish
+            return SizedBox(
+              height: widget.height + widget.shadowOffset,
+              child: Stack(
+                children: <Widget>[
+                  // Bottom shadow plate (the "3D depth")
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: Transform.scale(
+                      scale: scale,
+                      child: Container(
+                        height: widget.height + widget.shadowOffset,
+                        decoration: BoxDecoration(
+                          color: disabled
+                              ? AppTheme.textSecondary.withValues(alpha: 0.3)
+                              : widget.shadowColor,
+                          borderRadius: BorderRadius.circular(widget.radius),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Top face — translates down on press
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    top: v * widget.shadowOffset,
+                    child: Transform.scale(
+                      scale: scale,
+                      child: Container(
+                        height: widget.height,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: disabled
+                              ? AppTheme.textSecondary.withValues(alpha: 0.45)
+                              : widget.color,
+                          borderRadius: BorderRadius.circular(widget.radius),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            if (widget.icon != null) ...<Widget>[
+                              Icon(widget.icon, color: widget.textColor, size: 18),
+                              const SizedBox(width: 6),
+                            ],
+                            Text(
+                              widget.label,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.5,
+                                color: widget.textColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
   }
 }
 
-// Page transitions builder used at the theme level so any default
-// MaterialPageRoute (e.g. dialogs) gets the same smooth feel.
-class _SmoothPageTransitionsBuilder extends PageTransitionsBuilder {
-  const _SmoothPageTransitionsBuilder();
-
-  @override
-  Widget buildTransitions<T>(
-    PageRoute<T> route,
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
-    final enter = CurvedAnimation(
-      parent: animation,
-      curve: Curves.easeOutCubic,
-      reverseCurve: Curves.easeInCubic,
-    );
-    final cover = CurvedAnimation(
-      parent: secondaryAnimation,
-      curve: Curves.easeOutCubic,
-      reverseCurve: Curves.easeInCubic,
-    );
-
-    return FadeTransition(
-      opacity: Tween<double>(begin: 1.0, end: 0.4).animate(cover),
-      child: ScaleTransition(
-        scale: Tween<double>(begin: 1.0, end: 0.97).animate(cover),
-        child: FadeTransition(
-          opacity: enter,
-          child: ScaleTransition(
-            scale: Tween<double>(begin: 0.96, end: 1.0).animate(enter),
-            child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 0.02),
-                end: Offset.zero,
-              ).animate(enter),
-              child: child,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// ============================================================
+// Circular icon button
+// ============================================================
 
 class CircleIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
   final double size;
+  final Color? iconColor;
 
   const CircleIconButton({
     super.key,
     required this.icon,
     required this.onTap,
     this.size = 40,
+    this.iconColor,
   });
 
   @override
@@ -293,14 +505,14 @@ class CircleIconButton extends StatelessWidget {
             ),
           ],
         ),
-        child: Icon(icon, size: 18, color: AppTheme.textPrimary),
+        child: Icon(icon, size: 18, color: iconColor ?? AppTheme.textPrimary),
       ),
     );
   }
 }
 
 // ============================================================
-// Models & State
+// Models
 // ============================================================
 
 class Word {
@@ -362,120 +574,251 @@ class SublistProgress {
       };
 }
 
+// ============================================================
+// State manager
+// ============================================================
+
 class StudyManager extends ChangeNotifier {
   StudyManager._();
-
   static final StudyManager instance = StudyManager._();
 
   static const String _mistakeCountsKey = 'mistake_counts_v1';
+  static const String _mistakeDatesKey = 'mistake_dates_v1';
   static const String _sublistProgressKey = 'sublist_progress_v1';
+  static const String _starredKey = 'starred_words_v1';
+  static const String _streakKey = 'streak_v1';
+  static const String _totalMasteredKey = 'total_mastered_v1';
+  static const String _totalAttemptsKey = 'total_attempts_v1';
+  static const String _totalCorrectKey = 'total_correct_v1';
+  static const String _dailyHistoryKey = 'daily_history_v1';
 
   late final SharedPreferences _prefs;
   bool _isReady = false;
 
   final Map<int, int> _mistakeCounts = <int, int>{};
+  final Map<int, String> _mistakeDates = <int, String>{}; // wordId → 'yyyy-MM-dd'
   final Map<String, SublistProgress> _sublistProgress =
       <String, SublistProgress>{};
+  final Set<int> _starred = <int>{};
+  final Map<String, int> _dailyHistory = <String, int>{}; // 'yyyy-MM-dd' → count
+
+  int _streakDays = 0;
+  String? _lastStudyDate; // yyyy-MM-dd
+  int _totalMastered = 0;
+  int _totalAttempts = 0;
+  int _totalCorrect = 0;
 
   Future<void> init() async {
     if (_isReady) return;
     _prefs = await SharedPreferences.getInstance();
     _loadMistakeCounts();
+    _loadMistakeDates();
     _loadSublistProgress();
+    _loadStarred();
+    _loadStats();
+    _loadDailyHistory();
     _isReady = true;
   }
 
+  // ----- Mistake counts -----
   void _loadMistakeCounts() {
     final raw = _prefs.getString(_mistakeCountsKey);
     if (raw == null || raw.isEmpty) return;
-
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     _mistakeCounts
       ..clear()
-      ..addEntries(decoded.entries.map(
-        (entry) => MapEntry(
-          int.tryParse(entry.key) ?? 0,
-          (entry.value as num).toInt(),
-        ),
-      ));
+      ..addEntries(decoded.entries.map((e) => MapEntry(
+            int.tryParse(e.key) ?? 0,
+            (e.value as num).toInt(),
+          )));
     _mistakeCounts.remove(0);
+  }
+
+  void _loadMistakeDates() {
+    final raw = _prefs.getString(_mistakeDatesKey);
+    if (raw == null || raw.isEmpty) return;
+    final decoded = jsonDecode(raw) as Map<String, dynamic>;
+    _mistakeDates
+      ..clear()
+      ..addEntries(decoded.entries.map((e) => MapEntry(
+            int.tryParse(e.key) ?? 0,
+            e.value as String,
+          )));
+    _mistakeDates.remove(0);
+  }
+
+  void _loadDailyHistory() {
+    final raw = _prefs.getString(_dailyHistoryKey);
+    if (raw == null || raw.isEmpty) return;
+    final decoded = jsonDecode(raw) as Map<String, dynamic>;
+    _dailyHistory
+      ..clear()
+      ..addEntries(decoded.entries.map((e) => MapEntry(
+            e.key,
+            (e.value as num).toInt(),
+          )));
   }
 
   void _loadSublistProgress() {
     final raw = _prefs.getString(_sublistProgressKey);
     if (raw == null || raw.isEmpty) return;
-
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     _sublistProgress
       ..clear()
-      ..addEntries(decoded.entries.map(
-        (entry) => MapEntry(
-          entry.key,
-          SublistProgress.fromJson(entry.value as Map<String, dynamic>),
-        ),
-      ));
+      ..addEntries(decoded.entries.map((e) => MapEntry(
+            e.key,
+            SublistProgress.fromJson(e.value as Map<String, dynamic>),
+          )));
+  }
+
+  void _loadStarred() {
+    final raw = _prefs.getStringList(_starredKey);
+    if (raw == null) return;
+    _starred
+      ..clear()
+      ..addAll(raw.map((s) => int.tryParse(s) ?? 0).where((i) => i != 0));
+  }
+
+  void _loadStats() {
+    final raw = _prefs.getString(_streakKey);
+    if (raw != null) {
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      _streakDays = (decoded['days'] as num?)?.toInt() ?? 0;
+      _lastStudyDate = decoded['lastDate'] as String?;
+    }
+    _totalMastered = _prefs.getInt(_totalMasteredKey) ?? 0;
+    _totalAttempts = _prefs.getInt(_totalAttemptsKey) ?? 0;
+    _totalCorrect = _prefs.getInt(_totalCorrectKey) ?? 0;
   }
 
   void _persist() {
     final mistakePayload = <String, int>{
-      for (final entry in _mistakeCounts.entries) '${entry.key}': entry.value,
+      for (final e in _mistakeCounts.entries) '${e.key}': e.value,
+    };
+    final mistakeDatesPayload = <String, String>{
+      for (final e in _mistakeDates.entries) '${e.key}': e.value,
     };
     final progressPayload = <String, Map<String, dynamic>>{
-      for (final entry in _sublistProgress.entries)
-        entry.key: entry.value.toJson(),
+      for (final e in _sublistProgress.entries) e.key: e.value.toJson(),
     };
-    _prefs.setString(_mistakeCountsKey, jsonEncode(mistakePayload));
-    _prefs.setString(_sublistProgressKey, jsonEncode(progressPayload));
+    final historyPayload = <String, int>{
+      for (final e in _dailyHistory.entries) e.key: e.value,
+    };
+    _prefs
+      ..setString(_mistakeCountsKey, jsonEncode(mistakePayload))
+      ..setString(_mistakeDatesKey, jsonEncode(mistakeDatesPayload))
+      ..setString(_sublistProgressKey, jsonEncode(progressPayload))
+      ..setStringList(
+        _starredKey,
+        _starred.map((i) => '$i').toList(),
+      )
+      ..setString(
+        _streakKey,
+        jsonEncode(<String, dynamic>{
+          'days': _streakDays,
+          'lastDate': _lastStudyDate,
+        }),
+      )
+      ..setString(_dailyHistoryKey, jsonEncode(historyPayload))
+      ..setInt(_totalMasteredKey, _totalMastered)
+      ..setInt(_totalAttemptsKey, _totalAttempts)
+      ..setInt(_totalCorrectKey, _totalCorrect);
   }
 
+  // ----- API: mistakes -----
   void applyMistakeCounts(Iterable<Word> words) {
-    for (final word in words) {
-      word.errorCount = _mistakeCounts[word.id] ?? 0;
+    for (final w in words) {
+      w.errorCount = _mistakeCounts[w.id] ?? 0;
     }
   }
 
-  void recordMistake(Word word) {
-    final nextCount = (_mistakeCounts[word.id] ?? 0) + 1;
-    _mistakeCounts[word.id] = nextCount;
-    word.errorCount = nextCount;
+  int mistakeCountFor(Word w) => _mistakeCounts[w.id] ?? 0;
+
+  void recordMistake(Word w) {
+    final next = (_mistakeCounts[w.id] ?? 0) + 1;
+    _mistakeCounts[w.id] = next;
+    final now = DateTime.now();
+    final today = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+    _mistakeDates[w.id] = today;
+    w.errorCount = next;
     _persist();
     notifyListeners();
   }
 
   void removeMistake(int wordId) {
-    _mistakeCounts.remove(wordId);
+    if (_mistakeCounts.remove(wordId) != null) {
+      _totalMastered++;
+    }
+    _mistakeDates.remove(wordId);
     _persist();
     notifyListeners();
   }
 
-  List<Word> forgottenWords(Iterable<Word> allWords) {
-    final words = allWords
+  List<Word> forgottenWords(Iterable<Word> all) {
+    final list = all
         .where((w) => (_mistakeCounts[w.id] ?? 0) > 0)
         .map((w) {
       w.errorCount = _mistakeCounts[w.id] ?? 0;
       return w;
     }).toList();
-
-    words.sort((a, b) {
+    list.sort((a, b) {
       final c = b.errorCount.compareTo(a.errorCount);
       return c != 0 ? c : a.english.compareTo(b.english);
     });
-    return words;
+    return list;
   }
 
+  // ----- SRS spaced repetition -----
+  static const List<int> _srsIntervals = <int>[1, 3, 7];
+
+  int srsDueCount(Iterable<Word> all) {
+    return srsDueWords(all).length;
+  }
+
+  List<Word> srsDueWords(Iterable<Word> all) {
+    final today = DateTime.now();
+    final todayDate = DateTime(today.year, today.month, today.day);
+    final due = <Word>[];
+    for (final w in all) {
+      final dateStr = _mistakeDates[w.id];
+      if (dateStr == null) continue;
+      final parts = dateStr.split('-');
+      if (parts.length != 3) continue;
+      final d = DateTime(
+        int.parse(parts[0]),
+        int.parse(parts[1]),
+        int.parse(parts[2]),
+      );
+      final diff = todayDate.difference(d).inDays;
+      if (_srsIntervals.contains(diff)) {
+        w.errorCount = _mistakeCounts[w.id] ?? 0;
+        due.add(w);
+      }
+    }
+    due.sort((a, b) {
+      final c = b.errorCount.compareTo(a.errorCount);
+      return c != 0 ? c : a.english.compareTo(b.english);
+    });
+    return due;
+  }
+
+  // ----- daily history for charts -----
+  Map<String, int> get dailyHistory => Map<String, int>.from(_dailyHistory);
+
+  // ----- API: progress -----
   SublistProgress progressFor(String title) =>
       _sublistProgress[title] ?? const SublistProgress.empty();
 
-  int startOrResumeSublist(String title, int totalWords) {
-    if (totalWords <= 0) return 0;
-    final progress = progressFor(title);
-    if (progress.completed) {
+  int startOrResumeSublist(String title, int total) {
+    if (total <= 0) return 0;
+    final p = progressFor(title);
+    if (p.completed) {
       _sublistProgress[title] = const SublistProgress.empty();
       _persist();
       notifyListeners();
       return 0;
     }
-    return progress.currentIndex.clamp(0, totalWords - 1);
+    return p.currentIndex.clamp(0, total - 1);
   }
 
   void saveCurrentPosition(
@@ -485,25 +828,24 @@ class StudyManager extends ChangeNotifier {
   }) {
     if (totalWords <= 0) return;
     final safeIndex = currentIndex.clamp(0, totalWords - 1);
-    final previous = progressFor(title);
-    final completedCount = max(
-      previous.completed ? 0 : previous.completedCount,
+    final prev = progressFor(title);
+    final completed = max(
+      prev.completed ? 0 : prev.completedCount,
       safeIndex,
     ).clamp(0, totalWords);
-
     _sublistProgress[title] = SublistProgress(
       currentIndex: safeIndex,
-      completedCount: completedCount,
+      completedCount: completed,
       completed: false,
     );
     _persist();
     notifyListeners();
   }
 
-  void markSublistCompleted(String title, int totalWords) {
+  void markSublistCompleted(String title, int total) {
     _sublistProgress[title] = SublistProgress(
       currentIndex: 0,
-      completedCount: totalWords,
+      completedCount: total,
       completed: true,
     );
     _persist();
@@ -514,6 +856,71 @@ class StudyManager extends ChangeNotifier {
     _sublistProgress[title] = const SublistProgress.empty();
     _persist();
     notifyListeners();
+  }
+
+  // ----- API: stars -----
+  bool isStarred(int wordId) => _starred.contains(wordId);
+
+  void toggleStar(int wordId) {
+    if (!_starred.add(wordId)) {
+      _starred.remove(wordId);
+    }
+    _persist();
+    notifyListeners();
+  }
+
+  List<Word> starredWords(Iterable<Word> all) {
+    final list = all.where((w) => _starred.contains(w.id)).toList();
+    list.sort((a, b) => a.english.compareTo(b.english));
+    return list;
+  }
+
+  int get starredCount => _starred.length;
+
+  // ----- API: stats -----
+  int get streakDays => _streakDays;
+  int get totalMastered => _totalMastered;
+  int get totalAttempts => _totalAttempts;
+  int get totalCorrect => _totalCorrect;
+  double get accuracy =>
+      _totalAttempts == 0 ? 0 : _totalCorrect / _totalAttempts;
+  int get pendingMistakes => _mistakeCounts.length;
+
+  void recordAttempt({required bool correct}) {
+    _totalAttempts++;
+    if (correct) _totalCorrect++;
+    _bumpStreakForToday();
+    final now = DateTime.now();
+    final today = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+    _dailyHistory[today] = (_dailyHistory[today] ?? 0) + 1;
+    _persist();
+    notifyListeners();
+  }
+
+  void _bumpStreakForToday() {
+    final now = DateTime.now();
+    final today = '${now.year.toString().padLeft(4, '0')}-'
+        '${now.month.toString().padLeft(2, '0')}-'
+        '${now.day.toString().padLeft(2, '0')}';
+    if (_lastStudyDate == today) return;
+    if (_lastStudyDate != null) {
+      final last = DateTime.tryParse(_lastStudyDate!);
+      if (last != null) {
+        final diff = DateTime(now.year, now.month, now.day)
+            .difference(DateTime(last.year, last.month, last.day))
+            .inDays;
+        if (diff == 1) {
+          _streakDays++;
+        } else if (diff > 1) {
+          _streakDays = 1;
+        }
+      } else {
+        _streakDays = 1;
+      }
+    } else {
+      _streakDays = 1;
+    }
+    _lastStudyDate = today;
   }
 }
 
@@ -527,6 +934,12 @@ class WordApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final base = ThemeData(useMaterial3: true);
+    final textTheme = GoogleFonts.plusJakartaSansTextTheme(
+      base.textTheme.apply(
+        bodyColor: AppTheme.textPrimary,
+        displayColor: AppTheme.textPrimary,
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: base.copyWith(
@@ -535,24 +948,173 @@ class WordApp extends StatelessWidget {
           primary: AppTheme.primary,
           surface: Colors.white,
         ),
-        textTheme: base.textTheme.apply(
-          bodyColor: AppTheme.textPrimary,
-          displayColor: AppTheme.textPrimary,
-        ),
-        pageTransitionsTheme: PageTransitionsTheme(
+        textTheme: textTheme,
+        // Standard Apple right-to-left slide for page transitions.
+        pageTransitionsTheme: const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
-            for (final p in TargetPlatform.values)
-              p: const _SmoothPageTransitionsBuilder(),
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.fuchsia: CupertinoPageTransitionsBuilder(),
           },
         ),
       ),
-      home: const SublistSelectionPage(),
+      home: const HomeShell(),
     );
   }
 }
 
 // ============================================================
-// Sublist selection page
+// Bottom-nav shell (学习 / 统计)
+// ============================================================
+
+class HomeShell extends StatefulWidget {
+  const HomeShell({super.key});
+
+  @override
+  State<HomeShell> createState() => _HomeShellState();
+}
+
+class _HomeShellState extends State<HomeShell> {
+  int _index = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return GradientBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        extendBody: true,
+        body: IndexedStack(
+          index: _index,
+          children: const <Widget>[
+            SublistSelectionPage(),
+            StatsPage(),
+          ],
+        ),
+        bottomNavigationBar: _GlassBottomNav(
+          index: _index,
+          onChanged: (i) {
+            HapticFeedback.selectionClick();
+            setState(() => _index = i);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _GlassBottomNav extends StatelessWidget {
+  final int index;
+  final ValueChanged<int> onChanged;
+  const _GlassBottomNav({required this.index, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(40, 0, 40, 14),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(32),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: Container(
+              height: 78,
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.75),
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.6),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.06),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: <Widget>[
+                  _navItem(0, CupertinoIcons.book_fill, '学习'),
+                  _navItem(1, CupertinoIcons.chart_bar_alt_fill, '统计'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _navItem(int i, IconData icon, String label) {
+    final active = index == i;
+    return Expanded(
+      child: ScaleTap(
+        onTap: () => onChanged(i),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(end: active ? 1.0 : 0.0),
+              duration: const Duration(milliseconds: 320),
+              curve: Curves.easeOut,
+              builder: (context, v, _) {
+                return Container(
+                  width: 38,
+                  height: 38,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Color.lerp(
+                      Colors.transparent,
+                      AppTheme.primary.withValues(alpha: 0.12),
+                      v,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: active ? 22 : 20,
+                    color: Color.lerp(
+                      AppTheme.textSecondary,
+                      AppTheme.primary,
+                      v,
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 4),
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(end: active ? 1.0 : 0.0),
+              duration: const Duration(milliseconds: 320),
+              curve: Curves.elasticOut,
+              builder: (context, v, _) {
+                return Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: active ? 11 : 10,
+                    fontWeight: active ? FontWeight.w600 : FontWeight.w500,
+                    color: Color.lerp(
+                      AppTheme.textSecondary,
+                      AppTheme.primary,
+                      v,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================
+// Sublist selection (学习 tab)
 // ============================================================
 
 class SublistSelectionPage extends StatefulWidget {
@@ -576,7 +1138,6 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
     try {
       final jsonString = await rootBundle.loadString('assets/words.json');
       final jsonList = jsonDecode(jsonString) as List<dynamic>;
-
       final loaded = jsonList.map((sublist) {
         final words = (sublist['words'] as List<dynamic>)
             .map((item) => Word.fromJson(item as Map<String, dynamic>))
@@ -587,7 +1148,6 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
           'words': words,
         };
       }).toList();
-
       if (!mounted) return;
       setState(() {
         awlSublists = loaded;
@@ -598,6 +1158,10 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
       setState(() => isLoading = false);
     }
   }
+
+  List<Word> get _allWords => awlSublists
+      .expand<Word>((s) => List<Word>.from(s['words'] as List))
+      .toList();
 
   ({String title, int total, int completed, double ratio}) _todayPlan() {
     if (awlSublists.isEmpty) {
@@ -619,9 +1183,12 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
       }
     }
     final first = awlSublists.first;
-    final title = first['title'] as String;
-    final total = (first['words'] as List).length;
-    return (title: title, total: total, completed: 0, ratio: 0);
+    return (
+      title: first['title'] as String,
+      total: (first['words'] as List).length,
+      completed: 0,
+      ratio: 0,
+    );
   }
 
   @override
@@ -629,21 +1196,15 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
     return AnimatedBuilder(
       animation: StudyManager.instance,
       builder: (context, _) {
-        return GradientBackground(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SafeArea(
-              child: isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: AppTheme.primary,
-                      ),
-                    )
-                  : awlSublists.isEmpty
-                      ? const Center(child: Text('No data found.'))
-                      : _buildContent(context),
-            ),
-          ),
+        return SafeArea(
+          bottom: false,
+          child: isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(color: AppTheme.primary),
+                )
+              : awlSublists.isEmpty
+                  ? const Center(child: Text('No data found.'))
+                  : _buildContent(context),
         );
       },
     );
@@ -651,15 +1212,18 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
 
   Widget _buildContent(BuildContext context) {
     final today = _todayPlan();
+    final reviewCount = StudyManager.instance.pendingMistakes;
+    final starCount = StudyManager.instance.starredCount;
+    final srsCount = StudyManager.instance.srsDueCount(_allWords);
 
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: <Widget>[
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 6),
             child: Row(
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -685,11 +1249,11 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
                   ),
                 ),
                 CircleIconButton(
-                  icon: Icons.history_rounded,
+                  icon: CupertinoIcons.clock,
                   onTap: () {
                     Navigator.push(
                       context,
-                      SmoothPageRoute<void>(
+                      CupertinoPageRoute<void>(
                         builder: (_) =>
                             ForgottenWordsPage(sublists: awlSublists),
                       ),
@@ -706,8 +1270,92 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
             child: _TodayPlanCard(plan: today),
           ),
         ),
+        // SRS smart review pill
+        if (srsCount > 0)
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+              child: _SrsReviewPill(
+                count: srsCount,
+                onTap: () {
+                  final due = StudyManager.instance.srsDueWords(_allWords);
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute<void>(
+                      builder: (_) => StudyPage(
+                        title: '间隔复习',
+                        words: due,
+                        reviewMode: true,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: _ShortcutTile(
+                    icon: CupertinoIcons.refresh_thick,
+                    title: '今日复习',
+                    subtitle: reviewCount == 0
+                        ? '暂无错题'
+                        : '$reviewCount 个待巩固',
+                    color: AppTheme.danger,
+                    onTap: reviewCount == 0
+                        ? null
+                        : () {
+                            final wrong = StudyManager.instance
+                                .forgottenWords(_allWords);
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute<void>(
+                                builder: (_) => StudyPage(
+                                  title: '今日复习',
+                                  words: wrong,
+                                  reviewMode: true,
+                                ),
+                              ),
+                            );
+                          },
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _ShortcutTile(
+                    icon: CupertinoIcons.star_fill,
+                    title: '我的收藏',
+                    subtitle:
+                        starCount == 0 ? '暂无收藏' : '$starCount 个单词',
+                    color: AppTheme.star,
+                    onTap: starCount == 0
+                        ? null
+                        : () {
+                            final stars = StudyManager.instance
+                                .starredWords(_allWords);
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute<void>(
+                                builder: (_) => StudyPage(
+                                  title: '我的收藏',
+                                  words: stars,
+                                  reviewMode: true,
+                                ),
+                              ),
+                            );
+                          },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         SliverPadding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 120),
           sliver: SliverList.builder(
             itemCount: awlSublists.length,
             itemBuilder: (context, index) {
@@ -723,7 +1371,7 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
                   onTap: () async {
                     await Navigator.push(
                       context,
-                      SmoothPageRoute<void>(
+                      CupertinoPageRoute<void>(
                         builder: (_) => StudyPage(title: title, words: words),
                       ),
                     );
@@ -739,9 +1387,74 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
   }
 }
 
+class _ShortcutTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color;
+  final VoidCallback? onTap;
+
+  const _ShortcutTile({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.color,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTap(
+      onTap: onTap,
+      child: GlassCard(
+        padding: const EdgeInsets.all(14),
+        radius: 18,
+        child: Row(
+          children: <Widget>[
+            Container(
+              width: 38,
+              height: 38,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, size: 20, color: color),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: AppTheme.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _TodayPlanCard extends StatelessWidget {
   final ({String title, int total, int completed, double ratio}) plan;
-
   const _TodayPlanCard({required this.plan});
 
   @override
@@ -752,13 +1465,13 @@ class _TodayPlanCard extends StatelessWidget {
       radius: 26,
       padding: const EdgeInsets.all(22),
       child: Row(
-        children: [
+        children: <Widget>[
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 const Text(
-                  'Today\'s Plan',
+                  "Today's Plan",
                   style: TextStyle(
                     fontSize: 13,
                     color: AppTheme.textSecondary,
@@ -827,7 +1540,6 @@ class _TodayPlanCard extends StatelessWidget {
 class _RingProgress extends StatelessWidget {
   final double value;
   final int percent;
-
   const _RingProgress({required this.value, required this.percent});
 
   @override
@@ -837,7 +1549,7 @@ class _RingProgress extends StatelessWidget {
       height: 64,
       child: Stack(
         alignment: Alignment.center,
-        children: [
+        children: <Widget>[
           SizedBox(
             width: 64,
             height: 64,
@@ -863,6 +1575,75 @@ class _RingProgress extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SrsReviewPill extends StatelessWidget {
+  final int count;
+  final VoidCallback onTap;
+
+  const _SrsReviewPill({required this.count, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTap(
+      onTap: onTap,
+      child: GlassCard(
+        radius: 16,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          children: <Widget>[
+            Container(
+              width: 32,
+              height: 32,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: AppTheme.primary.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(
+                CupertinoIcons.clock_fill,
+                color: AppTheme.primary,
+                size: 16,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                '$count 个单词待间隔复习',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.textPrimary,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: AppTheme.primary.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(999),
+              ),
+              child: const Text(
+                'SRS',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.primary,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ),
+            const SizedBox(width: 4),
+            const Icon(
+              CupertinoIcons.chevron_right,
+              size: 14,
+              color: AppTheme.textSecondary,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -902,7 +1683,7 @@ class _SublistTile extends StatelessWidget {
         radius: 22,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Row(
-          children: [
+          children: <Widget>[
             Container(
               width: 48,
               height: 48,
@@ -912,10 +1693,7 @@ class _SublistTile extends StatelessWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: <Color>[
-                    Color(0xFFEDEBFF),
-                    Color(0xFFDFDBFF),
-                  ],
+                  colors: <Color>[Color(0xFFEDEBFF), Color(0xFFDFDBFF)],
                 ),
               ),
               child: Text(
@@ -931,7 +1709,7 @@ class _SublistTile extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   Text(
                     title,
                     style: const TextStyle(
@@ -983,14 +1761,376 @@ class _SublistTile extends StatelessWidget {
 }
 
 // ============================================================
+// Stats page
+// ============================================================
+
+class StatsPage extends StatelessWidget {
+  const StatsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: StudyManager.instance,
+      builder: (context, _) {
+        final mgr = StudyManager.instance;
+        return SafeArea(
+          bottom: false,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 120),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  'Your Stats',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.textPrimary,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'A small look at your progress.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppTheme.textSecondary,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                _StreakCard(days: mgr.streakDays),
+                const SizedBox(height: 14),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: _MetricCard(
+                        icon: CupertinoIcons.checkmark_seal_fill,
+                        color: AppTheme.success,
+                        value: '${mgr.totalMastered}',
+                        label: '已掌握',
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _MetricCard(
+                        icon: CupertinoIcons.flame_fill,
+                        color: AppTheme.danger,
+                        value: '${mgr.pendingMistakes}',
+                        label: '待复习',
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                _MetricCard(
+                  icon: CupertinoIcons.chart_pie_fill,
+                  color: AppTheme.primary,
+                  value: mgr.totalAttempts == 0
+                      ? '—'
+                      : '${(mgr.accuracy * 100).round()}%',
+                  label:
+                      '准确率 (共 ${mgr.totalAttempts} 次拼写, ${mgr.totalCorrect} 次正确)',
+                  wide: true,
+                ),
+                const SizedBox(height: 14),
+                _MetricCard(
+                  icon: CupertinoIcons.star_fill,
+                  color: AppTheme.star,
+                  value: '${mgr.starredCount}',
+                  label: '我的收藏',
+                  wide: true,
+                ),
+                const SizedBox(height: 24),
+                _WeeklyChart(history: mgr.dailyHistory),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _WeeklyChart extends StatelessWidget {
+  final Map<String, int> history;
+  const _WeeklyChart({required this.history});
+
+  List<_DayBar> _buildBars() {
+    final bars = <_DayBar>[];
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    for (int i = 6; i >= 0; i--) {
+      final d = today.subtract(Duration(days: i));
+      final key =
+          '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+      final count = history[key] ?? 0;
+      final labels = ['一', '二', '三', '四', '五', '六', '日'];
+      // dart weekday: 1=Mon ... 7=Sun
+      bars.add(_DayBar(
+        label: labels[d.weekday - 1],
+        count: count,
+        isToday: i == 0,
+      ));
+    }
+    return bars;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bars = _buildBars();
+    final maxCount = bars.fold<int>(1, (m, b) => b.count > m ? b.count : m);
+
+    return GlassCard(
+      radius: 24,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Row(
+            children: <Widget>[
+              Icon(CupertinoIcons.chart_bar_fill,
+                  size: 18, color: AppTheme.primary),
+              SizedBox(width: 8),
+              Text(
+                '本周学习',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.textPrimary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 160,
+            child: BarChart(
+              BarChartData(
+                alignment: BarChartAlignment.spaceAround,
+                maxY: (maxCount + 1).toDouble(),
+                barTouchData: BarTouchData(
+                  enabled: true,
+                  touchTooltipData: BarTouchTooltipData(
+                    tooltipRoundedRadius: 8,
+                    getTooltipItem: (group, groupIndex, rod, rodIndex) =>
+                        BarTooltipItem(
+                      '${rod.toY.toInt()} 次',
+                      const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+                titlesData: FlTitlesData(
+                  show: true,
+                  topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
+                  leftTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: (value, meta) {
+                        final idx = value.toInt();
+                        if (idx < 0 || idx >= bars.length) {
+                          return const SizedBox.shrink();
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            bars[idx].label,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight:
+                                  bars[idx].isToday ? FontWeight.w700 : FontWeight.w500,
+                              color: bars[idx].isToday
+                                  ? AppTheme.primary
+                                  : AppTheme.textSecondary,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                gridData: const FlGridData(show: false),
+                borderData: FlBorderData(show: false),
+                barGroups: List.generate(bars.length, (i) {
+                  return BarChartGroupData(
+                    x: i,
+                    barRods: <BarChartRodData>[
+                      BarChartRodData(
+                        toY: bars[i].count.toDouble(),
+                        color: bars[i].isToday
+                            ? AppTheme.primary
+                            : AppTheme.primary.withValues(alpha: 0.45),
+                        width: 20,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(6),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+              ),
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeOutCubic,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DayBar {
+  final String label;
+  final int count;
+  final bool isToday;
+  const _DayBar({required this.label, required this.count, required this.isToday});
+}
+
+class _StreakCard extends StatelessWidget {
+  final int days;
+  const _StreakCard({required this.days});
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      opacity: 0.75,
+      radius: 26,
+      padding: const EdgeInsets.all(22),
+      child: Row(
+        children: <Widget>[
+          Container(
+            width: 56,
+            height: 56,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: const LinearGradient(
+                colors: <Color>[Color(0xFFFFB75E), Color(0xFFED8F03)],
+              ),
+            ),
+            child: const Icon(
+              CupertinoIcons.flame_fill,
+              color: Colors.white,
+              size: 26,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '$days 天',
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.textPrimary,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                const Text(
+                  '连续学习',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: AppTheme.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MetricCard extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String value;
+  final String label;
+  final bool wide;
+
+  const _MetricCard({
+    required this.icon,
+    required this.color,
+    required this.value,
+    required this.label,
+    this.wide = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      padding: const EdgeInsets.all(18),
+      radius: 22,
+      child: Row(
+        children: <Widget>[
+          Container(
+            width: 44,
+            height: 44,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(icon, color: color, size: 22),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppTheme.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ============================================================
 // Study page
 // ============================================================
 
 class StudyPage extends StatefulWidget {
   final String title;
   final List<Word> words;
+  final bool reviewMode;
 
-  const StudyPage({super.key, required this.title, required this.words});
+  const StudyPage({
+    super.key,
+    required this.title,
+    required this.words,
+    this.reviewMode = false,
+  });
 
   @override
   State<StudyPage> createState() => _StudyPageState();
@@ -1000,9 +2140,11 @@ class _StudyPageState extends State<StudyPage> {
   final FlutterTts flutterTts = FlutterTts();
   final TextEditingController _inputController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  late final ConfettiController _confetti;
 
   late List<Word> studyList;
   int currentIndex = 0;
+  int _direction = 1; // 1 = next, -1 = previous (drives flashcard arc dir)
   bool hasChecked = false;
   bool isCorrect = false;
   bool showHint = false;
@@ -1011,14 +2153,20 @@ class _StudyPageState extends State<StudyPage> {
   void initState() {
     super.initState();
     _initTts();
+    _confetti =
+        ConfettiController(duration: const Duration(milliseconds: 1500));
     studyList = List<Word>.from(widget.words);
     StudyManager.instance.applyMistakeCounts(studyList);
-    currentIndex = StudyManager.instance.startOrResumeSublist(
-      widget.title,
-      studyList.length,
-    );
+    if (widget.reviewMode) {
+      currentIndex = 0;
+    } else {
+      currentIndex = StudyManager.instance.startOrResumeSublist(
+        widget.title,
+        studyList.length,
+      );
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) FocusScope.of(context).requestFocus(_focusNode);
+      // 不自动弹出键盘，用户点击输入框时再弹出
     });
   }
 
@@ -1034,51 +2182,70 @@ class _StudyPageState extends State<StudyPage> {
 
   void _checkSpelling() {
     if (_inputController.text.trim().isEmpty || hasChecked) return;
-    final currentWord = studyList[currentIndex];
-    final userInput = _inputController.text.trim().toLowerCase();
-    final correctSpell = currentWord.english.toLowerCase();
+    final word = studyList[currentIndex];
+    final input = _inputController.text.trim().toLowerCase();
+    final correct = word.english.toLowerCase();
 
     setState(() {
       hasChecked = true;
-      isCorrect = userInput == correctSpell;
+      isCorrect = input == correct;
     });
 
-    if (!isCorrect) {
-      StudyManager.instance.recordMistake(currentWord);
-    }
-    StudyManager.instance.saveCurrentPosition(
-      widget.title,
-      currentIndex: currentIndex,
-      totalWords: studyList.length,
-    );
-  }
+    StudyManager.instance.recordAttempt(correct: isCorrect);
 
-  void _nextWord() {
-    if (currentIndex < studyList.length - 1) {
-      setState(() {
-        currentIndex++;
-        _resetState();
-      });
+    if (isCorrect) {
+      HapticFeedback.lightImpact();
+      // 在复习模式下答对就把这个错题清除
+      if (widget.reviewMode) {
+        StudyManager.instance.removeMistake(word.id);
+      }
+    } else {
+      HapticFeedback.heavyImpact();
+      StudyManager.instance.recordMistake(word);
+    }
+
+    if (!widget.reviewMode) {
       StudyManager.instance.saveCurrentPosition(
         widget.title,
         currentIndex: currentIndex,
         totalWords: studyList.length,
       );
+    }
+  }
+
+  void _nextWord() {
+    HapticFeedback.selectionClick();
+    if (currentIndex < studyList.length - 1) {
+      setState(() {
+        _direction = 1;
+        currentIndex++;
+        _resetState();
+      });
+      if (!widget.reviewMode) {
+        StudyManager.instance.saveCurrentPosition(
+          widget.title,
+          currentIndex: currentIndex,
+          totalWords: studyList.length,
+        );
+      }
     } else {
-      StudyManager.instance.markSublistCompleted(
-        widget.title,
-        studyList.length,
-      );
-      _showFinishDialog();
+      if (!widget.reviewMode) {
+        StudyManager.instance
+            .markSublistCompleted(widget.title, studyList.length);
+      }
+      _celebrateAndExit();
     }
   }
 
   void _prevWord() {
-    if (currentIndex > 0) {
-      setState(() {
-        currentIndex--;
-        _resetState();
-      });
+    if (currentIndex == 0) return;
+    HapticFeedback.selectionClick();
+    setState(() {
+      _direction = -1;
+      currentIndex--;
+      _resetState();
+    });
+    if (!widget.reviewMode) {
       StudyManager.instance.saveCurrentPosition(
         widget.title,
         currentIndex: currentIndex,
@@ -1097,43 +2264,98 @@ class _StudyPageState extends State<StudyPage> {
     });
   }
 
-  void _showFinishDialog() {
+  void _celebrateAndExit() {
+    HapticFeedback.mediumImpact();
+    Future<void>.delayed(const Duration(milliseconds: 80), () {
+      HapticFeedback.heavyImpact();
+    });
+    _confetti.play();
     showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: Colors.white.withValues(alpha: 0.95),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        title: const Text(
-          'Finished',
-          style: TextStyle(
-            color: AppTheme.success,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        content: const Text(
-          'You completed all words in this sublist. Progress saved.',
-          style: TextStyle(color: AppTheme.textPrimary),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(ctx);
-              Navigator.pop(context);
-            },
-            child: const Text(
-              'Back to List',
-              style: TextStyle(
-                color: AppTheme.primary,
-                fontWeight: FontWeight.w600,
+      builder: (ctx) => Dialog(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        child: TweenAnimationBuilder<double>(
+          tween: Tween<double>(begin: 0.8, end: 1.0),
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.elasticOut,
+          builder: (context, value, _) => Transform.scale(
+            scale: value,
+            child: GlassCard(
+              opacity: 0.85,
+              radius: 28,
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TweenAnimationBuilder<double>(
+                    tween: Tween<double>(begin: 0, end: 1),
+                    duration: const Duration(milliseconds: 700),
+                    curve: Curves.elasticOut,
+                    builder: (context, v, _) => Container(
+                      width: 64,
+                      height: 64,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppTheme.success.withValues(alpha: 0.15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.success.withValues(alpha: 0.25 * (1 - v)),
+                            blurRadius: 24 * (1 - v),
+                            spreadRadius: 4 * (1 - v),
+                          ),
+                        ],
+                      ),
+                      child: Transform.scale(
+                        scale: 0.6 + 0.4 * v,
+                        child: const Icon(
+                          CupertinoIcons.checkmark_seal_fill,
+                          color: AppTheme.success,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  const Text(
+                    '完成啦 🎉',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    widget.reviewMode
+                        ? '今日的复习已完成，继续保持！'
+                        : '你完成了 ${widget.title} 的全部单词，进度已保存。',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: AppTheme.textSecondary,
+                    ),
+                  ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: DuolingoButton(
+                  label: '回到列表',
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    Navigator.pop(context);
+                  },
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
-    );
+      ), // Transform.scale
+      ), // TweenAnimationBuilder
+    ); // showDialog
   }
 
   void _confirmReset() {
@@ -1141,12 +2363,11 @@ class _StudyPageState extends State<StudyPage> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: Colors.white.withValues(alpha: 0.95),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text('Reset progress?'),
         content: Text('This will clear progress for ${widget.title}.'),
-        actions: [
+        actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(ctx),
             child: const Text('Cancel'),
@@ -1172,14 +2393,17 @@ class _StudyPageState extends State<StudyPage> {
 
   @override
   void dispose() {
-    StudyManager.instance.saveCurrentPosition(
-      widget.title,
-      currentIndex: currentIndex,
-      totalWords: studyList.length,
-    );
+    if (!widget.reviewMode) {
+      StudyManager.instance.saveCurrentPosition(
+        widget.title,
+        currentIndex: currentIndex,
+        totalWords: studyList.length,
+      );
+    }
     _inputController.dispose();
     _focusNode.dispose();
     flutterTts.stop();
+    _confetti.dispose();
     super.dispose();
   }
 
@@ -1194,81 +2418,81 @@ class _StudyPageState extends State<StudyPage> {
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
-          body: const Center(child: Text('No words in this list.')),
+          body: const Center(child: Text('No words.')),
         ),
       );
     }
 
-    final currentWord = studyList[currentIndex];
+    final word = studyList[currentIndex];
+    final keyboardInset = MediaQuery.of(context).viewInsets.bottom;
 
     return GradientBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: true,
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                _buildHeader(),
-                const SizedBox(height: 16),
-                _buildProgressCard(),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: GestureDetector(
-                      onHorizontalDragEnd: (details) {
-                        if ((details.primaryVelocity ?? 0) > 300 &&
-                            currentIndex > 0) {
-                          _prevWord();
-                        }
-                      },
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 480),
-                        reverseDuration: const Duration(milliseconds: 280),
-                        switchInCurve: Curves.easeOutCubic,
-                        switchOutCurve: Curves.easeInCubic,
-                        layoutBuilder: (current, previous) => Stack(
-                          alignment: Alignment.topCenter,
-                          children: <Widget>[
-                            ...previous,
-                            if (current != null) current,
-                          ],
-                        ),
-                        transitionBuilder: (child, anim) {
-                          final slide = Tween<Offset>(
-                            begin: const Offset(0.10, 0),
-                            end: Offset.zero,
-                          ).animate(anim);
-                          final scale = Tween<double>(
-                            begin: 0.96,
-                            end: 1.0,
-                          ).animate(anim);
-                          return FadeTransition(
-                            opacity: anim,
-                            child: SlideTransition(
-                              position: slide,
-                              child: ScaleTransition(
-                                scale: scale,
-                                child: child,
-                              ),
-                            ),
-                          );
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    _buildHeader(),
+                    const SizedBox(height: 16),
+                    _buildProgressCard(),
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: _FlashcardSwitcher(
+                        direction: _direction,
+                        currentKey: ValueKey<int>(currentIndex),
+                        onSwipeRight: () {
+                          if (currentIndex > 0) _prevWord();
                         },
-                        child: KeyedSubtree(
-                          key: ValueKey<int>(currentIndex),
-                          child: _buildWordCard(currentWord),
-                        ),
+                        onSwipeLeft: () {
+                          if (hasChecked) _nextWord();
+                        },
+                        child: _buildWordCard(word),
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 12),
+                    AnimatedPadding(
+                      duration: const Duration(milliseconds: 220),
+                      curve: Curves.easeOut,
+                      padding: EdgeInsets.only(
+                        bottom: keyboardInset > 0 ? 8 : 0,
+                      ),
+                      child: _buildInputAndButton(word),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                 ),
-                const SizedBox(height: 12),
-                _buildInputAndButton(currentWord),
-                const SizedBox(height: 12),
-              ],
-            ),
+              ),
+              // Confetti overlay (top-center, falls down)
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  confettiController: _confetti,
+                  blastDirection: pi / 2,
+                  emissionFrequency: 0.08,
+                  numberOfParticles: 18,
+                  maxBlastForce: 20,
+                  minBlastForce: 6,
+                  gravity: 0.4,
+                  shouldLoop: false,
+                  colors: const <Color>[
+                    AppTheme.primary,
+                    AppTheme.success,
+                    AppTheme.star,
+                    Color(0xFFFF6B9D),
+                    Color(0xFF89B4FF),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -1294,10 +2518,13 @@ class _StudyPageState extends State<StudyPage> {
             ),
           ),
         ),
-        CircleIconButton(
-          icon: CupertinoIcons.refresh,
-          onTap: _confirmReset,
-        ),
+        if (widget.reviewMode)
+          const SizedBox(width: 40)
+        else
+          CircleIconButton(
+            icon: CupertinoIcons.refresh,
+            onTap: _confirmReset,
+          ),
       ],
     );
   }
@@ -1318,10 +2545,7 @@ class _StudyPageState extends State<StudyPage> {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: <Color>[
-                  Color(0xFFEDEBFF),
-                  Color(0xFFDFDBFF),
-                ],
+                colors: <Color>[Color(0xFFEDEBFF), Color(0xFFDFDBFF)],
               ),
             ),
             child: const Icon(
@@ -1373,9 +2597,9 @@ class _StudyPageState extends State<StudyPage> {
                       ),
                     ),
                     const SizedBox(width: 6),
-                    const Text(
-                      'Auto-saving progress',
-                      style: TextStyle(
+                    Text(
+                      widget.reviewMode ? '复习模式' : 'Auto-saving progress',
+                      style: const TextStyle(
                         fontSize: 11,
                         color: AppTheme.textSecondary,
                       ),
@@ -1407,81 +2631,99 @@ class _StudyPageState extends State<StudyPage> {
             '____',
           );
     final showResult = hasChecked;
+    final starred = StudyManager.instance.isStarred(word.id);
 
-    return GlassCard(
-      opacity: 0.75,
-      radius: 26,
-      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 28),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Align(
-            alignment: Alignment.centerRight,
-            child: Icon(
-              CupertinoIcons.star,
-              size: 20,
-              color: AppTheme.textSecondary.withValues(alpha: 0.5),
-            ),
-          ),
-          const SizedBox(height: 14),
-          Text(
-            word.chinese,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: AppTheme.textPrimary,
-              letterSpacing: -0.5,
-              height: 1.25,
-            ),
-          ),
-          const SizedBox(height: 14),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              if (word.phonetic.isNotEmpty)
-                Text(
-                  word.phonetic,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: AppTheme.textSecondary,
-                    fontStyle: FontStyle.italic,
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: GlassCard(
+        opacity: 0.75,
+        radius: 26,
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 28),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: ScaleTap(
+                onTap: () {
+                  HapticFeedback.lightImpact();
+                  StudyManager.instance.toggleStar(word.id);
+                },
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 220),
+                  transitionBuilder: (child, anim) =>
+                      ScaleTransition(scale: anim, child: child),
+                  child: Icon(
+                    starred ? CupertinoIcons.star_fill : CupertinoIcons.star,
+                    key: ValueKey<bool>(starred),
+                    size: 22,
+                    color: starred
+                        ? AppTheme.star
+                        : AppTheme.textSecondary.withValues(alpha: 0.5),
                   ),
                 ),
-              const SizedBox(width: 8),
-              GestureDetector(
-                onTap: () => _speak(word.english),
-                child: const Icon(
-                  CupertinoIcons.speaker_2_fill,
-                  size: 18,
-                  color: AppTheme.primary,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              word.chinese,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w700,
+                color: AppTheme.textPrimary,
+                letterSpacing: -0.5,
+                height: 1.25,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                if (word.phonetic.isNotEmpty)
+                  Text(
+                    word.phonetic,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: AppTheme.textSecondary,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                const SizedBox(width: 8),
+                GestureDetector(
+                  onTap: () => _speak(word.english),
+                  child: const Icon(
+                    CupertinoIcons.speaker_2_fill,
+                    size: 18,
+                    color: AppTheme.primary,
+                  ),
+                ),
+              ],
+            ),
+            if (showResult) ...<Widget>[
+              const SizedBox(height: 22),
+              _buildResultBlock(word),
+            ],
+            if (maskedExample != null) ...<Widget>[
+              const SizedBox(height: 22),
+              Container(
+                height: 1,
+                color: AppTheme.textSecondary.withValues(alpha: 0.15),
+              ),
+              const SizedBox(height: 18),
+              Text(
+                maskedExample,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontStyle: FontStyle.italic,
+                  color: AppTheme.textPrimary.withValues(alpha: 0.75),
+                  height: 1.5,
                 ),
               ),
             ],
-          ),
-          if (showResult) ...<Widget>[
-            const SizedBox(height: 22),
-            _buildResultBlock(word),
           ],
-          if (maskedExample != null) ...<Widget>[
-            const SizedBox(height: 22),
-            Container(
-              height: 1,
-              color: AppTheme.textSecondary.withValues(alpha: 0.15),
-            ),
-            const SizedBox(height: 18),
-            Text(
-              maskedExample,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15,
-                fontStyle: FontStyle.italic,
-                color: AppTheme.textPrimary.withValues(alpha: 0.75),
-                height: 1.5,
-              ),
-            ),
-          ],
-        ],
+        ),
       ),
     );
   }
@@ -1512,10 +2754,7 @@ class _StudyPageState extends State<StudyPage> {
       children: <Widget>[
         const Text(
           'Correct spelling',
-          style: TextStyle(
-            fontSize: 13,
-            color: AppTheme.textSecondary,
-          ),
+          style: TextStyle(fontSize: 13, color: AppTheme.textSecondary),
         ),
         const SizedBox(height: 6),
         Text(
@@ -1545,7 +2784,6 @@ class _StudyPageState extends State<StudyPage> {
             controller: _inputController,
             focusNode: _focusNode,
             enabled: !hasChecked,
-            textAlign: TextAlign.start,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -1570,59 +2808,169 @@ class _StudyPageState extends State<StudyPage> {
                         CupertinoIcons.lightbulb,
                         color: AppTheme.primary,
                       ),
-                      onPressed: () => setState(() => showHint = true),
+                      onPressed: () {
+                        HapticFeedback.lightImpact();
+                        setState(() => showHint = true);
+                      },
                     ),
             ),
             onSubmitted: (_) => _checkSpelling(),
           ),
         ),
         const SizedBox(height: 14),
-        _PrimaryButton(
+        DuolingoButton(
           label: hasChecked ? 'Next' : 'Check',
+          icon: hasChecked ? CupertinoIcons.arrow_right : null,
           onTap: hasChecked ? _nextWord : _checkSpelling,
+          color: hasChecked
+              ? (isCorrect ? AppTheme.success : AppTheme.primary)
+              : AppTheme.primary,
+          shadowColor: hasChecked
+              ? (isCorrect ? AppTheme.successDark : AppTheme.primaryDark)
+              : AppTheme.primaryDark,
+          height: 54,
+          radius: 18,
         ),
       ],
     );
   }
 }
 
-class _PrimaryButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
+// ============================================================
+// Flashcard switcher — card-deck arc trajectory
+// ============================================================
 
-  const _PrimaryButton({required this.label, required this.onTap});
+class _FlashcardSwitcher extends StatefulWidget {
+  final Widget child;
+  final ValueKey<int> currentKey;
+  final int direction; // 1 = forward (from right), -1 = backward (from left)
+  final VoidCallback? onSwipeLeft;
+  final VoidCallback? onSwipeRight;
+
+  const _FlashcardSwitcher({
+    required this.child,
+    required this.currentKey,
+    required this.direction,
+    this.onSwipeLeft,
+    this.onSwipeRight,
+  });
+
+  @override
+  State<_FlashcardSwitcher> createState() => _FlashcardSwitcherState();
+}
+
+class _FlashcardSwitcherState extends State<_FlashcardSwitcher>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+  Widget? _oldChild;
+  ValueKey<int>? _oldKey;
+  int _lastDir = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
+      value: 1.0,
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant _FlashcardSwitcher oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.currentKey != widget.currentKey) {
+      _oldChild = oldWidget.child;
+      _oldKey = oldWidget.currentKey;
+      _lastDir = widget.direction;
+      _ctrl
+        ..reset()
+        ..forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTap(
-      onTap: onTap,
-      child: Container(
-        height: 56,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: AppTheme.primaryGradient,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppTheme.primary.withValues(alpha: 0.30),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onHorizontalDragEnd: (d) {
+        final v = d.primaryVelocity ?? 0;
+        if (v > 350) {
+          widget.onSwipeRight?.call();
+        } else if (v < -350) {
+          widget.onSwipeLeft?.call();
+        }
+      },
+      child: AnimatedBuilder(
+        animation: _ctrl,
+        builder: (context, _) {
+          final curved = Curves.easeOutCubic.transform(_ctrl.value);
+          final w = MediaQuery.of(context).size.width;
+          final h = MediaQuery.of(context).size.height;
+          final children = <Widget>[];
+
+          // Old card exits — curving off to the opposite side
+          if (_oldChild != null && _ctrl.value < 1.0) {
+            final sign = _lastDir > 0 ? -1.0 : 1.0; // old goes opposite
+            final x = sign * 0.75 * curved * w;
+            final y = 0.06 * curved * curved * h; // gentle downward arc
+            final angle = sign * 0.18 * curved;
+            final scale = 1.0 - 0.08 * curved;
+
+            children.add(
+              Opacity(
+                opacity: (1.0 - curved).clamp(0.0, 1.0),
+                child: Transform.translate(
+                  offset: Offset(x, y),
+                  child: Transform.rotate(
+                    angle: angle,
+                    child: Transform.scale(
+                      scale: scale,
+                      child: IgnorePointer(
+                        child: KeyedSubtree(key: _oldKey, child: _oldChild!),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+
+          // New card enters from the side with an arc
+          final inSign = _lastDir > 0 ? 1.0 : -1.0;
+          final rev = 1.0 - curved; // 1→0 → card travels from off-screen to center
+          final ix = inSign * 0.75 * rev * w;
+          final iy = -0.07 * rev * h; // starts above, settles down
+          final iangle = inSign * 0.18 * rev;
+          final iscale = 0.94 + 0.06 * curved; // scales up slightly as it arrives
+
+          children.add(
+            Opacity(
+              opacity: curved.clamp(0.0, 1.0),
+              child: Transform.translate(
+                offset: Offset(ix, iy),
+                child: Transform.rotate(
+                  angle: iangle,
+                  child: Transform.scale(
+                    scale: iscale,
+                    child: KeyedSubtree(
+                      key: widget.currentKey,
+                      child: widget.child,
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ],
-        ),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            letterSpacing: 0.3,
-          ),
-        ),
+          );
+
+          return Stack(alignment: Alignment.center, children: children);
+        },
       ),
     );
   }
@@ -1634,7 +2982,6 @@ class _PrimaryButton extends StatelessWidget {
 
 class ForgottenWordsPage extends StatefulWidget {
   final List<Map<String, dynamic>> sublists;
-
   const ForgottenWordsPage({super.key, required this.sublists});
 
   @override
@@ -1693,8 +3040,7 @@ class _ForgottenWordsPageState extends State<ForgottenWordsPage> {
                       ],
                     ),
                     const SizedBox(height: 14),
-                    if (widget.sublists.isNotEmpty)
-                      _buildFilterChips(),
+                    if (widget.sublists.isNotEmpty) _buildFilterChips(),
                     const SizedBox(height: 14),
                     Expanded(
                       child: words.isEmpty
@@ -1704,10 +3050,9 @@ class _ForgottenWordsPageState extends State<ForgottenWordsPage> {
                               padding: const EdgeInsets.only(bottom: 24),
                               itemCount: words.length,
                               itemBuilder: (context, index) {
-                                final word = words[index];
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 12),
-                                  child: _MissedWordTile(word: word),
+                                  child: _MissedWordTile(word: words[index]),
                                 );
                               },
                             ),
@@ -1736,11 +3081,8 @@ class _ForgottenWordsPageState extends State<ForgottenWordsPage> {
             final selected = selectedSublist == title;
             return Padding(
               padding: const EdgeInsets.only(left: 8),
-              child: _chip(
-                title,
-                selected,
-                () => setState(() => selectedSublist = title),
-              ),
+              child: _chip(title, selected,
+                  () => setState(() => selectedSublist = title)),
             );
           }),
         ],
@@ -1815,10 +3157,7 @@ class _ForgottenWordsPageState extends State<ForgottenWordsPage> {
           const SizedBox(height: 6),
           const Text(
             'No missed words yet — keep going.',
-            style: TextStyle(
-              fontSize: 13,
-              color: AppTheme.textSecondary,
-            ),
+            style: TextStyle(fontSize: 13, color: AppTheme.textSecondary),
           ),
         ],
       ),
@@ -1828,7 +3167,6 @@ class _ForgottenWordsPageState extends State<ForgottenWordsPage> {
 
 class _MissedWordTile extends StatelessWidget {
   final Word word;
-
   const _MissedWordTile({required this.word});
 
   @override
