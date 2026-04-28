@@ -14,73 +14,104 @@ Write-Host ""
 $keystoreDir = "android\app"
 $keystoreFile = "$keystoreDir\upload.keystore"
 
+$skipGen = $false
 if (Test-Path $keystoreFile) {
     Write-Host "[!] $keystoreFile already exists." -ForegroundColor Yellow
-    $overwrite = Read-Host "Overwrite? (y/N)"
-    if ($overwrite -ne "y") {
+    Write-Host "    [O] Overwrite — regenerate keystore"
+    Write-Host "    [S] Skip     — just re-display base64 & GitHub Secrets"
+    Write-Host "    [Q] Quit"
+    $choice = Read-Host "Choose (O/S/Q)"
+    if ($choice -eq "S" -or $choice -eq "s") {
+        $skipGen = $true
+    } elseif ($choice -eq "Q" -or $choice -eq "q") {
         Write-Host "Aborted." -ForegroundColor Red
         exit 0
+    } elseif ($choice -ne "O" -and $choice -ne "o") {
+        Write-Host "Invalid choice, aborting." -ForegroundColor Red
+        exit 1
     }
 }
 
-# Collect keystore info
-Write-Host ""
-Write-Host "Enter the following keystore details:" -ForegroundColor White
-Write-Host "----------------------------------------"
+if (-not $skipGen) {
+    # Collect keystore info
+    Write-Host ""
+    Write-Host "Enter the following keystore details:" -ForegroundColor White
+    Write-Host "----------------------------------------"
 
-$alias = Read-Host "Key alias (e.g. awl-release)"
-if ([string]::IsNullOrWhiteSpace($alias)) { $alias = "awl-release" }
+    $alias = Read-Host "Key alias (e.g. awl-release)"
+    if ([string]::IsNullOrWhiteSpace($alias)) { $alias = "awl-release" }
 
-$validity = Read-Host "Validity in days (default: 10000)"
-if ([string]::IsNullOrWhiteSpace($validity)) { $validity = "10000" }
+    $validity = Read-Host "Validity in days (default: 10000)"
+    if ([string]::IsNullOrWhiteSpace($validity)) { $validity = "10000" }
 
-Write-Host ""
-Write-Host "IMPORTANT: Keep these passwords safe! You will need them for GitHub Secrets." -ForegroundColor Yellow
-Write-Host ""
+    Write-Host ""
+    Write-Host "IMPORTANT: Keep these passwords safe! You will need them for GitHub Secrets." -ForegroundColor Yellow
+    Write-Host ""
 
-$storePass = Read-Host "Keystore password" -AsSecureString
-if ($storePass.Length -eq 0) {
-    Write-Host "Password cannot be empty." -ForegroundColor Red
-    exit 1
+    $storePass = Read-Host "Keystore password" -AsSecureString
+    if ($storePass.Length -eq 0) {
+        Write-Host "Password cannot be empty." -ForegroundColor Red
+        exit 1
+    }
+
+    $keyPass = Read-Host "Key password (Enter to reuse keystore password)" -AsSecureString
+    if ($keyPass.Length -eq 0) {
+        $keyPass = $storePass
+    }
+
+    # Convert SecureString to plain text (needed for keytool)
+    $storePassPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($storePass)
+    )
+    $keyPassPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($keyPass)
+    )
+
+    # Generate keystore using keytool
+    Write-Host ""
+    Write-Host "[*] Generating keystore ..." -ForegroundColor Cyan
+
+    $dname = "CN=AWL, OU=Dev, O=AWL, L=Unknown, ST=Unknown, C=CN"
+
+    # Use cmd /c to avoid PowerShell 5.1 stderr wrapping issue
+    $cmdArgs = @(
+        "keytool",
+        "-genkey", "-v",
+        "-keystore", "`"$keystoreFile`"",
+        "-alias", $alias,
+        "-keyalg", "RSA",
+        "-keysize", "2048",
+        "-validity", $validity,
+        "-storepass", $storePassPlain,
+        "-keypass", $keyPassPlain,
+        "-dname", "`"$dname`""
+    ) -join " "
+
+    $result = cmd /c "$cmdArgs 2>&1"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "keytool failed: $result" -ForegroundColor Red
+        exit 1
+    }
+
+    Write-Host $result
+    Write-Host "[+] Keystore created: $keystoreFile" -ForegroundColor Green
+} else {
+    # Skip generation — just re-display secrets info
+    Write-Host ""
+    Write-Host "[*] Skipping keystore generation, re-displaying secrets ..." -ForegroundColor Cyan
+    Write-Host ""
+    $alias = Read-Host "Key alias used (e.g. awl-release)"
+    if ([string]::IsNullOrWhiteSpace($alias)) { $alias = "awl-release" }
+    $storePass = Read-Host "Keystore password" -AsSecureString
+    $keyPass = Read-Host "Key password (Enter to reuse keystore password)" -AsSecureString
+    if ($keyPass.Length -eq 0) { $keyPass = $storePass }
+    $storePassPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($storePass)
+    )
+    $keyPassPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
+        [Runtime.InteropServices.Marshal]::SecureStringToBSTR($keyPass)
+    )
 }
-
-$keyPass = Read-Host "Key password (Enter to reuse keystore password)" -AsSecureString
-if ($keyPass.Length -eq 0) {
-    $keyPass = $storePass
-}
-
-# Convert SecureString to plain text (needed for keytool)
-$storePassPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
-    [Runtime.InteropServices.Marshal]::SecureStringToBSTR($storePass)
-)
-$keyPassPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
-    [Runtime.InteropServices.Marshal]::SecureStringToBSTR($keyPass)
-)
-
-# Generate keystore using keytool
-Write-Host ""
-Write-Host "[*] Generating keystore ..." -ForegroundColor Cyan
-
-$dname = "CN=AWL, OU=Dev, O=AWL, L=Unknown, ST=Unknown, C=CN"
-$keytoolArgs = @(
-    "-genkey", "-v",
-    "-keystore", $keystoreFile,
-    "-alias", $alias,
-    "-keyalg", "RSA",
-    "-keysize", "2048",
-    "-validity", $validity,
-    "-storepass", $storePassPlain,
-    "-keypass", $keyPassPlain,
-    "-dname", $dname
-)
-
-$result = & keytool @keytoolArgs 2>&1
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "keytool failed: $result" -ForegroundColor Red
-    exit 1
-}
-
-Write-Host "[+] Keystore created: $keystoreFile" -ForegroundColor Green
 
 # Encode to base64 for GitHub Secret
 Write-Host "[*] Encoding to base64 ..." -ForegroundColor Cyan
