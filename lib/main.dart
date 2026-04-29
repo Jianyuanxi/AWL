@@ -205,6 +205,9 @@ class _Blob extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Solid-colour circle with a soft edge fade — reads as a clear
+    // "圆形" rather than a fuzzy blob, but remains a single cheap
+    // RadialGradient draw (no BoxShadow blur pass).
     final body = Container(
       width: size,
       height: size,
@@ -213,9 +216,10 @@ class _Blob extends StatelessWidget {
         gradient: RadialGradient(
           colors: <Color>[
             color,
+            color,
             color.withValues(alpha: 0),
           ],
-          stops: const <double>[0.0, 1.0],
+          stops: const <double>[0.0, 0.65, 1.0],
         ),
       ),
     );
@@ -252,8 +256,8 @@ class _StaticBlob extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: RadialGradient(
-            colors: <Color>[color, color.withValues(alpha: 0)],
-            stops: const <double>[0.0, 1.0],
+            colors: <Color>[color, color, color.withValues(alpha: 0)],
+            stops: const <double>[0.0, 0.65, 1.0],
           ),
         ),
       ),
