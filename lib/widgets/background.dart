@@ -78,7 +78,7 @@ class _GradientBackgroundState extends State<GradientBackground>
           left: -60,
           child: _Blob(
             size: 260,
-            color: AppTheme.primary.withValues(alpha: 0.22),
+            color: AppTheme.primary.withValues(alpha: 0.38),
             drift: _drift,
             phase: 0.0,
             driftDx: 18,
@@ -90,7 +90,7 @@ class _GradientBackgroundState extends State<GradientBackground>
           right: -100,
           child: _Blob(
             size: 220,
-            color: const Color(0xFFFFB6C1).withValues(alpha: 0.22),
+            color: const Color(0xFFFFB6C1).withValues(alpha: 0.36),
             drift: _drift,
             phase: 0.33,
             driftDx: 14,
@@ -102,7 +102,7 @@ class _GradientBackgroundState extends State<GradientBackground>
           left: -40,
           child: _Blob(
             size: 280,
-            color: const Color(0xFF89B4FF).withValues(alpha: 0.20),
+            color: const Color(0xFF89B4FF).withValues(alpha: 0.34),
             drift: _drift,
             phase: 0.66,
             driftDx: 22,
@@ -117,7 +117,7 @@ class _GradientBackgroundState extends State<GradientBackground>
           left: -60,
           child: _StaticBlob(
             size: 260,
-            color: AppTheme.primary.withValues(alpha: 0.22),
+            color: AppTheme.primary.withValues(alpha: 0.38),
           ),
         ),
         Positioned(
@@ -125,7 +125,7 @@ class _GradientBackgroundState extends State<GradientBackground>
           right: -100,
           child: _StaticBlob(
             size: 220,
-            color: const Color(0xFFFFB6C1).withValues(alpha: 0.22),
+            color: const Color(0xFFFFB6C1).withValues(alpha: 0.36),
           ),
         ),
         Positioned(
@@ -133,7 +133,7 @@ class _GradientBackgroundState extends State<GradientBackground>
           left: -40,
           child: _StaticBlob(
             size: 280,
-            color: const Color(0xFF89B4FF).withValues(alpha: 0.20),
+            color: const Color(0xFF89B4FF).withValues(alpha: 0.34),
           ),
         ),
       ];
@@ -169,7 +169,7 @@ class _Blob extends StatelessWidget {
             color,
             color.withValues(alpha: 0),
           ],
-          stops: const <double>[0.0, 0.65, 1.0],
+          stops: const <double>[0.0, 0.78, 1.0],
         ),
       ),
     );
@@ -204,7 +204,7 @@ class _StaticBlob extends StatelessWidget {
           shape: BoxShape.circle,
           gradient: RadialGradient(
             colors: <Color>[color, color, color.withValues(alpha: 0)],
-            stops: const <double>[0.0, 0.65, 1.0],
+            stops: const <double>[0.0, 0.78, 1.0],
           ),
         ),
       ),

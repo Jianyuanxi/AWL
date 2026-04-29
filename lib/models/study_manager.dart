@@ -21,6 +21,7 @@ class StudyManager extends ChangeNotifier {
   static const String _totalCorrectKey = 'total_correct_v1';
   static const String _dailyHistoryKey = 'daily_history_v1';
   static const String _lastActiveTitleKey = 'last_active_title_v1';
+  static const String _dailyTargetKey = 'daily_target_v1';
 
   late final SharedPreferences _prefs;
   bool _isReady = false;
@@ -38,6 +39,7 @@ class StudyManager extends ChangeNotifier {
   int _totalAttempts = 0;
   int _totalCorrect = 0;
   String? _lastActiveTitle;
+  int _dailyTarget = 20;
 
   Future<void> init() async {
     if (_isReady) return;
@@ -121,9 +123,30 @@ class StudyManager extends ChangeNotifier {
     _totalAttempts = _prefs.getInt(_totalAttemptsKey) ?? 0;
     _totalCorrect = _prefs.getInt(_totalCorrectKey) ?? 0;
     _lastActiveTitle = _prefs.getString(_lastActiveTitleKey);
+    _dailyTarget = _prefs.getInt(_dailyTargetKey) ?? 20;
   }
 
   String? get lastActiveTitle => _lastActiveTitle;
+
+  int get dailyTarget => _dailyTarget;
+
+  int get todayCount {
+    final now = DateTime.now();
+    final today =
+        '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+    return _dailyHistory[today] ?? 0;
+  }
+
+  Future<void> setDailyTarget(int target) async {
+    _dailyTarget = target.clamp(1, 999);
+    _prefs.setInt(_dailyTargetKey, _dailyTarget);
+    notifyListeners();
+  }
+
+  bool isAllWordsReviewed(String title) {
+    final p = progressFor(title);
+    return p.allWordsReviewed || p.completed;
+  }
 
   void _persist() {
     final mistakePayload = <String, int>{
@@ -251,12 +274,6 @@ class StudyManager extends ChangeNotifier {
   int startOrResumeSublist(String title, int total) {
     if (total <= 0) return 0;
     final p = progressFor(title);
-    if (p.completed) {
-      _sublistProgress[title] = const SublistProgress.empty();
-      _persist();
-      notifyListeners();
-      return 0;
-    }
     return p.currentIndex.clamp(0, total - 1);
   }
 
@@ -282,11 +299,24 @@ class StudyManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  void markAllWordsReviewed(String title, int lastIndex, int total) {
+    _sublistProgress[title] = SublistProgress(
+      currentIndex: lastIndex,
+      completedCount: total,
+      completed: false,
+      allWordsReviewed: true,
+    );
+    _lastActiveTitle = title;
+    _persist();
+    notifyListeners();
+  }
+
   void markSublistCompleted(String title, int total) {
     _sublistProgress[title] = SublistProgress(
-      currentIndex: 0,
+      currentIndex: total > 0 ? total - 1 : 0,
       completedCount: total,
       completed: true,
+      allWordsReviewed: true,
     );
     _lastActiveTitle = title;
     _persist();

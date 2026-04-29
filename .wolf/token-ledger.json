@@ -1,0 +1,834 @@
+{
+  "version": 1,
+  "created_at": "2026-04-29T09:38:46.594Z",
+  "lifetime": {
+    "total_tokens_estimated": 148652,
+    "total_reads": 22,
+    "total_writes": 119,
+    "total_sessions": 17,
+    "anatomy_hits": 17,
+    "anatomy_misses": 5,
+    "repeated_reads_blocked": 0,
+    "estimated_savings_vs_bare_cli": 3400
+  },
+  "sessions": [
+    {
+      "id": "session-2026-04-29-0950",
+      "started": "2026-04-29T13:50:06.630Z",
+      "ended": "2026-04-29T14:58:43.481Z",
+      "reads": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 188,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 202,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist.dart",
+          "tokens_estimated": 43,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+          "tokens_estimated": 234,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/theme/app_theme.dart",
+          "tokens_estimated": 165,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 174,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 3182,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 12,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 1482,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/glass_card.dart",
+          "tokens_estimated": 424,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/buttons.dart",
+          "tokens_estimated": 2287,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/star_toggle.dart",
+          "tokens_estimated": 1513,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/bottom_nav.dart",
+          "tokens_estimated": 819,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/completion_dialog.dart",
+          "tokens_estimated": 1689,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/flashcard_switcher.dart",
+          "tokens_estimated": 1090,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/home_shell.dart",
+          "tokens_estimated": 288,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 6370,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/stats_page.dart",
+          "tokens_estimated": 3324,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/forgotten_words.dart",
+          "tokens_estimated": 2326,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 6287,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/app.dart",
+          "tokens_estimated": 422,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/main.dart",
+          "tokens_estimated": 125,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/buttons.dart",
+          "tokens_estimated": 33,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 18,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/bottom_nav.dart",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/star_toggle.dart",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/app.dart",
+          "tokens_estimated": 26,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 188,
+        "output_tokens_estimated": 32587,
+        "reads_count": 1,
+        "writes_count": 26,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-04-29-0950",
+      "started": "2026-04-29T13:50:06.630Z",
+      "ended": "2026-04-29T15:08:54.207Z",
+      "reads": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 188,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 202,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist.dart",
+          "tokens_estimated": 43,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+          "tokens_estimated": 234,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/theme/app_theme.dart",
+          "tokens_estimated": 165,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 174,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 3182,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 12,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 1482,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/glass_card.dart",
+          "tokens_estimated": 424,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/buttons.dart",
+          "tokens_estimated": 2287,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/star_toggle.dart",
+          "tokens_estimated": 1513,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/bottom_nav.dart",
+          "tokens_estimated": 819,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/completion_dialog.dart",
+          "tokens_estimated": 1689,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/flashcard_switcher.dart",
+          "tokens_estimated": 1090,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/home_shell.dart",
+          "tokens_estimated": 288,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 6370,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/stats_page.dart",
+          "tokens_estimated": 3324,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/forgotten_words.dart",
+          "tokens_estimated": 2326,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 6287,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/app.dart",
+          "tokens_estimated": 422,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/main.dart",
+          "tokens_estimated": 125,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/buttons.dart",
+          "tokens_estimated": 33,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 18,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/bottom_nav.dart",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/star_toggle.dart",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/app.dart",
+          "tokens_estimated": 26,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 188,
+        "output_tokens_estimated": 32587,
+        "reads_count": 1,
+        "writes_count": 26,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-04-29-0950",
+      "started": "2026-04-29T13:50:06.630Z",
+      "ended": "2026-04-29T15:09:57.460Z",
+      "reads": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 188,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 202,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist.dart",
+          "tokens_estimated": 43,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+          "tokens_estimated": 234,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/theme/app_theme.dart",
+          "tokens_estimated": 165,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/word.dart",
+          "tokens_estimated": 174,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 3182,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 12,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 1482,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/glass_card.dart",
+          "tokens_estimated": 424,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/buttons.dart",
+          "tokens_estimated": 2287,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/star_toggle.dart",
+          "tokens_estimated": 1513,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/bottom_nav.dart",
+          "tokens_estimated": 819,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/completion_dialog.dart",
+          "tokens_estimated": 1689,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/flashcard_switcher.dart",
+          "tokens_estimated": 1090,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/home_shell.dart",
+          "tokens_estimated": 288,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 6370,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/stats_page.dart",
+          "tokens_estimated": 3324,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/forgotten_words.dart",
+          "tokens_estimated": 2326,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 6287,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/app.dart",
+          "tokens_estimated": 422,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/main.dart",
+          "tokens_estimated": 125,
+          "action": "create"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/buttons.dart",
+          "tokens_estimated": 33,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 18,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/bottom_nav.dart",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/star_toggle.dart",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/app.dart",
+          "tokens_estimated": 26,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 188,
+        "output_tokens_estimated": 32587,
+        "reads_count": 1,
+        "writes_count": 26,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-04-29-1140",
+      "started": "2026-04-29T15:40:16.574Z",
+      "ended": "2026-04-29T16:01:36.830Z",
+      "reads": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/cerebrum.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 1379,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 5946,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 5868,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 2975,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/home_shell.dart",
+          "tokens_estimated": 268,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/stats_page.dart",
+          "tokens_estimated": 3102,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+          "tokens_estimated": 218,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+          "tokens_estimated": 294,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 36,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 51,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 259,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 48,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 178,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 186,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 273,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 137,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 95,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 378,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 72,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 71,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 613,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 367,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 92,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 643,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 1,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 1382,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 19756,
+        "output_tokens_estimated": 5176,
+        "reads_count": 9,
+        "writes_count": 19,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 7
+      }
+    },
+    {
+      "id": "session-2026-04-29-1140",
+      "started": "2026-04-29T15:40:16.574Z",
+      "ended": "2026-04-29T16:10:38.523Z",
+      "reads": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/cerebrum.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 1379,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 5946,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 5868,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 2975,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/home_shell.dart",
+          "tokens_estimated": 268,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/stats_page.dart",
+          "tokens_estimated": 3102,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+          "tokens_estimated": 218,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+          "tokens_estimated": 294,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 36,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 51,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 259,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 48,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+          "tokens_estimated": 178,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 186,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 273,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 137,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 95,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+          "tokens_estimated": 378,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 72,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 71,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 613,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 367,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 92,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 643,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 1,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+          "tokens_estimated": 1382,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 258,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 191,
+          "action": "edit"
+        },
+        {
+          "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+          "tokens_estimated": 14,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 19756,
+        "output_tokens_estimated": 5639,
+        "reads_count": 10,
+        "writes_count": 22,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 7
+      }
+    }
+  ],
+  "daemon_usage": [],
+  "waste_flags": [],
+  "optimization_report": {
+    "last_generated": null,
+    "patterns": []
+  }
+}

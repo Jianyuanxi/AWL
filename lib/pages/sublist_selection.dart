@@ -54,53 +54,48 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
     }
   }
 
+  void _showEmptySnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.fromLTRB(80, 0, 80, 110),
+        padding: EdgeInsets.zero,
+        duration: const Duration(milliseconds: 1400),
+        content: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1C1C1E).withValues(alpha: 0.92),
+            borderRadius: BorderRadius.circular(999),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.15),
+                blurRadius: 16,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Text(
+              message,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   List<Word> get _allWords => awlSublists
       .expand<Word>((s) => List<Word>.from(s['words'] as List))
       .toList();
 
-  ({String title, int total, int completed, double ratio}) _todayPlan() {
-    if (awlSublists.isEmpty) {
-      return (title: '—', total: 0, completed: 0, ratio: 0);
-    }
-    final mgr = StudyManager.instance;
-
-    ({String title, int total, int completed, double ratio}) packFor(
-      Map<String, dynamic> sublist,
-    ) {
-      final title = sublist['title'] as String;
-      final total = (sublist['words'] as List).length;
-      final progress = mgr.progressFor(title);
-      final rawCompleted =
-          progress.completed ? total : progress.completedCount;
-      final completed = rawCompleted.clamp(0, total);
-      return (
-        title: title,
-        total: total,
-        completed: completed,
-        ratio: total == 0 ? 0.0 : completed / total,
-      );
-    }
-
-    final activeTitle = mgr.lastActiveTitle;
-    if (activeTitle != null) {
-      for (final sublist in awlSublists) {
-        if (sublist['title'] == activeTitle) {
-          return packFor(sublist);
-        }
-      }
-    }
-
-    for (final sublist in awlSublists) {
-      final title = sublist['title'] as String;
-      final progress = mgr.progressFor(title);
-      if (progress.completed) continue;
-      if (progress.completedCount > 0 || progress.currentIndex > 0) {
-        return packFor(sublist);
-      }
-    }
-
-    return packFor(awlSublists.first);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +118,12 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
   }
 
   Widget _buildContent(BuildContext context) {
-    final today = _todayPlan();
-    final reviewCount = StudyManager.instance.pendingMistakes;
-    final starCount = StudyManager.instance.starredCount;
-    final srsCount = StudyManager.instance.srsDueCount(_allWords);
+    final mgr = StudyManager.instance;
+    final todayCount = mgr.todayCount;
+    final dailyTarget = mgr.dailyTarget;
+    final reviewCount = mgr.pendingMistakes;
+    final starCount = mgr.starredCount;
+    final srsCount = mgr.srsDueCount(_allWords);
 
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
@@ -179,7 +176,10 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-            child: _TodayPlanCard(plan: today),
+            child: _TodayPlanCard(
+              todayCount: todayCount,
+              dailyTarget: dailyTarget,
+            ),
           ),
         ),
         if (srsCount > 0)
@@ -218,22 +218,24 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
                         ? '暂无错题'
                         : '$reviewCount 个待巩固',
                     color: AppTheme.danger,
-                    onTap: reviewCount == 0
-                        ? null
-                        : () {
-                            final wrong = StudyManager.instance
-                                .forgottenWords(_allWords);
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute<void>(
-                                builder: (_) => StudyPage(
-                                  title: '今日复习',
-                                  words: wrong,
-                                  reviewMode: true,
-                                ),
-                              ),
-                            );
-                          },
+                    onTap: () {
+                      if (reviewCount == 0) {
+                        _showEmptySnackbar(context, '暂无错题');
+                        return;
+                      }
+                      final wrong =
+                          StudyManager.instance.forgottenWords(_allWords);
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute<void>(
+                          builder: (_) => StudyPage(
+                            title: '今日复习',
+                            words: wrong,
+                            reviewMode: true,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -244,22 +246,24 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
                     subtitle:
                         starCount == 0 ? '暂无收藏' : '$starCount 个单词',
                     color: AppTheme.star,
-                    onTap: starCount == 0
-                        ? null
-                        : () {
-                            final stars = StudyManager.instance
-                                .starredWords(_allWords);
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute<void>(
-                                builder: (_) => StudyPage(
-                                  title: '我的收藏',
-                                  words: stars,
-                                  reviewMode: true,
-                                ),
-                              ),
-                            );
-                          },
+                    onTap: () {
+                      if (starCount == 0) {
+                        _showEmptySnackbar(context, '暂无收藏');
+                        return;
+                      }
+                      final stars =
+                          StudyManager.instance.starredWords(_allWords);
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute<void>(
+                          builder: (_) => StudyPage(
+                            title: '我的收藏',
+                            words: stars,
+                            reviewMode: true,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -305,14 +309,14 @@ class _ShortcutTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final Color color;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
   const _ShortcutTile({
     required this.icon,
     required this.title,
     required this.subtitle,
     required this.color,
-    this.onTap,
+    required this.onTap,
   });
 
   @override
@@ -367,12 +371,58 @@ class _ShortcutTile extends StatelessWidget {
 }
 
 class _TodayPlanCard extends StatelessWidget {
-  final ({String title, int total, int completed, double ratio}) plan;
-  const _TodayPlanCard({required this.plan});
+  final int todayCount;
+  final int dailyTarget;
+
+  const _TodayPlanCard({
+    required this.todayCount,
+    required this.dailyTarget,
+  });
+
+  void _showTargetDialog(BuildContext context) {
+    final controller =
+        TextEditingController(text: '$dailyTarget');
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: Colors.white.withValues(alpha: 0.95),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text('设置每日目标'),
+        content: TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          autofocus: true,
+          decoration: const InputDecoration(
+            hintText: '输入目标单词数',
+            suffixText: '个',
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('取消'),
+          ),
+          TextButton(
+            onPressed: () {
+              final v = int.tryParse(controller.text.trim());
+              if (v != null && v > 0) {
+                StudyManager.instance.setDailyTarget(v);
+              }
+              Navigator.pop(ctx);
+            },
+            child: const Text('确定'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final percent = (plan.ratio * 100).round();
+    final ratio =
+        dailyTarget > 0 ? (todayCount / dailyTarget).clamp(0.0, 1.0) : 0.0;
+    final percent = (ratio * 100).round();
     return GlassCard(
       opacity: 0.75,
       radius: 26,
@@ -394,15 +444,12 @@ class _TodayPlanCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 6),
-                    Flexible(
-                      child: Text(
-                        '· ${plan.title}',
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: AppTheme.primary,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    GestureDetector(
+                      onTap: () => _showTargetDialog(context),
+                      child: const Icon(
+                        CupertinoIcons.pencil,
+                        size: 14,
+                        color: AppTheme.primary,
                       ),
                     ),
                   ],
@@ -417,9 +464,9 @@ class _TodayPlanCard extends StatelessWidget {
                       letterSpacing: -0.5,
                     ),
                     children: <InlineSpan>[
-                      TextSpan(text: '${plan.completed}'),
+                      TextSpan(text: '$todayCount'),
                       TextSpan(
-                        text: '/${plan.total} words',
+                        text: '/$dailyTarget words',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -433,7 +480,7 @@ class _TodayPlanCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(999),
                   child: TweenAnimationBuilder<double>(
-                    tween: Tween<double>(begin: 0, end: plan.ratio),
+                    tween: Tween<double>(begin: 0, end: ratio),
                     duration: const Duration(milliseconds: 700),
                     curve: Curves.easeOutCubic,
                     builder: (context, value, _) => LinearProgressIndicator(
@@ -449,7 +496,9 @@ class _TodayPlanCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Keep going — every word counts.',
+                  todayCount >= dailyTarget
+                      ? '🎉 今日目标完成！'
+                      : 'Keep going — every word counts.',
                   style: TextStyle(
                     fontSize: 12,
                     color: AppTheme.textSecondary.withValues(alpha: 0.9),
@@ -459,7 +508,7 @@ class _TodayPlanCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          _RingProgress(value: plan.ratio, percent: percent),
+          _RingProgress(value: ratio, percent: percent),
         ],
       ),
     );
@@ -602,13 +651,6 @@ class _SublistTile extends StatelessWidget {
         progress.completed ? total : progress.completedCount.clamp(0, total);
     final ratio = total == 0 ? 0.0 : completed / total;
 
-    String status = 'Not started';
-    if (progress.completed) {
-      status = 'Completed';
-    } else if (completed > 0) {
-      status = 'In progress';
-    }
-
     return ScaleTap(
       onTap: onTap,
       child: GlassCard(
@@ -653,7 +695,7 @@ class _SublistTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '$total words · $status',
+                    '$completed/$total words',
                     style: const TextStyle(
                       fontSize: 12,
                       color: AppTheme.textSecondary,

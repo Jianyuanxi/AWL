@@ -62,6 +62,10 @@ class _StudyPageState extends State<StudyPage> {
         widget.title,
         studyList.length,
       );
+      if (StudyManager.instance.isAllWordsReviewed(widget.title)) {
+        hasChecked = true;
+        isCorrect = true;
+      }
     }
     WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
@@ -126,17 +130,23 @@ class _StudyPageState extends State<StudyPage> {
         );
       }
     } else {
+      // Last word in normal mode: hand off to Finish button
+      if (!widget.reviewMode) return;
       _focusNode.unfocus();
       setState(() {
         _sessionCompleted = true;
         hasChecked = true;
       });
-      if (!widget.reviewMode) {
-        StudyManager.instance
-            .markSublistCompleted(widget.title, studyList.length);
-      }
       _celebrateAndExit();
     }
+  }
+
+  void _finishSession() {
+    if (_sessionCompleted) return;
+    _focusNode.unfocus();
+    setState(() => _sessionCompleted = true);
+    StudyManager.instance.markSublistCompleted(widget.title, studyList.length);
+    _celebrateAndExit();
   }
 
   void _prevWord() {
@@ -260,6 +270,8 @@ class _StudyPageState extends State<StudyPage> {
               Navigator.pop(ctx);
               setState(() {
                 currentIndex = 0;
+                hasChecked = false;
+                isCorrect = false;
                 _resetState();
               });
             },
@@ -276,11 +288,19 @@ class _StudyPageState extends State<StudyPage> {
   @override
   void dispose() {
     if (!widget.reviewMode && !_sessionCompleted) {
-      StudyManager.instance.saveCurrentPosition(
-        widget.title,
-        currentIndex: currentIndex,
-        totalWords: studyList.length,
-      );
+      if (hasChecked && currentIndex == studyList.length - 1) {
+        StudyManager.instance.markAllWordsReviewed(
+          widget.title,
+          currentIndex,
+          studyList.length,
+        );
+      } else {
+        StudyManager.instance.saveCurrentPosition(
+          widget.title,
+          currentIndex: currentIndex,
+          totalWords: studyList.length,
+        );
+      }
     }
     _inputController.dispose();
     _focusNode.dispose();
@@ -696,28 +716,38 @@ class _StudyPageState extends State<StudyPage> {
           ),
         ),
         const SizedBox(height: 14),
-        DuolingoButton(
-          label: _sessionCompleted
+        Builder(builder: (context) {
+          final isLastWord = currentIndex == studyList.length - 1;
+          final showFinish =
+              !widget.reviewMode && hasChecked && isLastWord && !_sessionCompleted;
+          final String label = _sessionCompleted
               ? '已完成'
-              : (hasChecked ? 'Next' : 'Check'),
-          icon: _sessionCompleted
+              : (showFinish ? 'Finish' : (hasChecked ? 'Next' : 'Check'));
+          final IconData? icon = _sessionCompleted
               ? CupertinoIcons.checkmark_alt
-              : (hasChecked ? CupertinoIcons.arrow_right : null),
-          onTap: _sessionCompleted
+              : (showFinish
+                  ? CupertinoIcons.checkmark_seal
+                  : (hasChecked ? CupertinoIcons.arrow_right : null));
+          final VoidCallback? action = _sessionCompleted
               ? null
-              : (hasChecked ? _nextWord : _checkSpelling),
-          enabled: !_sessionCompleted,
-          color: hasChecked
-              ? (isCorrect ? AppTheme.success : AppTheme.primary)
-              : AppTheme.primary,
-          shadowColor: hasChecked
-              ? (isCorrect
-                  ? AppTheme.successDark
-                  : AppTheme.primaryDark)
-              : AppTheme.primaryDark,
-          height: 54,
-          radius: 18,
-        ),
+              : (showFinish
+                  ? _finishSession
+                  : (hasChecked ? _nextWord : _checkSpelling));
+          return DuolingoButton(
+            label: label,
+            icon: icon,
+            onTap: action,
+            enabled: !_sessionCompleted,
+            color: hasChecked
+                ? (isCorrect ? AppTheme.success : AppTheme.primary)
+                : AppTheme.primary,
+            shadowColor: hasChecked
+                ? (isCorrect ? AppTheme.successDark : AppTheme.primaryDark)
+                : AppTheme.primaryDark,
+            height: 54,
+            radius: 18,
+          );
+        }),
       ],
     );
   }

@@ -1,0 +1,202 @@
+{
+  "session_id": "session-2026-04-29-1140",
+  "started": "2026-04-29T15:40:16.574Z",
+  "files_read": {
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/anatomy.md": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-04-29T15:49:36.327Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/cerebrum.md": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-04-29T15:49:36.482Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart": {
+      "count": 1,
+      "tokens": 1379,
+      "first_read": "2026-04-29T15:49:50.443Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart": {
+      "count": 1,
+      "tokens": 5946,
+      "first_read": "2026-04-29T15:49:50.727Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart": {
+      "count": 1,
+      "tokens": 5868,
+      "first_read": "2026-04-29T15:49:58.219Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart": {
+      "count": 1,
+      "tokens": 2975,
+      "first_read": "2026-04-29T15:49:58.445Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/home_shell.dart": {
+      "count": 1,
+      "tokens": 268,
+      "first_read": "2026-04-29T15:51:05.923Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/stats_page.dart": {
+      "count": 1,
+      "tokens": 3102,
+      "first_read": "2026-04-29T15:51:06.148Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart": {
+      "count": 1,
+      "tokens": 218,
+      "first_read": "2026-04-29T15:55:47.675Z"
+    },
+    "d:/16228/desktop/Progroms/Flutter/flutter_application_1/.wolf/memory.md": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-04-29T16:10:19.530Z"
+    }
+  },
+  "files_written": [
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/sublist_progress.dart",
+      "action": "edit",
+      "tokens": 294,
+      "at": "2026-04-29T15:56:45.231Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+      "action": "edit",
+      "tokens": 36,
+      "at": "2026-04-29T15:56:59.981Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+      "action": "edit",
+      "tokens": 51,
+      "at": "2026-04-29T15:57:11.828Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+      "action": "edit",
+      "tokens": 259,
+      "at": "2026-04-29T15:57:38.667Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+      "action": "edit",
+      "tokens": 48,
+      "at": "2026-04-29T15:57:47.330Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/models/study_manager.dart",
+      "action": "edit",
+      "tokens": 178,
+      "at": "2026-04-29T15:57:55.087Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+      "action": "edit",
+      "tokens": 186,
+      "at": "2026-04-29T15:58:14.983Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+      "action": "edit",
+      "tokens": 273,
+      "at": "2026-04-29T15:58:26.543Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+      "action": "edit",
+      "tokens": 137,
+      "at": "2026-04-29T15:58:37.638Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+      "action": "edit",
+      "tokens": 95,
+      "at": "2026-04-29T15:58:45.906Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/study_page.dart",
+      "action": "edit",
+      "tokens": 378,
+      "at": "2026-04-29T15:59:01.785Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 72,
+      "at": "2026-04-29T15:59:19.368Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 71,
+      "at": "2026-04-29T15:59:26.132Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 613,
+      "at": "2026-04-29T15:59:40.840Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 367,
+      "at": "2026-04-29T15:59:52.056Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 92,
+      "at": "2026-04-29T16:00:02.712Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 643,
+      "at": "2026-04-29T16:00:25.015Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 1,
+      "at": "2026-04-29T16:00:42.357Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/pages/sublist_selection.dart",
+      "action": "edit",
+      "tokens": 1382,
+      "at": "2026-04-29T16:01:17.201Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+      "action": "edit",
+      "tokens": 258,
+      "at": "2026-04-29T16:07:32.952Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+      "action": "edit",
+      "tokens": 191,
+      "at": "2026-04-29T16:07:41.527Z"
+    },
+    {
+      "file": "d:/16228/desktop/Progroms/Flutter/flutter_application_1/lib/widgets/background.dart",
+      "action": "edit",
+      "tokens": 14,
+      "at": "2026-04-29T16:07:48.181Z"
+    }
+  ],
+  "edit_counts": {
+    "lib/models/sublist_progress.dart": 1,
+    "lib/models/study_manager.dart": 5,
+    "lib/pages/study_page.dart": 5,
+    "lib/pages/sublist_selection.dart": 8,
+    "lib/widgets/background.dart": 3
+  },
+  "anatomy_hits": 7,
+  "anatomy_misses": 3,
+  "repeated_reads_warned": 0,
+  "cerebrum_warnings": 0,
+  "stop_count": 2
+}
