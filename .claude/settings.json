@@ -66,6 +66,18 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "Set-Location \"$env:CLAUDE_PROJECT_DIR\"; git add lib/ 2>$null; $staged = git diff --cached --name-only 2>$null; if ($staged) { git commit -m \"auto: sync changes\" 2>$null }; $ahead = git log \"origin/main..HEAD\" --oneline 2>$null; if ($ahead) { git push origin main 2>$null }",
+            "timeout": 30,
+            "statusMessage": "Auto-pushing to remote..."
+          }
+        ]
       }
     ]
   }
