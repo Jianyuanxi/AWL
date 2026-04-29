@@ -45,12 +45,41 @@ class AppTheme {
 // Background with decorative blur circles
 // ============================================================
 
-class GradientBackground extends StatelessWidget {
+class GradientBackground extends StatefulWidget {
   final Widget child;
   const GradientBackground({super.key, required this.child});
 
   @override
+  State<GradientBackground> createState() => _GradientBackgroundState();
+}
+
+class _GradientBackgroundState extends State<GradientBackground>
+    with SingleTickerProviderStateMixin {
+  // One shared, slow controller drives all three blobs — far cheaper than
+  // three separate AnimationControllers. Each blob picks a phase offset.
+  late final AnimationController _drift;
+
+  @override
+  void initState() {
+    super.initState();
+    _drift = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 18),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _drift.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // RepaintBoundary isolates the animated blobs from the foreground
+    // content layer, so the cards above are never repainted on a drift tick.
+    // Blobs use cheap RadialGradient fills (no boxShadow blur passes) and
+    // animate only `Transform.translate`, which is GPU-cheap.
     return Stack(
       children: <Widget>[
         const Positioned.fill(
@@ -64,112 +93,100 @@ class GradientBackground extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          top: -80,
-          left: -60,
-          child: _Blob(
-            size: 260,
-            color: AppTheme.primary.withValues(alpha: 0.18),
-            driftDx: 20,
-            driftDy: 16,
-            durationSec: 7,
+        RepaintBoundary(
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: -80,
+                left: -60,
+                child: _Blob(
+                  size: 260,
+                  color: AppTheme.primary.withValues(alpha: 0.22),
+                  drift: _drift,
+                  phase: 0.0,
+                  driftDx: 18,
+                  driftDy: 14,
+                ),
+              ),
+              Positioned(
+                top: 120,
+                right: -100,
+                child: _Blob(
+                  size: 220,
+                  color: const Color(0xFFFFB6C1).withValues(alpha: 0.22),
+                  drift: _drift,
+                  phase: 0.33,
+                  driftDx: 14,
+                  driftDy: 20,
+                ),
+              ),
+              Positioned(
+                bottom: -120,
+                left: -40,
+                child: _Blob(
+                  size: 280,
+                  color: const Color(0xFF89B4FF).withValues(alpha: 0.20),
+                  drift: _drift,
+                  phase: 0.66,
+                  driftDx: 22,
+                  driftDy: 12,
+                ),
+              ),
+            ],
           ),
         ),
-        Positioned(
-          top: 120,
-          right: -100,
-          child: _Blob(
-            size: 220,
-            color: const Color(0xFFFFB6C1).withValues(alpha: 0.18),
-            driftDx: 14,
-            driftDy: 22,
-            durationSec: 9,
-          ),
-        ),
-        Positioned(
-          bottom: -120,
-          left: -40,
-          child: _Blob(
-            size: 280,
-            color: const Color(0xFF89B4FF).withValues(alpha: 0.16),
-            driftDx: 24,
-            driftDy: 12,
-            durationSec: 10,
-          ),
-        ),
-        child,
+        widget.child,
       ],
     );
   }
 }
 
-class _Blob extends StatefulWidget {
+class _Blob extends StatelessWidget {
   final double size;
   final Color color;
+  final Animation<double> drift;
+  final double phase;
   final double driftDx;
   final double driftDy;
-  final double durationSec;
 
   const _Blob({
     required this.size,
     required this.color,
-    this.driftDx = 18,
-    this.driftDy = 14,
-    this.durationSec = 8,
+    required this.drift,
+    this.phase = 0.0,
+    this.driftDx = 16,
+    this.driftDy = 12,
   });
 
   @override
-  State<_Blob> createState() => _BlobState();
-}
-
-class _BlobState extends State<_Blob> with SingleTickerProviderStateMixin {
-  late final AnimationController _ctrl;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: widget.durationSec.round()),
-    );
-    _ctrl.repeat(reverse: true);
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _ctrl,
-      builder: (context, _) {
-        final t = _ctrl.value;
-        final ox = widget.driftDx * (t - 0.5) * 2;
-        final oy = widget.driftDy * (t - 0.5) * 2;
-        return IgnorePointer(
-          child: Transform.translate(
-            offset: Offset(ox, oy),
-            child: Container(
-              width: widget.size,
-              height: widget.size,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: widget.color,
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: widget.color,
-                    blurRadius: 80,
-                    spreadRadius: 30,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
+    final body = Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(
+          colors: <Color>[
+            color,
+            color.withValues(alpha: 0),
+          ],
+          stops: const <double>[0.0, 1.0],
+        ),
+      ),
+    );
+    return IgnorePointer(
+      child: AnimatedBuilder(
+        animation: drift,
+        builder: (context, child) {
+          // Smooth sine drift; cheap maths, no rebuilds of `body`.
+          final t = (drift.value + phase) * 2 * pi;
+          return Transform.translate(
+            offset: Offset(driftDx * sin(t), driftDy * cos(t)),
+            child: child,
+          );
+        },
+        child: body,
+      ),
     );
   }
 }
@@ -192,41 +209,48 @@ class GlassCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(20),
     this.margin,
     this.radius = 22,
-    this.opacity = 0.6,
-    this.blur = 20,
+    this.opacity = 0.78,
+    this.blur = 12,
   });
 
   @override
   Widget build(BuildContext context) {
+    final inner = Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: opacity),
+        borderRadius: BorderRadius.circular(radius),
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.6),
+          width: 1,
+        ),
+      ),
+      child: child,
+    );
     return Container(
       margin: margin,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 14,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
-          child: Container(
-            padding: padding,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: opacity),
-              borderRadius: BorderRadius.circular(radius),
-              border: Border.all(
-                color: Colors.white.withValues(alpha: 0.6),
-                width: 1,
+        // BackdropFilter is GPU-expensive on Android (especially Vivo). When
+        // the card is mostly opaque (>=0.7) we skip the blur pass entirely
+        // and rely on the white fill — the visual difference is negligible
+        // and frame times improve dramatically when many cards are on screen.
+        child: opacity >= 0.7
+            ? inner
+            : BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+                child: inner,
               ),
-            ),
-            child: child,
-          ),
-        ),
       ),
     );
   }
@@ -512,6 +536,177 @@ class CircleIconButton extends StatelessWidget {
 }
 
 // ============================================================
+// Star toggle with burst animation
+// ============================================================
+
+/// Animated star button: scale bounce + expanding ring on activate,
+/// quick shrink on deactivate. Designed to make favouriting feel tactile.
+class StarToggleButton extends StatefulWidget {
+  final bool starred;
+  final VoidCallback onTap;
+  final double size;
+
+  const StarToggleButton({
+    super.key,
+    required this.starred,
+    required this.onTap,
+    this.size = 24,
+  });
+
+  @override
+  State<StarToggleButton> createState() => _StarToggleButtonState();
+}
+
+class _StarToggleButtonState extends State<StarToggleButton>
+    with TickerProviderStateMixin {
+  late final AnimationController _bounce;
+  late final AnimationController _burst;
+
+  @override
+  void initState() {
+    super.initState();
+    _bounce = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 360),
+    );
+    _burst = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 520),
+    );
+  }
+
+  @override
+  void dispose() {
+    _bounce.dispose();
+    _burst.dispose();
+    super.dispose();
+  }
+
+  void _handleTap() {
+    HapticFeedback.lightImpact();
+    final wasStarred = widget.starred;
+    widget.onTap();
+    _bounce
+      ..reset()
+      ..forward();
+    // Burst only when transitioning to starred (positive feedback).
+    if (!wasStarred) {
+      _burst
+        ..reset()
+        ..forward();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final hitSize = widget.size + 16;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: _handleTap,
+      child: SizedBox(
+        width: hitSize,
+        height: hitSize,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            // Expanding ring burst
+            AnimatedBuilder(
+              animation: _burst,
+              builder: (context, _) {
+                final t = _burst.value;
+                if (t == 0) return const SizedBox.shrink();
+                final eased = Curves.easeOutCubic.transform(t);
+                final ringSize = widget.size * (0.6 + 1.4 * eased);
+                final opacity = (1.0 - eased).clamp(0.0, 1.0);
+                return IgnorePointer(
+                  child: Container(
+                    width: ringSize,
+                    height: ringSize,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppTheme.star.withValues(alpha: 0.55 * opacity),
+                        width: 2.0 * (1 - 0.5 * eased),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            // Sparkle dots
+            AnimatedBuilder(
+              animation: _burst,
+              builder: (context, _) {
+                final t = _burst.value;
+                if (t == 0) return const SizedBox.shrink();
+                final eased = Curves.easeOutQuad.transform(t);
+                final opacity = (1.0 - t).clamp(0.0, 1.0);
+                final reach = widget.size * (0.55 + 0.55 * eased);
+                return IgnorePointer(
+                  child: SizedBox(
+                    width: hitSize,
+                    height: hitSize,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: List<Widget>.generate(6, (i) {
+                        final angle = (i / 6) * 2 * pi;
+                        final dx = reach * cos(angle);
+                        final dy = reach * sin(angle);
+                        return Transform.translate(
+                          offset: Offset(dx, dy),
+                          child: Container(
+                            width: 4,
+                            height: 4,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppTheme.star.withValues(alpha: opacity),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                );
+              },
+            ),
+            // Star icon with scale bounce + cross-fade
+            AnimatedBuilder(
+              animation: _bounce,
+              builder: (context, _) {
+                final t = _bounce.value;
+                // Punch curve: quickly grow then settle (overshoots once).
+                final punch = sin(t * pi) * 0.45;
+                final scale = 1.0 + punch;
+                return Transform.scale(
+                  scale: scale,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    transitionBuilder: (child, anim) => FadeTransition(
+                      opacity: anim,
+                      child: ScaleTransition(scale: anim, child: child),
+                    ),
+                    child: Icon(
+                      widget.starred
+                          ? CupertinoIcons.star_fill
+                          : CupertinoIcons.star,
+                      key: ValueKey<bool>(widget.starred),
+                      size: widget.size,
+                      color: widget.starred
+                          ? AppTheme.star
+                          : AppTheme.textSecondary.withValues(alpha: 0.55),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================
 // Models
 // ============================================================
 
@@ -591,6 +786,7 @@ class StudyManager extends ChangeNotifier {
   static const String _totalAttemptsKey = 'total_attempts_v1';
   static const String _totalCorrectKey = 'total_correct_v1';
   static const String _dailyHistoryKey = 'daily_history_v1';
+  static const String _lastActiveTitleKey = 'last_active_title_v1';
 
   late final SharedPreferences _prefs;
   bool _isReady = false;
@@ -607,6 +803,7 @@ class StudyManager extends ChangeNotifier {
   int _totalMastered = 0;
   int _totalAttempts = 0;
   int _totalCorrect = 0;
+  String? _lastActiveTitle;
 
   Future<void> init() async {
     if (_isReady) return;
@@ -689,7 +886,10 @@ class StudyManager extends ChangeNotifier {
     _totalMastered = _prefs.getInt(_totalMasteredKey) ?? 0;
     _totalAttempts = _prefs.getInt(_totalAttemptsKey) ?? 0;
     _totalCorrect = _prefs.getInt(_totalCorrectKey) ?? 0;
+    _lastActiveTitle = _prefs.getString(_lastActiveTitleKey);
   }
+
+  String? get lastActiveTitle => _lastActiveTitle;
 
   void _persist() {
     final mistakePayload = <String, int>{
@@ -723,6 +923,11 @@ class StudyManager extends ChangeNotifier {
       ..setInt(_totalMasteredKey, _totalMastered)
       ..setInt(_totalAttemptsKey, _totalAttempts)
       ..setInt(_totalCorrectKey, _totalCorrect);
+    if (_lastActiveTitle == null) {
+      _prefs.remove(_lastActiveTitleKey);
+    } else {
+      _prefs.setString(_lastActiveTitleKey, _lastActiveTitle!);
+    }
   }
 
   // ----- API: mistakes -----
@@ -838,6 +1043,7 @@ class StudyManager extends ChangeNotifier {
       completedCount: completed,
       completed: false,
     );
+    _lastActiveTitle = title;
     _persist();
     notifyListeners();
   }
@@ -848,6 +1054,7 @@ class StudyManager extends ChangeNotifier {
       completedCount: total,
       completed: true,
     );
+    _lastActiveTitle = title;
     _persist();
     notifyListeners();
   }
@@ -1005,6 +1212,9 @@ class _HomeShellState extends State<HomeShell> {
   }
 }
 
+/// Apple-style slim tab bar. Targets ~52pt content height (matches iOS
+/// system tab bar) with a subtle frosted card and gentle iOS-style icon
+/// + caption stack.
 class _GlassBottomNav extends StatelessWidget {
   final int index;
   final ValueChanged<int> onChanged;
@@ -1014,33 +1224,40 @@ class _GlassBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
+      minimum: const EdgeInsets.only(bottom: 6),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(40, 0, 40, 14),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(32),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-            child: Container(
-              height: 78,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.75),
-                borderRadius: BorderRadius.circular(32),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.6),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.06),
-                    blurRadius: 20,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
+        padding: const EdgeInsets.fromLTRB(56, 0, 56, 4),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(26),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.07),
+                blurRadius: 18,
+                offset: const Offset(0, 6),
               ),
-              child: Row(
-                children: <Widget>[
-                  _navItem(0, CupertinoIcons.book_fill, '学习'),
-                  _navItem(1, CupertinoIcons.chart_bar_alt_fill, '统计'),
-                ],
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(26),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+              child: Container(
+                height: 52,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.78),
+                  borderRadius: BorderRadius.circular(26),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.55),
+                    width: 0.5,
+                  ),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    _navItem(0, CupertinoIcons.book_fill, '学习'),
+                    _navItem(1, CupertinoIcons.chart_bar_alt_fill, '统计'),
+                  ],
+                ),
               ),
             ),
           ),
@@ -1053,60 +1270,36 @@ class _GlassBottomNav extends StatelessWidget {
     final active = index == i;
     return Expanded(
       child: ScaleTap(
+        pressScale: 0.92,
         onTap: () => onChanged(i),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TweenAnimationBuilder<double>(
-              tween: Tween<double>(end: active ? 1.0 : 0.0),
-              duration: const Duration(milliseconds: 320),
-              curve: Curves.easeOut,
-              builder: (context, v, _) {
-                return Container(
-                  width: 38,
-                  height: 38,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color.lerp(
-                      Colors.transparent,
-                      AppTheme.primary.withValues(alpha: 0.12),
-                      v,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    icon,
-                    size: active ? 22 : 20,
-                    color: Color.lerp(
-                      AppTheme.textSecondary,
-                      AppTheme.primary,
-                      v,
-                    ),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 4),
-            TweenAnimationBuilder<double>(
-              tween: Tween<double>(end: active ? 1.0 : 0.0),
-              duration: const Duration(milliseconds: 320),
-              curve: Curves.elasticOut,
-              builder: (context, v, _) {
-                return Text(
+        child: TweenAnimationBuilder<double>(
+          tween: Tween<double>(end: active ? 1.0 : 0.0),
+          duration: const Duration(milliseconds: 240),
+          curve: Curves.easeOut,
+          builder: (context, v, _) {
+            final color = Color.lerp(
+              AppTheme.textSecondary,
+              AppTheme.primary,
+              v,
+            )!;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(icon, size: 22, color: color),
+                const SizedBox(height: 2),
+                Text(
                   label,
                   style: TextStyle(
-                    fontSize: active ? 11 : 10,
+                    fontSize: 10,
+                    height: 1.0,
                     fontWeight: active ? FontWeight.w600 : FontWeight.w500,
-                    color: Color.lerp(
-                      AppTheme.textSecondary,
-                      AppTheme.primary,
-                      v,
-                    ),
+                    color: color,
                   ),
-                );
-              },
-            ),
-          ],
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -1167,28 +1360,49 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
     if (awlSublists.isEmpty) {
       return (title: '—', total: 0, completed: 0, ratio: 0);
     }
-    for (final sublist in awlSublists) {
+    final mgr = StudyManager.instance;
+
+    ({String title, int total, int completed, double ratio}) _packFor(
+      Map<String, dynamic> sublist,
+    ) {
       final title = sublist['title'] as String;
       final total = (sublist['words'] as List).length;
-      final progress = StudyManager.instance.progressFor(title);
-      if (progress.completed) continue;
-      if (progress.completedCount > 0 || progress.currentIndex > 0) {
-        final completed = progress.completedCount.clamp(0, total);
-        return (
-          title: title,
-          total: total,
-          completed: completed,
-          ratio: total == 0 ? 0 : completed / total,
-        );
+      final progress = mgr.progressFor(title);
+      final rawCompleted =
+          progress.completed ? total : progress.completedCount;
+      final completed = rawCompleted.clamp(0, total);
+      return (
+        title: title,
+        total: total,
+        completed: completed,
+        ratio: total == 0 ? 0.0 : completed / total,
+      );
+    }
+
+    // 1) Prefer the most recently active sublist — that's what the user is
+    //    currently studying, so the Today's Plan card should reflect its
+    //    progress (not stale progress on Sublist 1).
+    final activeTitle = mgr.lastActiveTitle;
+    if (activeTitle != null) {
+      for (final sublist in awlSublists) {
+        if (sublist['title'] == activeTitle) {
+          return _packFor(sublist);
+        }
       }
     }
-    final first = awlSublists.first;
-    return (
-      title: first['title'] as String,
-      total: (first['words'] as List).length,
-      completed: 0,
-      ratio: 0,
-    );
+
+    // 2) Otherwise pick the first in-progress (not completed) sublist.
+    for (final sublist in awlSublists) {
+      final title = sublist['title'] as String;
+      final progress = mgr.progressFor(title);
+      if (progress.completed) continue;
+      if (progress.completedCount > 0 || progress.currentIndex > 0) {
+        return _packFor(sublist);
+      }
+    }
+
+    // 3) Fall back to the first sublist (zero progress).
+    return _packFor(awlSublists.first);
   }
 
   @override
@@ -1355,7 +1569,7 @@ class _SublistSelectionPageState extends State<SublistSelectionPage> {
           ),
         ),
         SliverPadding(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 120),
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 86),
           sliver: SliverList.builder(
             itemCount: awlSublists.length,
             itemBuilder: (context, index) {
@@ -1470,13 +1684,29 @@ class _TodayPlanCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text(
-                  "Today's Plan",
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: AppTheme.textSecondary,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Row(
+                  children: <Widget>[
+                    const Text(
+                      "Today's Plan",
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: AppTheme.textSecondary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        '· ${plan.title}',
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: AppTheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10),
                 RichText(
@@ -1777,7 +2007,7 @@ class StatsPage extends StatelessWidget {
           bottom: false,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 120),
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 86),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -2148,6 +2378,10 @@ class _StudyPageState extends State<StudyPage> {
   bool hasChecked = false;
   bool isCorrect = false;
   bool showHint = false;
+  // True once the sublist's last word has been completed in this session.
+  // Used to (a) gate the input/Check button, (b) prevent dispose() from
+  // overwriting `completed: true` with a `currentIndex: last` snapshot.
+  bool _sessionCompleted = false;
 
   @override
   void initState() {
@@ -2181,6 +2415,7 @@ class _StudyPageState extends State<StudyPage> {
   }
 
   void _checkSpelling() {
+    if (_sessionCompleted) return;
     if (_inputController.text.trim().isEmpty || hasChecked) return;
     final word = studyList[currentIndex];
     final input = _inputController.text.trim().toLowerCase();
@@ -2214,6 +2449,7 @@ class _StudyPageState extends State<StudyPage> {
   }
 
   void _nextWord() {
+    if (_sessionCompleted) return;
     HapticFeedback.selectionClick();
     if (currentIndex < studyList.length - 1) {
       setState(() {
@@ -2229,6 +2465,14 @@ class _StudyPageState extends State<StudyPage> {
         );
       }
     } else {
+      // Lock the page before showing the celebration: drop focus, disable
+      // input, and remember we're done so dispose() doesn't roll back the
+      // "completed: true" state we're about to write.
+      _focusNode.unfocus();
+      setState(() {
+        _sessionCompleted = true;
+        hasChecked = true;
+      });
       if (!widget.reviewMode) {
         StudyManager.instance
             .markSublistCompleted(widget.title, studyList.length);
@@ -2273,89 +2517,64 @@ class _StudyPageState extends State<StudyPage> {
     showDialog<void>(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) => Dialog(
-        backgroundColor: Colors.transparent,
+      barrierColor: Colors.black.withValues(alpha: 0.45),
+      builder: (ctx) => _CompletionDialog(
+        title: widget.title,
+        reviewMode: widget.reviewMode,
+        onClose: () {
+          Navigator.pop(ctx);
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+  void _showStarToast({required bool starred}) {
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(
+      SnackBar(
         elevation: 0,
-        child: TweenAnimationBuilder<double>(
-          tween: Tween<double>(begin: 0.8, end: 1.0),
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.elasticOut,
-          builder: (context, value, _) => Transform.scale(
-            scale: value,
-            child: GlassCard(
-              opacity: 0.85,
-              radius: 28,
-              padding: const EdgeInsets.fromLTRB(24, 28, 24, 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  TweenAnimationBuilder<double>(
-                    tween: Tween<double>(begin: 0, end: 1),
-                    duration: const Duration(milliseconds: 700),
-                    curve: Curves.elasticOut,
-                    builder: (context, v, _) => Container(
-                      width: 64,
-                      height: 64,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppTheme.success.withValues(alpha: 0.15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppTheme.success.withValues(alpha: 0.25 * (1 - v)),
-                            blurRadius: 24 * (1 - v),
-                            spreadRadius: 4 * (1 - v),
-                          ),
-                        ],
-                      ),
-                      child: Transform.scale(
-                        scale: 0.6 + 0.4 * v,
-                        child: const Icon(
-                          CupertinoIcons.checkmark_seal_fill,
-                          color: AppTheme.success,
-                          size: 32,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  const Text(
-                    '完成啦 🎉',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.textPrimary,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    widget.reviewMode
-                        ? '今日的复习已完成，继续保持！'
-                        : '你完成了 ${widget.title} 的全部单词，进度已保存。',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppTheme.textSecondary,
-                    ),
-                  ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: DuolingoButton(
-                  label: '回到列表',
-                  onTap: () {
-                    Navigator.pop(ctx);
-                    Navigator.pop(context);
-                  },
+        backgroundColor: Colors.transparent,
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.fromLTRB(80, 0, 80, 110),
+        padding: EdgeInsets.zero,
+        duration: const Duration(milliseconds: 1400),
+        content: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: AppTheme.textPrimary.withValues(alpha: 0.92),
+            borderRadius: BorderRadius.circular(999),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.15),
+                blurRadius: 16,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                starred ? CupertinoIcons.star_fill : CupertinoIcons.star,
+                size: 16,
+                color: starred ? AppTheme.star : Colors.white,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                starred ? '已收藏' : '已取消收藏',
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
               ),
             ],
           ),
         ),
       ),
-      ), // Transform.scale
-      ), // TweenAnimationBuilder
-    ); // showDialog
+    );
   }
 
   void _confirmReset() {
@@ -2393,7 +2612,11 @@ class _StudyPageState extends State<StudyPage> {
 
   @override
   void dispose() {
-    if (!widget.reviewMode) {
+    // Don't write a position snapshot if we already marked the sublist as
+    // completed — otherwise it overwrites `completed: true / 60/60` with
+    // `completed: false / 59/60` and the next entry resumes on the last
+    // word with input still active.
+    if (!widget.reviewMode && !_sessionCompleted) {
       StudyManager.instance.saveCurrentPosition(
         widget.title,
         currentIndex: currentIndex,
@@ -2644,24 +2867,18 @@ class _StudyPageState extends State<StudyPage> {
           children: <Widget>[
             Align(
               alignment: Alignment.centerRight,
-              child: ScaleTap(
+              child: StarToggleButton(
+                starred: starred,
                 onTap: () {
-                  HapticFeedback.lightImpact();
+                  final wasStarred =
+                      StudyManager.instance.isStarred(word.id);
                   StudyManager.instance.toggleStar(word.id);
+                  // Force StudyPage rebuild — it doesn't subscribe to
+                  // StudyManager directly, so the icon/color won't refresh
+                  // without an explicit setState.
+                  setState(() {});
+                  _showStarToast(starred: !wasStarred);
                 },
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 220),
-                  transitionBuilder: (child, anim) =>
-                      ScaleTransition(scale: anim, child: child),
-                  child: Icon(
-                    starred ? CupertinoIcons.star_fill : CupertinoIcons.star,
-                    key: ValueKey<bool>(starred),
-                    size: 22,
-                    color: starred
-                        ? AppTheme.star
-                        : AppTheme.textSecondary.withValues(alpha: 0.5),
-                  ),
-                ),
               ),
             ),
             const SizedBox(height: 14),
@@ -2783,7 +3000,7 @@ class _StudyPageState extends State<StudyPage> {
           child: TextField(
             controller: _inputController,
             focusNode: _focusNode,
-            enabled: !hasChecked,
+            enabled: !hasChecked && !_sessionCompleted,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -2819,9 +3036,16 @@ class _StudyPageState extends State<StudyPage> {
         ),
         const SizedBox(height: 14),
         DuolingoButton(
-          label: hasChecked ? 'Next' : 'Check',
-          icon: hasChecked ? CupertinoIcons.arrow_right : null,
-          onTap: hasChecked ? _nextWord : _checkSpelling,
+          label: _sessionCompleted
+              ? '已完成'
+              : (hasChecked ? 'Next' : 'Check'),
+          icon: _sessionCompleted
+              ? CupertinoIcons.checkmark_alt
+              : (hasChecked ? CupertinoIcons.arrow_right : null),
+          onTap: _sessionCompleted
+              ? null
+              : (hasChecked ? _nextWord : _checkSpelling),
+          enabled: !_sessionCompleted,
           color: hasChecked
               ? (isCorrect ? AppTheme.success : AppTheme.primary)
               : AppTheme.primary,
@@ -2832,6 +3056,199 @@ class _StudyPageState extends State<StudyPage> {
           radius: 18,
         ),
       ],
+    );
+  }
+}
+
+// ============================================================
+// Completion dialog — Apple-style sublist finish celebration
+// ============================================================
+
+class _CompletionDialog extends StatefulWidget {
+  final String title;
+  final bool reviewMode;
+  final VoidCallback onClose;
+
+  const _CompletionDialog({
+    required this.title,
+    required this.reviewMode,
+    required this.onClose,
+  });
+
+  @override
+  State<_CompletionDialog> createState() => _CompletionDialogState();
+}
+
+class _CompletionDialogState extends State<_CompletionDialog>
+    with TickerProviderStateMixin {
+  late final AnimationController _scaleCtrl;
+  late final AnimationController _checkCtrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _scaleCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
+    )..forward();
+    _checkCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    Future<void>.delayed(const Duration(milliseconds: 180), () {
+      if (mounted) _checkCtrl.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _scaleCtrl.dispose();
+    _checkCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 36),
+      child: AnimatedBuilder(
+        animation: _scaleCtrl,
+        builder: (context, _) {
+          // easeOutBack overshoots gently; clamp anything we feed into shadow
+          // values so we never produce negative blur radii.
+          final t = Curves.easeOutBack.transform(_scaleCtrl.value);
+          final scale = 0.86 + 0.14 * t;
+          final opacity = _scaleCtrl.value.clamp(0.0, 1.0);
+          return Opacity(
+            opacity: opacity,
+            child: Transform.scale(
+              scale: scale,
+              child: GlassCard(
+                opacity: 0.95,
+                radius: 28,
+                padding: const EdgeInsets.fromLTRB(28, 30, 28, 22),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _AnimatedCheckBadge(animation: _checkCtrl),
+                    const SizedBox(height: 18),
+                    const Text(
+                      '完成啦',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.textPrimary,
+                        letterSpacing: -0.3,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      widget.reviewMode
+                          ? '今日的复习已完成，继续保持！'
+                          : '你完成了 ${widget.title} 的全部单词，进度已保存。',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13,
+                        height: 1.45,
+                        color: AppTheme.textSecondary.withValues(alpha: 0.95),
+                      ),
+                    ),
+                    const SizedBox(height: 22),
+                    SizedBox(
+                      width: double.infinity,
+                      child: DuolingoButton(
+                        label: '回到列表',
+                        onTap: widget.onClose,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _AnimatedCheckBadge extends StatelessWidget {
+  final Animation<double> animation;
+  const _AnimatedCheckBadge({required this.animation});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: animation,
+      builder: (context, _) {
+        final t = animation.value.clamp(0.0, 1.0);
+        // Two staged eases: badge pop, then expanding glow ring underneath.
+        final pop = Curves.easeOutBack.transform(t);
+        final ringT = Curves.easeOutCubic.transform(t);
+        // pop can briefly exceed 1.0 — clamp where shadows depend on it.
+        final popClamped = pop.clamp(0.0, 1.0);
+        final iconScale = 0.6 + 0.4 * popClamped;
+        final ringScale = 0.7 + 0.9 * ringT;
+        final ringOpacity = (1.0 - ringT) * 0.5;
+        return SizedBox(
+          width: 96,
+          height: 96,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              // Expanding glow ring (no boxShadow blur — pure decoration)
+              Opacity(
+                opacity: ringOpacity.clamp(0.0, 1.0),
+                child: Container(
+                  width: 92 * ringScale,
+                  height: 92 * ringScale,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppTheme.success.withValues(alpha: 0.45),
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+              // Solid badge (no animated shadow → no negative-blur risk)
+              Container(
+                width: 68,
+                height: 68,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                      Color(0xFF34C759),
+                      Color(0xFF2BA84A),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppTheme.success.withValues(alpha: 0.30),
+                      blurRadius: 18,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: Transform.scale(
+                  scale: iconScale,
+                  child: const Icon(
+                    CupertinoIcons.checkmark_alt,
+                    color: Colors.white,
+                    size: 36,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
