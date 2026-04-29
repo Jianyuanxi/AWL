@@ -54,7 +54,7 @@ class GradientBackground extends StatefulWidget {
 }
 
 class _GradientBackgroundState extends State<GradientBackground>
-    with SingleTickerProviderStateMixin {
+    with WidgetsBindingObserver, SingleTickerProviderStateMixin {
   // One shared, slow controller drives all three blobs — far cheaper than
   // three separate AnimationControllers. Each blob picks a phase offset.
   late final AnimationController _drift;
@@ -62,6 +62,7 @@ class _GradientBackgroundState extends State<GradientBackground>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _drift = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 18),
@@ -69,7 +70,18 @@ class _GradientBackgroundState extends State<GradientBackground>
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive) {
+      _drift.stop();
+    } else if (state == AppLifecycleState.resumed) {
+      _drift.repeat();
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _drift.dispose();
     super.dispose();
   }
@@ -80,6 +92,7 @@ class _GradientBackgroundState extends State<GradientBackground>
     // content layer, so the cards above are never repainted on a drift tick.
     // Blobs use cheap RadialGradient fills (no boxShadow blur passes) and
     // animate only `Transform.translate`, which is GPU-cheap.
+    final routeActive = ModalRoute.of(context)?.isCurrent ?? true;
     return Stack(
       children: <Widget>[
         const Positioned.fill(
@@ -93,52 +106,84 @@ class _GradientBackgroundState extends State<GradientBackground>
             ),
           ),
         ),
-        RepaintBoundary(
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: -80,
-                left: -60,
-                child: _Blob(
-                  size: 260,
-                  color: AppTheme.primary.withValues(alpha: 0.22),
-                  drift: _drift,
-                  phase: 0.0,
-                  driftDx: 18,
-                  driftDy: 14,
-                ),
-              ),
-              Positioned(
-                top: 120,
-                right: -100,
-                child: _Blob(
-                  size: 220,
-                  color: const Color(0xFFFFB6C1).withValues(alpha: 0.22),
-                  drift: _drift,
-                  phase: 0.33,
-                  driftDx: 14,
-                  driftDy: 20,
-                ),
-              ),
-              Positioned(
-                bottom: -120,
-                left: -40,
-                child: _Blob(
-                  size: 280,
-                  color: const Color(0xFF89B4FF).withValues(alpha: 0.20),
-                  drift: _drift,
-                  phase: 0.66,
-                  driftDx: 22,
-                  driftDy: 12,
-                ),
-              ),
-            ],
-          ),
-        ),
+        if (routeActive)
+          RepaintBoundary(
+            child: Stack(
+              children: _animatedBlobs(),
+            ),
+          )
+        else
+          ..._staticBlobs(),
         widget.child,
       ],
     );
   }
+
+  List<Widget> _animatedBlobs() => <Widget>[
+        Positioned(
+          top: -80,
+          left: -60,
+          child: _Blob(
+            size: 260,
+            color: AppTheme.primary.withValues(alpha: 0.22),
+            drift: _drift,
+            phase: 0.0,
+            driftDx: 18,
+            driftDy: 14,
+          ),
+        ),
+        Positioned(
+          top: 120,
+          right: -100,
+          child: _Blob(
+            size: 220,
+            color: const Color(0xFFFFB6C1).withValues(alpha: 0.22),
+            drift: _drift,
+            phase: 0.33,
+            driftDx: 14,
+            driftDy: 20,
+          ),
+        ),
+        Positioned(
+          bottom: -120,
+          left: -40,
+          child: _Blob(
+            size: 280,
+            color: const Color(0xFF89B4FF).withValues(alpha: 0.20),
+            drift: _drift,
+            phase: 0.66,
+            driftDx: 22,
+            driftDy: 12,
+          ),
+        ),
+      ];
+
+  List<Widget> _staticBlobs() => <Widget>[
+        Positioned(
+          top: -80,
+          left: -60,
+          child: _StaticBlob(
+            size: 260,
+            color: AppTheme.primary.withValues(alpha: 0.22),
+          ),
+        ),
+        Positioned(
+          top: 120,
+          right: -100,
+          child: _StaticBlob(
+            size: 220,
+            color: const Color(0xFFFFB6C1).withValues(alpha: 0.22),
+          ),
+        ),
+        Positioned(
+          bottom: -120,
+          left: -40,
+          child: _StaticBlob(
+            size: 280,
+            color: const Color(0xFF89B4FF).withValues(alpha: 0.20),
+          ),
+        ),
+      ];
 }
 
 class _Blob extends StatelessWidget {
@@ -186,6 +231,31 @@ class _Blob extends StatelessWidget {
           );
         },
         child: body,
+      ),
+    );
+  }
+}
+
+/// Non-animated version of _Blob for use when the route is covered —
+/// avoids wasting tick callbacks and GPU fill on an occluded layer.
+class _StaticBlob extends StatelessWidget {
+  final double size;
+  final Color color;
+  const _StaticBlob({required this.size, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: RadialGradient(
+            colors: <Color>[color, color.withValues(alpha: 0)],
+            stops: const <double>[0.0, 1.0],
+          ),
+        ),
       ),
     );
   }
@@ -1238,26 +1308,23 @@ class _GlassBottomNav extends StatelessWidget {
               ),
             ],
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(26),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-              child: Container(
-                height: 52,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.78),
-                  borderRadius: BorderRadius.circular(26),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.55),
-                    width: 0.5,
-                  ),
-                ),
-                child: Row(
-                  children: <Widget>[
-                    _navItem(0, CupertinoIcons.book_fill, '学习'),
-                    _navItem(1, CupertinoIcons.chart_bar_alt_fill, '统计'),
-                  ],
-                ),
+          child: Container(
+            height: 52,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.88),
+              borderRadius: BorderRadius.circular(26),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.55),
+                width: 0.5,
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(26),
+              child: Row(
+                children: <Widget>[
+                  _navItem(0, CupertinoIcons.book_fill, '学习'),
+                  _navItem(1, CupertinoIcons.chart_bar_alt_fill, '统计'),
+                ],
               ),
             ),
           ),
@@ -2382,6 +2449,7 @@ class _StudyPageState extends State<StudyPage> {
   // Used to (a) gate the input/Check button, (b) prevent dispose() from
   // overwriting `completed: true` with a `currentIndex: last` snapshot.
   bool _sessionCompleted = false;
+  bool _showConfetti = false;
 
   @override
   void initState() {
@@ -2513,7 +2581,11 @@ class _StudyPageState extends State<StudyPage> {
     Future<void>.delayed(const Duration(milliseconds: 80), () {
       HapticFeedback.heavyImpact();
     });
+    setState(() => _showConfetti = true);
     _confetti.play();
+    Future<void>.delayed(const Duration(milliseconds: 1500), () {
+      if (mounted) setState(() => _showConfetti = false);
+    });
     showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -2695,26 +2767,28 @@ class _StudyPageState extends State<StudyPage> {
                 ),
               ),
               // Confetti overlay (top-center, falls down)
-              Align(
-                alignment: Alignment.topCenter,
-                child: ConfettiWidget(
-                  confettiController: _confetti,
-                  blastDirection: pi / 2,
-                  emissionFrequency: 0.08,
-                  numberOfParticles: 18,
-                  maxBlastForce: 20,
-                  minBlastForce: 6,
-                  gravity: 0.4,
-                  shouldLoop: false,
-                  colors: const <Color>[
-                    AppTheme.primary,
-                    AppTheme.success,
-                    AppTheme.star,
-                    Color(0xFFFF6B9D),
-                    Color(0xFF89B4FF),
-                  ],
+              // Only render while playing — avoids idle CustomPainter overhead.
+              if (_showConfetti)
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ConfettiWidget(
+                    confettiController: _confetti,
+                    blastDirection: pi / 2,
+                    emissionFrequency: 0.08,
+                    numberOfParticles: 18,
+                    maxBlastForce: 20,
+                    minBlastForce: 6,
+                    gravity: 0.4,
+                    shouldLoop: false,
+                    colors: const <Color>[
+                      AppTheme.primary,
+                      AppTheme.success,
+                      AppTheme.star,
+                      Color(0xFFFF6B9D),
+                      Color(0xFF89B4FF),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),
@@ -2995,7 +3069,7 @@ class _StudyPageState extends State<StudyPage> {
       children: <Widget>[
         GlassCard(
           radius: 28,
-          opacity: 0.6,
+          opacity: 0.72,
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: TextField(
             controller: _inputController,
